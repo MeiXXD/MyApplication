@@ -17,5 +17,5 @@ package com.example.lifeng.myapplication.bean;
  * @author: lifeng
  * @date: 16/7/18
  */
-public class InfoBean {
+public class AdministratorBean {
 }
