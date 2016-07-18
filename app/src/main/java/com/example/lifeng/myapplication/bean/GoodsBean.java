@@ -12,13 +12,40 @@
 
 package com.example.lifeng.myapplication.bean;
 
+import java.util.ArrayList;
+
 /**
- * @description: TODO
- * @author: lifeng
- * @date: 16/7/18
+ * @author lifeng
+ * @description 商品bean
+ * @date 16/7/18
  */
 public class GoodsBean {
-    private ProductBean mProductBean;
+    /**
+     * 产品编号
+     */
+    private int mId;
+    /**
+     * 产品价格
+     */
+    private double mPrice;
+    /**
+     * 产品描述
+     */
+    private String mDescription;
+    /**
+     * 产品名称
+     */
+    private String mName;
+    /**
+     * 简单的描述
+     */
+    private String mBriefDescription;
+    /**
+     * 产品图片
+     */
+    private ArrayList<String> imagesArrayList;
+    /**
+     * 商品数量
+     */
     private int mAmounts;
-    private String mKinds;
 }

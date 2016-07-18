@@ -12,14 +12,32 @@
 
 package com.example.lifeng.myapplication.bean;
 
+import java.util.ArrayList;
+
 /**
- * @description: TODO
- * @author: lifeng
- * @date: 16/7/18
+ * @author lifeng
+ * @description 普通用户
+ * @date 16/7/18
  */
 public class UserBean {
+    /**
+     * 用户编号
+     */
     private int mId;
+    /**
+     * 用户名
+     */
     private String mName;
+    /**
+     * 用户密码
+     */
     private String mPassword;
-
+    /**
+     * 邮箱
+     */
+    private String mEmail;
+    /**
+     * 收货地址
+     */
+    private ArrayList<String> mAddressesArrayList;
 }

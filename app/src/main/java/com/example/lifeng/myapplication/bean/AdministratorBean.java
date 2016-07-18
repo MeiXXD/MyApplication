@@ -13,9 +13,21 @@
 package com.example.lifeng.myapplication.bean;
 
 /**
- * @description: TODO
- * @author: lifeng
- * @date: 16/7/18
+ * @author lifeng
+ * @description 系统管理员
+ * @date 16/7/18
  */
 public class AdministratorBean {
+    /**
+     * 管理员编号
+     */
+    private int mId;
+    /**
+     * 管理员用户名
+     */
+    private String mName;
+    /**
+     * 管理员密码
+     */
+    private String mPassword;
 }

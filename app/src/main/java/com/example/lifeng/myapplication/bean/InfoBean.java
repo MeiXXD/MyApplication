@@ -13,9 +13,9 @@
 package com.example.lifeng.myapplication.bean;
 
 /**
- * @description: TODO
- * @author: lifeng
- * @date: 16/7/18
+ * @author lifeng
+ * @description 示例
+ * @date 16/7/18
  */
 public class InfoBean {
 }
