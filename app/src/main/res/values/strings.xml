@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="getInfo">后台对象获取</string>
+    <string name="setInfo">前台对象保存</string>
 </resources>
