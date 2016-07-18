@@ -46,9 +46,11 @@ public class MainActivity extends AppCompatActivity implements IInfoView, View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            //得到输入的各种信息
             case R.id.getInfo:
                 presenter.saveInfo(getInfo());
                 break;
+            //获取后台的各种信息
             case R.id.setInfo:
                 presenter.getInfo();
                 break;
