@@ -70,7 +70,7 @@ public interface IUserModel {
     boolean addTOShoppingCart(GoodsBean goodsBean);
 
     /**
-     * 普通用户结账前的验证接口
+     * 普通用户下订单前的验证接口
      *
      * @param userBean
      * @return 是否验证通过

@@ -43,9 +43,65 @@ public class GoodsBean {
     /**
      * 产品图片
      */
-    private ArrayList<String> imagesArrayList;
+    private ArrayList<String> mImagesArrayList;
     /**
      * 商品数量
      */
     private int mAmounts;
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int id) {
+        mId = id;
+    }
+
+    public double getPrice() {
+        return mPrice;
+    }
+
+    public void setPrice(double price) {
+        mPrice = price;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String name) {
+        mName = name;
+    }
+
+    public String getBriefDescription() {
+        return mBriefDescription;
+    }
+
+    public void setBriefDescription(String briefDescription) {
+        mBriefDescription = briefDescription;
+    }
+
+    public ArrayList<String> getImagesArrayList() {
+        return mImagesArrayList;
+    }
+
+    public void setImagesArrayList(ArrayList<String> imagesArrayList) {
+        mImagesArrayList = imagesArrayList;
+    }
+
+    public int getAmounts() {
+        return mAmounts;
+    }
+
+    public void setAmounts(int amounts) {
+        mAmounts = amounts;
+    }
 }
