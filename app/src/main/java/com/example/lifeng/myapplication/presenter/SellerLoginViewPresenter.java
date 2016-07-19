@@ -28,6 +28,12 @@ public class SellerLoginViewPresenter {
         mSellerModel = new ISellerModelImpl();
     }
 
+    /**
+     * 销售商登录
+     *
+     * @param sellerBean
+     * @return 是否登录成功
+     */
     public boolean sellerLogin(SellerBean sellerBean) {
         return mSellerModel.sellerLogin(sellerBean);
     }

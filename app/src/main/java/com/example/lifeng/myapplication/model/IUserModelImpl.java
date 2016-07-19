@@ -15,6 +15,8 @@ package com.example.lifeng.myapplication.model;
 import com.example.lifeng.myapplication.bean.GoodsBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 
+import java.util.ArrayList;
+
 /**
  * @author lifeng
  * @version 1.0 16/7/19
@@ -55,5 +57,10 @@ public class IUserModelImpl implements IUserModel {
     @Override
     public boolean verifyAgain(UserBean userBean) {
         return false;
+    }
+
+    @Override
+    public ArrayList<UserBean> getUsers() {
+        return null;
     }
 }

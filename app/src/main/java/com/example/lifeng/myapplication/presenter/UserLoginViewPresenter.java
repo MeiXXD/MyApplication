@@ -28,6 +28,12 @@ public class UserLoginViewPresenter {
         mUserModel = new IUserModelImpl();
     }
 
+    /**
+     * 普通用户登录
+     *
+     * @param userBean
+     * @return 是否成功登录
+     */
     public boolean userLogin(UserBean userBean) {
         return mUserModel.userLogin(userBean);
     }

@@ -14,6 +14,8 @@ package com.example.lifeng.myapplication.model;
 
 import com.example.lifeng.myapplication.bean.SellerBean;
 
+import java.util.ArrayList;
+
 /**
  * @author lifeng
  * @version 1.0 16/7/19
@@ -29,5 +31,10 @@ public class ISellerModelImpl implements ISellerModel {
     public boolean sellerLogin(SellerBean sellerBean) {
         // TODO: 16/7/19 seller登录待补
         return true;
+    }
+
+    @Override
+    public ArrayList<SellerBean> getSellers() {
+        return null;
     }
 }

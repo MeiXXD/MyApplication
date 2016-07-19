@@ -15,6 +15,8 @@ package com.example.lifeng.myapplication.model;
 import com.example.lifeng.myapplication.bean.GoodsBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 
+import java.util.ArrayList;
+
 /**
  * @author lifeng
  * @version 1.0 16/7/19
@@ -76,5 +78,12 @@ public interface IUserModel {
      * @return 是否验证通过
      */
     boolean verifyAgain(UserBean userBean);
+
+    /**
+     * 得到系统中存在的用户
+     *
+     * @return 返回用户列表
+     */
+    ArrayList<UserBean> getUsers();
 
 }

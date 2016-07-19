@@ -14,6 +14,8 @@ package com.example.lifeng.myapplication.model;
 
 import com.example.lifeng.myapplication.bean.SellerBean;
 
+import java.util.ArrayList;
+
 /**
  * @author lifeng
  * @version 1.0 16/7/19
@@ -35,4 +37,11 @@ public interface ISellerModel {
      * @return 是否成功登录
      */
     boolean sellerLogin(SellerBean sellerBean);
+
+    /**
+     * 得到系统中的销售商
+     *
+     * @return 返回销售商列表
+     */
+    ArrayList<SellerBean> getSellers();
 }

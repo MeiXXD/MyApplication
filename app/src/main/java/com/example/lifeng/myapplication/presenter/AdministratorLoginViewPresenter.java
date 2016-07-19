@@ -28,6 +28,12 @@ public class AdministratorLoginViewPresenter {
         mAdministratorModel = new IAdministratorModelImpl();
     }
 
+    /**
+     * 系统管理员登录
+     *
+     * @param administratorBean
+     * @return 是否登录成功
+     */
     public boolean adminLogin(AdministratorBean administratorBean) {
         return mAdministratorModel.adminLogin(administratorBean);
     }
