@@ -33,7 +33,8 @@ public class IUserModelImpl implements IUserModel {
 
     @Override
     public boolean userLogin(UserBean userBean) {
-        return false;
+        // TODO: 16/7/19 假设登录成功 
+        return true;
     }
 
     @Override

@@ -12,24 +12,23 @@
 
 package com.example.lifeng.myapplication.presenter;
 
-import com.example.lifeng.myapplication.bean.AdministratorBean;
-import com.example.lifeng.myapplication.model.IAdministratorModel;
-import com.example.lifeng.myapplication.model.IAdministratorModelImpl;
+import com.example.lifeng.myapplication.bean.SellerBean;
+import com.example.lifeng.myapplication.model.ISellerModel;
+import com.example.lifeng.myapplication.model.ISellerModelImpl;
 
 /**
  * @author lifeng
  * @version 1.0 16/7/19
- * @description 管理员登录Presenter
+ * @description 销售商登录的Presenter
  */
-public class AdministratorLoginViewPresenter {
-    private IAdministratorModel mAdministratorModel;
+public class SellerLoginViewPresenter {
+    private ISellerModel mSellerModel;
 
-    public AdministratorLoginViewPresenter() {
-        mAdministratorModel = new IAdministratorModelImpl();
+    public SellerLoginViewPresenter() {
+        mSellerModel = new ISellerModelImpl();
     }
 
-    public boolean adminLogin(AdministratorBean administratorBean) {
-        return mAdministratorModel.adminLogin(administratorBean);
+    public boolean sellerLogin(SellerBean sellerBean) {
+        return mSellerModel.sellerLogin(sellerBean);
     }
-
 }

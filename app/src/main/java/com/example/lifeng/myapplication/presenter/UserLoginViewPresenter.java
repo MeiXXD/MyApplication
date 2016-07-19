@@ -10,18 +10,25 @@
  * ------------------------------------------------------------------------------------
  */
 
-package com.example.lifeng.myapplication.activity;
+package com.example.lifeng.myapplication.presenter;
+
+import com.example.lifeng.myapplication.bean.UserBean;
+import com.example.lifeng.myapplication.model.IUserModel;
+import com.example.lifeng.myapplication.model.IUserModelImpl;
 
 /**
  * @author lifeng
  * @version 1.0 16/7/19
- * @description 销售商登录View
+ * @description 普通用户登录的Presenter
  */
-public interface ISellerLoginView {
-    /**
-     * UI交互,得到输入的用户名和密码
-     *
-     * @return 输入是否合法
-     */
-    boolean getSellerInput();
+public class UserLoginViewPresenter {
+    private IUserModel mUserModel;
+
+    public UserLoginViewPresenter() {
+        mUserModel = new IUserModelImpl();
+    }
+
+    public boolean userLogin(UserBean userBean) {
+        return mUserModel.userLogin(userBean);
+    }
 }

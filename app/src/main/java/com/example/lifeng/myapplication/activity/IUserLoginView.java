@@ -18,4 +18,10 @@ package com.example.lifeng.myapplication.activity;
  * @description 普通用户登录View
  */
 public interface IUserLoginView {
+    /**
+     * UI交互,得到输入的用户名和密码
+     *
+     * @return 输入是否合法
+     */
+    boolean getUserInput();
 }

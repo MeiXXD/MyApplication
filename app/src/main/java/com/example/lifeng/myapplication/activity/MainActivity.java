@@ -12,64 +12,57 @@
 
 package com.example.lifeng.myapplication.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.lifeng.myapplication.R;
-import com.example.lifeng.myapplication.bean.InfoBean;
-import com.example.lifeng.myapplication.presenter.Presenter;
 
 /**
- * @description: TODO
- * @author: lifeng
- * @date: 16/7/18
+ * @author lifeng
+ * @version 1.0 16/7/19
+ * @description 程序主界面入口
  */
-public class MainActivity extends AppCompatActivity implements IInfoView, View.OnClickListener {
-    private Button mbtGetInfo;
-    private Button mbtSetInfo;
-
-    //通过presenter操作数据
-    private Presenter presenter;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private Button mUserLoginBtn;
+    private Button mSellerLoginBtn;
+    private Button mAdminLoginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity);
 
-        initData();
+        init();
     }
 
-    private void initData() {
-        presenter = new Presenter(this);
-        mbtGetInfo.setOnClickListener(this);
-        mbtSetInfo.setOnClickListener(this);
-    }
+    void init() {
+        mUserLoginBtn = (Button) findViewById(R.id.btn_user_login);
+        mSellerLoginBtn = (Button) findViewById(R.id.btn_seller_login);
+        mAdminLoginBtn = (Button) findViewById(R.id.btn_admin_login);
 
-    @Override
-    public InfoBean getInfo() {
-        //得到界面输入数据,并新建info对象
-        InfoBean bean = new InfoBean();
-        //得到数据并设置相关域
-        return bean;
-    }
-
-    @Override
-    public void setInfo(InfoBean info) {
-        //从后台获取数据
+        mUserLoginBtn.setOnClickListener(this);
+        mSellerLoginBtn.setOnClickListener(this);
+        mAdminLoginBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()) {
-            //得到输入的各种信息
-            case R.id.getInfo:
-                presenter.saveInfo(getInfo());
+            case R.id.btn_user_login:
+                intent.setClass(MainActivity.this, UserLoginActivity.class);
+                startActivity(intent);
                 break;
-            //获取后台的各种信息
-            case R.id.setInfo:
-                presenter.getInfo();
+            case R.id.btn_seller_login:
+                intent.setClass(MainActivity.this, SellerLoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_admin_login:
+                intent.setClass(MainActivity.this, AdministratorLoginActivity.class);
+                startActivity(intent);
                 break;
         }
     }

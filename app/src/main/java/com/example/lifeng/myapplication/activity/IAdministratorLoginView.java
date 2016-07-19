@@ -12,8 +12,6 @@
 
 package com.example.lifeng.myapplication.activity;
 
-import com.example.lifeng.myapplication.bean.AdministratorBean;
-
 /**
  * @author lifeng
  * @version 1.0 16/7/19
@@ -21,17 +19,9 @@ import com.example.lifeng.myapplication.bean.AdministratorBean;
  */
 public interface IAdministratorLoginView {
     /**
-     * 管理员登录接口
+     * UI交互,得到输入的用户名和密码
      *
-     * @param administratorBean
-     * @return 是否成功登录
+     * @return 输入是否合法
      */
-    boolean adminLogin(AdministratorBean administratorBean);
-
-    /**
-     * ,UI交互,得到输入的用户名和密码
-     *
-     * @return AdministratorBean对象
-     */
-    AdministratorBean getAdministratorInfo();
+    boolean getAdministratorInput();
 }

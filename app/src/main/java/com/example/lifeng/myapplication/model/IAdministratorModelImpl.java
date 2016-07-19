@@ -22,6 +22,7 @@ import com.example.lifeng.myapplication.bean.AdministratorBean;
 public class IAdministratorModelImpl implements IAdministratorModel {
     @Override
     public boolean adminLogin(AdministratorBean administratorBean) {
-        return false;
+        // TODO: 16/7/19 系统管理员登录逻辑待补
+        return true;
     }
 }

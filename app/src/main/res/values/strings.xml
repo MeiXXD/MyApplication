@@ -1,5 +1,15 @@
 <resources>
-    <string name="app_name">My Application</string>
-    <string name="getInfo">后台对象获取</string>
-    <string name="setInfo">前台对象保存</string>
+    <string name="app_name">网上商城</string>
+    <string name="activity_main_user_login">普通用户登录</string>
+    <string name="activity_main_seller_login">销售商登录</string>
+    <string name="activity_main_admin_login">系统管理员登录</string>
+    <string name="activity_user_login_user_name">请输入用户名</string>
+    <string name="activity_seller_login_seller_name">请输入用户名</string>
+    <string name="activity_admin_login_admin_name">请输入用户名</string>
+    <string name="activity_user_login_user_password">请输入密码</string>
+    <string name="activity_seller_login_seller_password">请输入密码</string>
+    <string name="activity_admin_login_admin_password">请输入密码</string>
+    <string name="activity_user_login_login">登录</string>
+    <string name="activity_seller_login_login">登录</string>
+    <string name="activity_admin_login_login">登录</string>
 </resources>

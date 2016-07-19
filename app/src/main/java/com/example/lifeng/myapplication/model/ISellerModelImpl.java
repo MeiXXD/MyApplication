@@ -27,6 +27,7 @@ public class ISellerModelImpl implements ISellerModel {
 
     @Override
     public boolean sellerLogin(SellerBean sellerBean) {
-        return false;
+        // TODO: 16/7/19 seller登录待补
+        return true;
     }
 }
