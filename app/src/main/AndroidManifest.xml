@@ -18,6 +18,8 @@
         <activity android:name=".activity.UserLoginActivity"></activity>
         <activity android:name=".activity.SellerLoginActivity"></activity>
         <activity android:name=".activity.AdministratorLoginActivity"></activity>
+        <activity android:name=".activity.UserManagementActivity"></activity>
+        <activity android:name=".activity.SellerManagementActivity"></activity>
     </application>
 
 </manifest>

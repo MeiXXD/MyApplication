@@ -10,29 +10,12 @@
  * ------------------------------------------------------------------------------------
  */
 
-package com.example.lifeng.myapplication.activity;
-
-import com.example.lifeng.myapplication.bean.UserBean;
-
-import java.util.ArrayList;
+package com.example.lifeng.myapplication.presenter;
 
 /**
  * @author lifeng
  * @version 1.0 16/7/19
- * @description 普通用户管理View
+ * @description 销售商管理的Presenter
  */
-public interface IUserManagementView {
-    /**
-     * UI交互,得到输入的用户名和密码
-     *
-     * @return 输入是否合法
-     */
-    boolean getAdminInput();
-
-    /**
-     * 为UI提供显示数据
-     *
-     * @param userBeanArrayList
-     */
-    void setOutput(ArrayList<UserBean> userBeanArrayList);
+public class SellerManagementViewPresenter {
 }
