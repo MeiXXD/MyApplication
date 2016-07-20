@@ -12,8 +12,6 @@
 
 package com.example.lifeng.myapplication.bean;
 
-import java.util.ArrayList;
-
 /**
  * @author lifeng
  * @description 普通用户
@@ -39,7 +37,7 @@ public class UserBean {
     /**
      * 收货地址
      */
-    private ArrayList<String> mAddressesArrayList;
+    private String mAddress;
 
     public int getId() {
         return mId;
@@ -73,11 +71,11 @@ public class UserBean {
         mEmail = email;
     }
 
-    public ArrayList<String> getAddressesArrayList() {
-        return mAddressesArrayList;
+    public String getAddress() {
+        return mAddress;
     }
 
-    public void setAddressesArrayList(ArrayList<String> addressesArrayList) {
-        mAddressesArrayList = addressesArrayList;
+    public void setAddress(String address) {
+        mAddress = address;
     }
 }

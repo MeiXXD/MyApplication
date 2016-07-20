@@ -12,8 +12,6 @@
 
 package com.example.lifeng.myapplication.bean;
 
-import java.util.ArrayList;
-
 /**
  * @author lifeng
  * @description 商品bean
@@ -43,7 +41,7 @@ public class GoodsBean {
     /**
      * 产品图片
      */
-    private ArrayList<String> mImagesArrayList;
+    private String mImage;
     /**
      * 商品数量
      */
@@ -89,12 +87,12 @@ public class GoodsBean {
         mBriefDescription = briefDescription;
     }
 
-    public ArrayList<String> getImagesArrayList() {
-        return mImagesArrayList;
+    public String getImage() {
+        return mImage;
     }
 
-    public void setImagesArrayList(ArrayList<String> imagesArrayList) {
-        mImagesArrayList = imagesArrayList;
+    public void setImage(String image) {
+        mImage = image;
     }
 
     public int getAmounts() {

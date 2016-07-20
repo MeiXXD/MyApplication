@@ -12,9 +12,6 @@
 
 package com.example.lifeng.myapplication.bean;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 /**
  * @author lifeng
  * @description 订单bean
@@ -28,15 +25,15 @@ public class OrderBean {
     /**
      * 订单日期
      */
-    private Date mDate;
+    private String mDate;
     /**
      * 用户
      */
     private UserBean mUserBean;
     /**
-     * 订单包含的商品(一个订单可能包含多个商品)
+     * 订单包含的商品(一个订单只能包含意见商品)
      */
-    private ArrayList<GoodsBean> mGoodsBeanArrayList;
+    private GoodsBean mGoodsBean;
     /**
      * 订单状态
      */
@@ -54,11 +51,11 @@ public class OrderBean {
         mId = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return mDate;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         mDate = date;
     }
 
@@ -70,12 +67,12 @@ public class OrderBean {
         mUserBean = userBean;
     }
 
-    public ArrayList<GoodsBean> getGoodsBeanArrayList() {
-        return mGoodsBeanArrayList;
+    public GoodsBean getGoodsBeanArrayList() {
+        return mGoodsBean;
     }
 
-    public void setGoodsBeanArrayList(ArrayList<GoodsBean> goodsBeanArrayList) {
-        mGoodsBeanArrayList = goodsBeanArrayList;
+    public void setGoodsBean(GoodsBean goodsBean) {
+        mGoodsBean = goodsBean;
     }
 
     public int getStatus() {

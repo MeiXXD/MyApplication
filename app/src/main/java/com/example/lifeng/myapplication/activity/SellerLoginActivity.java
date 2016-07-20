@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.bean.SellerBean;
@@ -37,6 +38,7 @@ public class SellerLoginActivity extends AppCompatActivity implements ISellerLog
     private SellerLoginViewPresenter mSellerLoginViewPresenter;
 
     private boolean mIsSuccess;
+    private boolean mPasswordIsValid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +59,16 @@ public class SellerLoginActivity extends AppCompatActivity implements ISellerLog
         mSellerLoginViewPresenter = new SellerLoginViewPresenter();
 
         mIsSuccess = false;
+        mPasswordIsValid = false;
     }
 
     @Override
     public boolean getSellerInput() {
         String mSellerName = mSellerNameEdt.getText().toString().trim();
         String mSellerPassword = mSellerPasswordEdt.getText().toString().trim();
-        // TODO: 16/7/19 密码是否合法逻辑
+        if (mSellerPassword.contains("\'") || mSellerPassword.contains("\"") || mSellerPassword.isEmpty()) {
+            return false;
+        }
         mSellerBean.setName(mSellerName);
         mSellerBean.setPassword(mSellerPassword);
         return true;
@@ -73,15 +78,20 @@ public class SellerLoginActivity extends AppCompatActivity implements ISellerLog
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_seller_login_login:
-                boolean temp = getSellerInput();
-                if (temp) {
+                mPasswordIsValid = getSellerInput();
+                if (!mPasswordIsValid) {
+                    Toast.makeText(this, "密码不合法!", Toast.LENGTH_SHORT).show();
+                } else {
                     mIsSuccess = mSellerLoginViewPresenter.sellerLogin(mSellerBean);
-                }
-                if (mIsSuccess) {
-                    Intent intent = new Intent();
-                    // TODO: 16/7/19 登录成功启动的界面待补
-                    intent.setClass(SellerLoginActivity.this, null);
-                    startActivity(intent);
+                    if (mIsSuccess) {
+                        Toast.makeText(this, "销售商登录成功!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent();
+                        // TODO: 16/7/19 登录成功启动的界面待补
+                        intent.setClass(SellerLoginActivity.this, null);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "用户名或密码错误!", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
         }

@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.bean.UserBean;
@@ -37,6 +38,7 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
     private UserLoginViewPresenter mUserLoginViewPresenter;
 
     private boolean mIsSuccess;
+    private boolean mPasswordIsValid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
 
     void init() {
         mIsSuccess = false;
+        mPasswordIsValid = false;
         mUserNameEdt = (EditText) findViewById(R.id.edt_user_name);
         mUserPasswordEdt = (EditText) findViewById(R.id.edt_user_password);
         mUserLoginBtn = (Button) findViewById(R.id.btn_user_login_login);
@@ -61,11 +64,13 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
 
     @Override
     public boolean getUserInput() {
-        String userName = mUserNameEdt.getText().toString().trim();
-        String userPassword = mUserPasswordEdt.getText().toString().trim();
-        // TODO: 16/7/19 密码是否合法逻辑
-        mUserBean.setName(userName);
-        mUserBean.setPassword(userPassword);
+        String mUserName = mUserNameEdt.getText().toString().trim();
+        String mUserPassword = mUserPasswordEdt.getText().toString().trim();
+        if (mUserPassword.contains("\'") || mUserPassword.contains("\"") || mUserPassword.isEmpty()) {
+            return false;
+        }
+        mUserBean.setName(mUserName);
+        mUserBean.setPassword(mUserPassword);
         return true;
     }
 
@@ -73,15 +78,20 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_user_login_login:
-                boolean temp = getUserInput();
-                if (temp) {
+                mPasswordIsValid = getUserInput();
+                if (!mPasswordIsValid) {
+                    Toast.makeText(this, "密码不合法!", Toast.LENGTH_SHORT).show();
+                } else {
                     mIsSuccess = mUserLoginViewPresenter.userLogin(mUserBean);
-                }
-                if (mIsSuccess) {
-                    Intent intent = new Intent();
-                    // TODO: 16/7/19 登录成功启动的界面待补
-                    intent.setClass(UserLoginActivity.this, null);
-                    startActivity(intent);
+                    if (mIsSuccess) {
+                        Toast.makeText(this, "普通用户登录成功!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent();
+                        // TODO: 16/7/19 登录成功启动的界面待补
+                        intent.setClass(UserLoginActivity.this, null);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "用户名或密码错误!", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
         }

@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.bean.AdministratorBean;
@@ -37,6 +38,7 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
     private AdministratorBean mAdministratorBean;
 
     private boolean mIsSuccess;
+    private boolean mPasswordIsValid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
     }
 
     private void init() {
+        mPasswordIsValid = false;
         mIsSuccess = false;
         mAdminNameEdt = (EditText) findViewById(R.id.edt_admin_name);
         mAdminPasswordEdt = (EditText) findViewById(R.id.edt_admin_password);
@@ -63,8 +66,9 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
     public boolean getAdministratorInput() {
         String mAdminName = mAdminNameEdt.getText().toString().trim();
         String mAdminPassword = mAdminPasswordEdt.getText().toString().trim();
-
-        // TODO: 16/7/19 判断密码是否合法
+        if (mAdminPassword.contains("\'") || mAdminPassword.contains("\"") || mAdminPassword.isEmpty()) {
+            return false;
+        }
         mAdministratorBean.setName(mAdminName);
         mAdministratorBean.setPassword(mAdminPassword);
         return true;
@@ -74,15 +78,24 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_admin_login_login:
-                boolean temp = getAdministratorInput();
-                if (temp) {
+                //得到管理员输入
+                mPasswordIsValid = getAdministratorInput();
+                //密码不合法
+                if (!mPasswordIsValid) {
+                    Toast.makeText(this, "密码不合法!", Toast.LENGTH_SHORT).show();
+                } else {
+                    //管理员登录
                     mIsSuccess = mAdministratorLoginViewPresenter.adminLogin(mAdministratorBean);
-                }
-                if (mIsSuccess) {
-                    Intent intent = new Intent();
-                    // TODO: 16/7/19 管理员登录后界面待补
-                    intent.setClass(AdministratorLoginActivity.this, null);
-                    startActivity(intent);
+                    if (mIsSuccess) {
+                        //验证通过进入普通用户管理与销售商管理界面
+                        Toast.makeText(this, "管理员登录成功!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent();
+                        // TODO: 16/7/20  UserLoginActivity.class需要修改
+                        intent.setClass(AdministratorLoginActivity.this, UserLoginActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "用户名或密码错误!", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
         }

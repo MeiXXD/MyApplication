@@ -12,6 +12,10 @@
 
 package com.example.lifeng.myapplication.model;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import com.example.lifeng.myapplication.bean.SellerBean;
 
 import java.util.ArrayList;
@@ -22,6 +26,12 @@ import java.util.ArrayList;
  * @description ISellerModel接口实现类
  */
 public class ISellerModelImpl implements ISellerModel {
+    private MyDatabaseHelper mDatabaseHelper;
+
+    public ISellerModelImpl() {
+        mDatabaseHelper = MyDatabaseHelper.getInstantce();
+    }
+
     @Override
     public boolean addSeller(SellerBean sellerBean) {
         return false;
@@ -29,8 +39,21 @@ public class ISellerModelImpl implements ISellerModel {
 
     @Override
     public boolean sellerLogin(SellerBean sellerBean) {
-        // TODO: 16/7/19 seller登录待补
-        return true;
+        //得到输入的用户名和密码
+        String mSellerName = sellerBean.getName();
+        String mSellerPassword = sellerBean.getPassword();
+        boolean result = false;
+        SQLiteDatabase db = mDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_seller where sellername=? and sellerpassword=?", new String[]{mSellerName, mSellerPassword});
+            if (cursor.moveToFirst()) {
+                result = true;
+            }
+            cursor.close();
+            db.close();
+        }
+        Log.e(">>>>>", "销售商登录" + Boolean.toString(result));
+        return result;
     }
 
     @Override

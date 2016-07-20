@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.lifeng.myapplication.R;
+import com.example.lifeng.myapplication.model.MyDatabaseHelper;
 
 /**
  * @author lifeng
@@ -30,11 +31,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mSellerLoginBtn;
     private Button mAdminLoginBtn;
 
+    private MyDatabaseHelper mDatabaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-
+        //dbhelper实例化
+        mDatabaseHelper = MyDatabaseHelper.getInstantce(this);
         init();
     }
 

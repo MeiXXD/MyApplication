@@ -12,6 +12,10 @@
 
 package com.example.lifeng.myapplication.model;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import com.example.lifeng.myapplication.bean.GoodsBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 
@@ -23,6 +27,12 @@ import java.util.ArrayList;
  * @description IUserModel接口实现类
  */
 public class IUserModelImpl implements IUserModel {
+    private MyDatabaseHelper mDatabaseHelper;
+
+    public IUserModelImpl() {
+        mDatabaseHelper = MyDatabaseHelper.getInstantce();
+    }
+
     @Override
     public boolean addUser(UserBean userBean) {
         return false;
@@ -35,8 +45,21 @@ public class IUserModelImpl implements IUserModel {
 
     @Override
     public boolean userLogin(UserBean userBean) {
-        // TODO: 16/7/19 假设登录成功 
-        return true;
+        //得到输入的用户名和密码
+        String mUserName = userBean.getName();
+        String mUserPassword = userBean.getPassword();
+        boolean result = false;
+        SQLiteDatabase db = mDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_user where username=? and userpassword=?", new String[]{mUserName, mUserPassword});
+            if (cursor.moveToFirst()) {
+                result = true;
+            }
+            cursor.close();
+            db.close();
+        }
+        Log.e(">>>>>", "普通用户登录" + Boolean.toString(result));
+        return result;
     }
 
     @Override

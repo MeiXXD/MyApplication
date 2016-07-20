@@ -12,6 +12,10 @@
 
 package com.example.lifeng.myapplication.model;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import com.example.lifeng.myapplication.bean.AdministratorBean;
 
 /**
@@ -20,9 +24,28 @@ import com.example.lifeng.myapplication.bean.AdministratorBean;
  * @description IAdministratorModel接口实现类
  */
 public class IAdministratorModelImpl implements IAdministratorModel {
+    private MyDatabaseHelper mDatabaseHelper;
+
+    public IAdministratorModelImpl() {
+        mDatabaseHelper = MyDatabaseHelper.getInstantce();
+    }
+
     @Override
     public boolean adminLogin(AdministratorBean administratorBean) {
-        // TODO: 16/7/19 系统管理员登录逻辑待补
-        return true;
+        //得到输入的用户名和密码
+        String mAdminName = administratorBean.getName();
+        String mAdminPassword = administratorBean.getPassword();
+        boolean result = false;
+        SQLiteDatabase db = mDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_admin where adminname=? and adminpassword=?", new String[]{mAdminName, mAdminPassword});
+            if (cursor.moveToFirst()) {
+                result = true;
+            }
+            cursor.close();
+            db.close();
+        }
+        Log.e(">>>>>", "管理员登录" + Boolean.toString(result));
+        return result;
     }
 }
