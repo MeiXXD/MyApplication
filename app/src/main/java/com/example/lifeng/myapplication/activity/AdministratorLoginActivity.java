@@ -94,7 +94,7 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
                         Toast.makeText(this, "管理员登录成功!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent();
                         // TODO: 16/7/20  UserLoginActivity.class需要修改
-                        intent.setClass(AdministratorLoginActivity.this, UserLoginActivity.class);
+                        intent.setClass(AdministratorLoginActivity.this, SellerUserManagementTabActivity.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(this, "用户名或密码错误!", Toast.LENGTH_SHORT).show();
