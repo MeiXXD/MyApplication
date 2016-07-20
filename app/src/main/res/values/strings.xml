@@ -12,4 +12,6 @@
     <string name="activity_user_login_login">登录</string>
     <string name="activity_seller_login_login">登录</string>
     <string name="activity_admin_login_login">登录</string>
+    <string name="activity_seller_user_management_titlebar_admin_management">管理平台</string>
+    <string name="activity_seller_user_management_titlebar_admin_logout">退出</string>
 </resources>

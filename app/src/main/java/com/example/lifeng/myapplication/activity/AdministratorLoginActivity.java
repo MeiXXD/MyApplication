@@ -45,7 +45,7 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_login_activity);
         setTitle("系统管理员登录");
-        Toast.makeText(this, "请输入用户名和密码", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "请输入用户名和密码", Toast.LENGTH_SHORT).show();
         init();
     }
 

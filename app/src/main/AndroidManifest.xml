@@ -18,9 +18,15 @@
         <activity android:name=".activity.UserLoginActivity"></activity>
         <activity android:name=".activity.SellerLoginActivity"></activity>
         <activity android:name=".activity.AdministratorLoginActivity"></activity>
-        <activity android:name=".activity.SellerUserManagementTabActivity"></activity>
-        <activity android:name=".activity.UserManagementActivity"></activity>
-        <activity android:name=".activity.SellerManagementActivity"></activity>
+        <activity
+            android:name=".activity.SellerUserManagementTabActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".activity.UserManagementActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".activity.SellerManagementActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

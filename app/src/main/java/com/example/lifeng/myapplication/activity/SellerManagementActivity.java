@@ -35,7 +35,7 @@ public class SellerManagementActivity extends AppCompatActivity implements ISell
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seller_management_activity);
-        setTitle("销售商管理");
+        //setTitle("销售商管理");
     }
 
     @Override

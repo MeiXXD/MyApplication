@@ -35,7 +35,7 @@ public class UserManagementActivity extends AppCompatActivity implements IUserMa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_management_activity);
-        setTitle("普通用户管理");
+        //setTitle("普通用户管理");
     }
 
     @Override
