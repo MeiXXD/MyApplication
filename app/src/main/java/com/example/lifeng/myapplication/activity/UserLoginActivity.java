@@ -45,7 +45,7 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_login_activity);
         setTitle("普通用户登录");
-
+        Toast.makeText(this, "请输入用户名和密码", Toast.LENGTH_LONG).show();
         init();
     }
 
@@ -85,6 +85,8 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
                     mIsSuccess = mUserLoginViewPresenter.userLogin(mUserBean);
                     if (mIsSuccess) {
                         Toast.makeText(this, "普通用户登录成功!", Toast.LENGTH_SHORT).show();
+                        mUserBean.setStatus(1);
+                        mUserLoginViewPresenter.updateUserStatus(mUserBean);
                         Intent intent = new Intent();
                         // TODO: 16/7/19 登录成功启动的界面待补
                         intent.setClass(UserLoginActivity.this, null);

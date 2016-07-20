@@ -86,4 +86,11 @@ public interface IUserModel {
      */
     ArrayList<UserBean> getUsers();
 
+    /**
+     * 更新用户状态
+     *
+     * @param userBean
+     */
+    void updateUserStatus(UserBean userBean);
+
 }

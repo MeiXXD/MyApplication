@@ -37,4 +37,13 @@ public class UserLoginViewPresenter {
     public boolean userLogin(UserBean userBean) {
         return mUserModel.userLogin(userBean);
     }
+
+    /**
+     * 更新用户状态
+     *
+     * @param userBean
+     */
+    public void updateUserStatus(UserBean userBean) {
+        mUserModel.updateUserStatus(userBean);
+    }
 }

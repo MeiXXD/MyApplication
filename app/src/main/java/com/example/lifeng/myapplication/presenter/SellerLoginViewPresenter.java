@@ -37,4 +37,13 @@ public class SellerLoginViewPresenter {
     public boolean sellerLogin(SellerBean sellerBean) {
         return mSellerModel.sellerLogin(sellerBean);
     }
+
+    /**
+     * 销售商登录状态更新
+     *
+     * @param sellerBean
+     */
+    public void updateSellerStatus(SellerBean sellerBean) {
+        mSellerModel.updateSellerStatus(sellerBean);
+    }
 }

@@ -23,6 +23,10 @@ public class AdministratorBean {
      */
     private int mId;
     /**
+     * 管理员是否登录状态
+     */
+    private int mStatus;
+    /**
      * 管理员用户名
      */
     private String mName;
@@ -53,5 +57,13 @@ public class AdministratorBean {
 
     public void setPassword(String password) {
         mPassword = password;
+    }
+
+    public int getStatus() {
+        return mStatus;
+    }
+
+    public void setStatus(int status) {
+        mStatus = status;
     }
 }

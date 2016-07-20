@@ -23,6 +23,10 @@ public class SellerBean {
      */
     private int mId;
     /**
+     * 销售商是否登录状态
+     */
+    private int mStatus;
+    /**
      * 销售商用户名
      */
     private String mName;
@@ -53,5 +57,13 @@ public class SellerBean {
 
     public void setPassword(String password) {
         mPassword = password;
+    }
+
+    public int getStatus() {
+        return mStatus;
+    }
+
+    public void setStatus(int status) {
+        mStatus = status;
     }
 }

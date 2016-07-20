@@ -45,7 +45,7 @@ public class SellerLoginActivity extends AppCompatActivity implements ISellerLog
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seller_login_activity);
         setTitle("销售商登录");
-
+        Toast.makeText(this, "请输入用户名和密码", Toast.LENGTH_LONG).show();
         init();
     }
 
@@ -85,6 +85,8 @@ public class SellerLoginActivity extends AppCompatActivity implements ISellerLog
                     mIsSuccess = mSellerLoginViewPresenter.sellerLogin(mSellerBean);
                     if (mIsSuccess) {
                         Toast.makeText(this, "销售商登录成功!", Toast.LENGTH_SHORT).show();
+                        mSellerBean.setStatus(1);
+                        mSellerLoginViewPresenter.updateSellerStatus(mSellerBean);
                         Intent intent = new Intent();
                         // TODO: 16/7/19 登录成功启动的界面待补
                         intent.setClass(SellerLoginActivity.this, null);

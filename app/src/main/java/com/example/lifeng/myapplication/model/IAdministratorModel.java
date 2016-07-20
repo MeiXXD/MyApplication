@@ -27,4 +27,11 @@ public interface IAdministratorModel {
      * @return 是否成功登录
      */
     boolean adminLogin(AdministratorBean administratorBean);
+
+    /**
+     * 管理员更新登录状态接口
+     *
+     * @param administratorBean
+     */
+    void updateAdminStatus(AdministratorBean administratorBean);
 }

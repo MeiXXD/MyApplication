@@ -86,4 +86,15 @@ public class IUserModelImpl implements IUserModel {
     public ArrayList<UserBean> getUsers() {
         return null;
     }
+
+    @Override
+    public void updateUserStatus(UserBean userBean) {
+        String mUserName = userBean.getName();
+        SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            db.execSQL("update tb_user set userstatus=" + userBean.getStatus() + " where username=\"" + mUserName + "\"");
+            db.close();
+        }
+        Log.e(">>>>>", "用户登录状态更新成功");
+    }
 }

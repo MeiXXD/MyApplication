@@ -38,4 +38,7 @@ public class AdministratorLoginViewPresenter {
         return mAdministratorModel.adminLogin(administratorBean);
     }
 
+    public void updateAdminStatus(AdministratorBean administratorBean) {
+        mAdministratorModel.updateAdminStatus(administratorBean);
+    }
 }

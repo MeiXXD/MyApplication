@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.main_activity);
         //dbhelper实例化
         mDatabaseHelper = MyDatabaseHelper.getInstantce(this);
+        mDatabaseHelper.getReadableDatabase();
         init();
     }
 

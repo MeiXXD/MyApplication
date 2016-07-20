@@ -48,4 +48,15 @@ public class IAdministratorModelImpl implements IAdministratorModel {
         Log.e(">>>>>", "管理员登录" + Boolean.toString(result));
         return result;
     }
+
+    @Override
+    public void updateAdminStatus(AdministratorBean administratorBean) {
+        String mAdminName = administratorBean.getName();
+        SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            db.execSQL("update tb_admin set adminstatus=" + administratorBean.getStatus() + " where adminname=\"" + mAdminName + "\"");
+            db.close();
+        }
+        Log.e(">>>>>", "管理员登录状态更新成功");
+    }
 }

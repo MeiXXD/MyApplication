@@ -22,6 +22,11 @@ public class UserBean {
      * 用户编号
      */
     private int mId;
+
+    /**
+     * 用户是否登录状态
+     */
+    private int mStatus;
     /**
      * 用户名
      */
@@ -77,5 +82,13 @@ public class UserBean {
 
     public void setAddress(String address) {
         mAddress = address;
+    }
+
+    public int getStatus() {
+        return mStatus;
+    }
+
+    public void setStatus(int status) {
+        mStatus = status;
     }
 }

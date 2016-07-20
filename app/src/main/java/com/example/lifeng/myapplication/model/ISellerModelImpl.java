@@ -60,4 +60,15 @@ public class ISellerModelImpl implements ISellerModel {
     public ArrayList<SellerBean> getSellers() {
         return null;
     }
+
+    @Override
+    public void updateSellerStatus(SellerBean sellerBean) {
+        String mSellerName = sellerBean.getName();
+        SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            db.execSQL("update tb_seller set sellerstatus=" + sellerBean.getStatus() + " where username=\"" + mSellerName + "\"");
+            db.close();
+        }
+        Log.e(">>>>>", "销售商登录状态更新成功");
+    }
 }

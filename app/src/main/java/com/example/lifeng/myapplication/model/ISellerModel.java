@@ -44,4 +44,11 @@ public interface ISellerModel {
      * @return 返回销售商列表
      */
     ArrayList<SellerBean> getSellers();
+
+    /**
+     * 更新销售商的登录状态
+     *
+     * @param sellerBean
+     */
+    void updateSellerStatus(SellerBean sellerBean);
 }
