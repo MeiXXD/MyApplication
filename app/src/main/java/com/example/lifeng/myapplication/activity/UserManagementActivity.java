@@ -48,7 +48,7 @@ public class UserManagementActivity extends AppCompatActivity implements IUserMa
     private UserBean mUserBean;
     private UserManagementViewPresenter mUserManagementViewPresenter;
 
-    private boolean mPasswordIsValid;
+    private boolean mIsInputValid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +81,7 @@ public class UserManagementActivity extends AppCompatActivity implements IUserMa
     public boolean getAdminInput() {
         String mUserName = mUserNameEdt.getText().toString().trim();
         String mUserPassword = mUserPasswordEdt.getText().toString().trim();
-        if (mUserPassword.contains("\'") || mUserPassword.contains("\"") || mUserPassword.isEmpty()) {
+        if (mUserName.isEmpty() || mUserPassword.contains("\'") || mUserPassword.contains("\"") || mUserPassword.isEmpty()) {
             return false;
         }
 
@@ -95,8 +95,8 @@ public class UserManagementActivity extends AppCompatActivity implements IUserMa
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add_user_listitem_add_user:
-                mPasswordIsValid = getAdminInput();
-                if (mPasswordIsValid) {
+                mIsInputValid = getAdminInput();
+                if (mIsInputValid) {
                     boolean temp = mUserManagementViewPresenter.addUser(mUserBean);
                     if (!temp) {
                         Toast.makeText(UserManagementActivity.this, "用户名已存在!", Toast.LENGTH_SHORT).show();
@@ -106,6 +106,8 @@ public class UserManagementActivity extends AppCompatActivity implements IUserMa
                         mUsersListAdapter.notifyDataSetChanged();
                         Toast.makeText(UserManagementActivity.this, "添加成功!", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(UserManagementActivity.this, "输入不合法", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

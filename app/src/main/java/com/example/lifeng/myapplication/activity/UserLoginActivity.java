@@ -38,7 +38,7 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
     private UserLoginViewPresenter mUserLoginViewPresenter;
 
     private boolean mIsSuccess;
-    private boolean mPasswordIsValid;
+    private boolean mIsInputValid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
 
     void init() {
         mIsSuccess = false;
-        mPasswordIsValid = false;
+        mIsInputValid = false;
         mUserNameEdt = (EditText) findViewById(R.id.edt_user_name);
         mUserPasswordEdt = (EditText) findViewById(R.id.edt_user_password);
         mUserLoginBtn = (Button) findViewById(R.id.btn_user_login_login);
@@ -78,9 +78,9 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_user_login_login:
-                mPasswordIsValid = getUserInput();
-                if (!mPasswordIsValid) {
-                    Toast.makeText(this, "密码不合法!", Toast.LENGTH_SHORT).show();
+                mIsInputValid = getUserInput();
+                if (!mIsInputValid) {
+                    Toast.makeText(this, "输入不合法!", Toast.LENGTH_SHORT).show();
                 } else {
                     mIsSuccess = mUserLoginViewPresenter.userLogin(mUserBean);
                     if (mIsSuccess) {

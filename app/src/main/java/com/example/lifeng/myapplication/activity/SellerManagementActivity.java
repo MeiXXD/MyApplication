@@ -48,7 +48,7 @@ public class SellerManagementActivity extends AppCompatActivity implements ISell
     private SellerBean mSellerBean;
     private SellerManagementViewPresenter mSellerManagementViewPresenter;
 
-    private boolean mPasswordIsValid;
+    private boolean mIsInputValid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +81,7 @@ public class SellerManagementActivity extends AppCompatActivity implements ISell
     public boolean getAdminInput() {
         String mSellerName = mSellerNameEdt.getText().toString().trim();
         String mSellerPassword = mSellerPasswordEdt.getText().toString().trim();
-        if (mSellerPassword.contains("\'") || mSellerPassword.contains("\"") || mSellerPassword.isEmpty()) {
+        if (mSellerName.isEmpty() || mSellerPassword.contains("\'") || mSellerPassword.contains("\"") || mSellerPassword.isEmpty()) {
             return false;
         }
 
@@ -94,8 +94,8 @@ public class SellerManagementActivity extends AppCompatActivity implements ISell
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add_seller_listitem_add_seller:
-                mPasswordIsValid = getAdminInput();
-                if (mPasswordIsValid) {
+                mIsInputValid = getAdminInput();
+                if (mIsInputValid) {
                     boolean temp = mSellerManagementViewPresenter.addSeller(mSellerBean);
                     if (!temp) {
                         Toast.makeText(SellerManagementActivity.this, "用户名已存在!", Toast.LENGTH_SHORT).show();
@@ -105,6 +105,8 @@ public class SellerManagementActivity extends AppCompatActivity implements ISell
                         mSellersListAdapter.notifyDataSetChanged();
                         Toast.makeText(SellerManagementActivity.this, "添加成功!", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(SellerManagementActivity.this, "输入不合法!", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

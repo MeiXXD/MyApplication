@@ -38,7 +38,7 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
     private AdministratorBean mAdministratorBean;
 
     private boolean mIsSuccess;
-    private boolean mPasswordIsValid;
+    private boolean mIsInputValid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
     }
 
     private void init() {
-        mPasswordIsValid = false;
+        mIsInputValid = false;
         mIsSuccess = false;
         mAdminNameEdt = (EditText) findViewById(R.id.edt_admin_name);
         mAdminPasswordEdt = (EditText) findViewById(R.id.edt_admin_password);
@@ -65,7 +65,7 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
     public boolean getAdministratorInput() {
         String mAdminName = mAdminNameEdt.getText().toString().trim();
         String mAdminPassword = mAdminPasswordEdt.getText().toString().trim();
-        if (mAdminPassword.contains("\'") || mAdminPassword.contains("\"") || mAdminPassword.isEmpty()) {
+        if (mAdminName.isEmpty() || mAdminPassword.contains("\'") || mAdminPassword.contains("\"") || mAdminPassword.isEmpty()) {
             return false;
         }
         mAdministratorBean.setName(mAdminName);
@@ -78,10 +78,10 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
         switch (v.getId()) {
             case R.id.btn_admin_login_login:
                 //得到管理员输入
-                mPasswordIsValid = getAdministratorInput();
+                mIsInputValid = getAdministratorInput();
                 //密码不合法
-                if (!mPasswordIsValid) {
-                    Toast.makeText(this, "密码不合法!", Toast.LENGTH_SHORT).show();
+                if (!mIsInputValid) {
+                    Toast.makeText(this, "输入不合法!", Toast.LENGTH_SHORT).show();
                 } else {
                     //管理员登录
                     mIsSuccess = mAdministratorLoginViewPresenter.adminLogin(mAdministratorBean);

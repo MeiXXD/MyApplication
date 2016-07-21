@@ -38,7 +38,7 @@ public class SellerLoginActivity extends AppCompatActivity implements ISellerLog
     private SellerLoginViewPresenter mSellerLoginViewPresenter;
 
     private boolean mIsSuccess;
-    private boolean mPasswordIsValid;
+    private boolean mIsInputValid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class SellerLoginActivity extends AppCompatActivity implements ISellerLog
         mSellerLoginViewPresenter = new SellerLoginViewPresenter();
 
         mIsSuccess = false;
-        mPasswordIsValid = false;
+        mIsInputValid = false;
     }
 
     @Override
@@ -78,8 +78,8 @@ public class SellerLoginActivity extends AppCompatActivity implements ISellerLog
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_seller_login_login:
-                mPasswordIsValid = getSellerInput();
-                if (!mPasswordIsValid) {
+                mIsInputValid = getSellerInput();
+                if (!mIsInputValid) {
                     Toast.makeText(this, "密码不合法!", Toast.LENGTH_SHORT).show();
                 } else {
                     mIsSuccess = mSellerLoginViewPresenter.sellerLogin(mSellerBean);
