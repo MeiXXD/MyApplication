@@ -15,6 +15,9 @@ package com.example.lifeng.myapplication.presenter;
 import com.example.lifeng.myapplication.activity.ISellerManagementView;
 import com.example.lifeng.myapplication.bean.SellerBean;
 import com.example.lifeng.myapplication.model.ISellerModel;
+import com.example.lifeng.myapplication.model.ISellerModelImpl;
+
+import java.util.ArrayList;
 
 /**
  * @author lifeng
@@ -26,6 +29,7 @@ public class SellerManagementViewPresenter {
     private ISellerManagementView mSellerManagementView;
 
     public SellerManagementViewPresenter(ISellerManagementView sellerManagementView) {
+        mSellerModel = new ISellerModelImpl();
         mSellerManagementView = sellerManagementView;
     }
 
@@ -42,7 +46,16 @@ public class SellerManagementViewPresenter {
     /**
      * 得到系统中的销售商
      */
-    public void getSellers() {
-        mSellerManagementView.setOutput(mSellerModel.getSellers());
+    public void getSellers(ArrayList<SellerBean> sellerBeanArrayList) {
+        mSellerModel.getSellers(sellerBeanArrayList);
+    }
+
+    /**
+     * 删除销售商
+     *
+     * @param sellerBean
+     */
+    public void delSeller(SellerBean sellerBean) {
+        mSellerModel.delSeller(sellerBean);
     }
 }

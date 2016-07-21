@@ -1,7 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/add_seller_listitem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/add_seller_listitem_seller_name"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:hint="@string/activity_seller_management_listheader_sellername"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textSize="25dp" />
+
+        <EditText
+            android:id="@+id/add_seller_listitem_seller_password"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:hint="@string/activity_seller_management_listheader_sellerpassword"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/add_seller_listitem_add_seller"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@android:color/holo_orange_dark"
+        android:text="@string/activity_seller_management_add_seller"
+        android:textSize="20dp" />
+
+    <LinearLayout
+        android:id="@+id/sellers_list_header"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="@string/activity_seller_management_listheader_sellerid"
+            android:textAlignment="center"
+            android:textSize="25dp" />
+
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:text="@string/activity_seller_management_listheader_sellername"
+            android:textAlignment="center"
+            android:textSize="25dp" />
+
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:text="@string/activity_seller_management_listheader_sellerpassword"
+            android:textAlignment="center"
+            android:textSize="25dp" />
+
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:text="@string/activity_seller_management_listheader_sellerstatus"
+            android:textAlignment="center"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_sellers"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="5dp"></ListView>
+
+</LinearLayout>

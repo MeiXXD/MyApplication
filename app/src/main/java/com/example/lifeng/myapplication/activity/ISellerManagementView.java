@@ -12,10 +12,6 @@
 
 package com.example.lifeng.myapplication.activity;
 
-import com.example.lifeng.myapplication.bean.SellerBean;
-
-import java.util.ArrayList;
-
 /**
  * @author lifeng
  * @version 1.0 16/7/19
@@ -28,11 +24,4 @@ public interface ISellerManagementView {
      * @return 输入是否合法
      */
     boolean getAdminInput();
-
-    /**
-     * 为UI提供显示数据
-     *
-     * @param sellerBeanArrayList
-     */
-    void setOutput(ArrayList<SellerBean> sellerBeanArrayList);
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="16dp">
+
+    <TextView
+        android:id="@+id/txt_sellers_listitem_sellerid"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/txt_sellers_listitem_sellername"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:paddingLeft="5dp"
+        android:textAlignment="center"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/txt_sellers_listitem_sellepassword"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:paddingLeft="5dp"
+        android:textAlignment="center"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/txt_sellers_listitem_sellerstatus"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:paddingLeft="5dp"
+        android:textAlignment="center"
+        android:textSize="25dp" />
+
+</LinearLayout>

@@ -34,7 +34,23 @@ public class ISellerModelImpl implements ISellerModel {
 
     @Override
     public boolean addSeller(SellerBean sellerBean) {
-        return false;
+        boolean result = false;
+        //得到输入的用户名和密码
+        String mSellerName = sellerBean.getName();
+        String mSellerPassword = sellerBean.getPassword();
+        int mSellerStatus = sellerBean.getStatus();
+        SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_seller where sellername=\"" + mSellerName + "\"", null);
+            if (cursor.moveToFirst()) {
+                result = false;
+            } else {
+                db.execSQL("insert into tb_seller(sellername,sellerpassword,sellerstatus) values(\"" + mSellerName + "\",\"" + mSellerPassword + "\"," + mSellerStatus + ")");
+                result = true;
+            }
+            db.close();
+        }
+        return result;
     }
 
     @Override
@@ -57,8 +73,20 @@ public class ISellerModelImpl implements ISellerModel {
     }
 
     @Override
-    public ArrayList<SellerBean> getSellers() {
-        return null;
+    public void getSellers(ArrayList<SellerBean> sellerBeanArrayList) {
+        SQLiteDatabase db = mDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_seller", null);
+            SellerBean sellerBean = null;
+            while (cursor.moveToNext()) {
+                sellerBean = new SellerBean();
+                sellerBean.setId(cursor.getInt(cursor.getColumnIndex("sellerid")));
+                sellerBean.setName(cursor.getString(cursor.getColumnIndex("sellername")));
+                sellerBean.setPassword(cursor.getString(cursor.getColumnIndex("sellerpassword")));
+                sellerBean.setStatus(cursor.getInt(cursor.getColumnIndex("sellerstatus")));
+                sellerBeanArrayList.add(sellerBean);
+            }
+        }
     }
 
     @Override
@@ -70,5 +98,16 @@ public class ISellerModelImpl implements ISellerModel {
             db.close();
         }
         Log.e(">>>>>", "销售商登录状态更新成功");
+    }
+
+    @Override
+    public void delSeller(SellerBean sellerBean) {
+        int mSellerId = sellerBean.getId();
+        SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            db.execSQL("delete from tb_seller where sellerid=" + mSellerId);
+            db.close();
+        }
+        Log.e(">>>>>", "销售商删除成功");
     }
 }

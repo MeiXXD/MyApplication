@@ -102,11 +102,10 @@ public class SellerUserManagementTabActivity extends TabActivity implements View
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_admin_logout:
-                mAdministratorBean.setStatus(0);
-                // TODO: 16/7/21 弹出一个警告框
                 new AlertDialog.Builder(this).setTitle("警告").setMessage("确定退出登录?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        mAdministratorBean.setStatus(0);
                         mAdministratorLoginViewPresenter.updateAdminStatus(mAdministratorBean);
                         Toast.makeText(SellerUserManagementTabActivity.this, "退出登录成功", Toast.LENGTH_SHORT).show();
                         //返回登录页面

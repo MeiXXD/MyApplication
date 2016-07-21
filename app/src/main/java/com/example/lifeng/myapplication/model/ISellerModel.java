@@ -43,7 +43,7 @@ public interface ISellerModel {
      *
      * @return 返回销售商列表
      */
-    ArrayList<SellerBean> getSellers();
+    void getSellers(ArrayList<SellerBean> sellerBeanArrayList);
 
     /**
      * 更新销售商的登录状态
@@ -51,4 +51,11 @@ public interface ISellerModel {
      * @param sellerBean
      */
     void updateSellerStatus(SellerBean sellerBean);
+
+    /**
+     * 删除销售商接口
+     *
+     * @param sellerBean
+     */
+    void delSeller(SellerBean sellerBean);
 }

@@ -11,6 +11,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
         android:hint="@string/activity_user_login_user_name"
+        android:singleLine="true"
         android:textAlignment="center"
         android:textSize="40dp" />
 
@@ -24,6 +25,7 @@
         android:layout_marginTop="10dp"
         android:hint="@string/activity_user_login_user_password"
         android:inputType="textPassword"
+        android:singleLine="true"
         android:textAlignment="center"
         android:textSize="40dp" />
 

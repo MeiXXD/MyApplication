@@ -14,4 +14,9 @@
     <string name="activity_admin_login_login">登录</string>
     <string name="activity_seller_user_management_titlebar_admin_management">管理员管理平台</string>
     <string name="activity_seller_user_management_titlebar_admin_logout">退出</string>
+    <string name="activity_seller_management_add_seller">添加销售商</string>
+    <string name="activity_seller_management_listheader_sellerid">编号</string>
+    <string name="activity_seller_management_listheader_sellername">用户名</string>
+    <string name="activity_seller_management_listheader_sellerpassword">密码</string>
+    <string name="activity_seller_management_listheader_sellerstatus">状态</string>
 </resources>
