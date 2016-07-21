@@ -9,7 +9,7 @@
     android:paddingTop="16dp">
 
     <TextView
-        android:id="@+id/txt_sellers_listitem_sellerid"
+        android:id="@+id/txt_users_listitem_userid"
         android:layout_width="65dp"
         android:layout_height="50dp"
         android:layout_weight="1"
@@ -17,16 +17,7 @@
         android:textSize="25dp" />
 
     <TextView
-        android:id="@+id/txt_sellers_listitem_sellername"
-        android:layout_width="65dp"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:paddingLeft="5dp"
-        android:textAlignment="center"
-        android:textSize="25dp" />
-
-    <TextView
-        android:id="@+id/txt_sellers_listitem_sellerpassword"
+        android:id="@+id/txt_users_listitem_username"
         android:layout_width="65dp"
         android:layout_height="50dp"
         android:layout_weight="1"
@@ -35,7 +26,16 @@
         android:textSize="25dp" />
 
     <TextView
-        android:id="@+id/txt_sellers_listitem_sellerstatus"
+        android:id="@+id/txt_users_listitem_userpassword"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:paddingLeft="5dp"
+        android:textAlignment="center"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/txt_users_listitem_userstatus"
         android:layout_width="65dp"
         android:layout_height="50dp"
         android:layout_weight="1"

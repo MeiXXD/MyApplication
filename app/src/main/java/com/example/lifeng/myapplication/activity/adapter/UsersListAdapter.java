@@ -21,33 +21,33 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.lifeng.myapplication.R;
-import com.example.lifeng.myapplication.bean.SellerBean;
+import com.example.lifeng.myapplication.bean.UserBean;
 
 import java.util.List;
 
 /**
  * @author lifeng
  * @version 1.0 16/7/21
- * @description 销售商列表的Adapter
+ * @description 普通用户列表的Adapter
  */
-public class SellersListAdapter extends BaseAdapter {
+public class UsersListAdapter extends BaseAdapter {
+    private List<UserBean> mUserBeanList;
     private Activity mActivity;
-    private List<SellerBean> mSellerBeanList;
     private LayoutInflater mLayoutInflater;
 
-    public SellersListAdapter(Activity activity, List<SellerBean> sellerBeanList) {
+    public UsersListAdapter(Activity activity, List<UserBean> userBeanList) {
         mActivity = activity;
-        mSellerBeanList = sellerBeanList;
+        mUserBeanList = userBeanList;
     }
 
     @Override
     public int getCount() {
-        return mSellerBeanList.size();
+        return mUserBeanList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mSellerBeanList.get(position);
+        return mUserBeanList.get(position);
     }
 
     @Override
@@ -61,19 +61,19 @@ public class SellersListAdapter extends BaseAdapter {
             mLayoutInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if (null == convertView) {
-            convertView = mLayoutInflater.inflate(R.layout.sellers_listitem, null);
+            convertView = mLayoutInflater.inflate(R.layout.users_listitem, null);
         }
 
-        TextView sellerIdTxt = (TextView) convertView.findViewById(R.id.txt_sellers_listitem_sellerid);
-        TextView sellerNameTxt = (TextView) convertView.findViewById(R.id.txt_sellers_listitem_sellername);
-        TextView sellerPasswordTxt = (TextView) convertView.findViewById(R.id.txt_sellers_listitem_sellerpassword);
-        TextView sellerStatusTxt = (TextView) convertView.findViewById(R.id.txt_sellers_listitem_sellerstatus);
+        TextView userIdTxt = (TextView) convertView.findViewById(R.id.txt_users_listitem_userid);
+        TextView userNameTxt = (TextView) convertView.findViewById(R.id.txt_users_listitem_username);
+        TextView userPasswordTxt = (TextView) convertView.findViewById(R.id.txt_users_listitem_userpassword);
+        TextView userStatusTxt = (TextView) convertView.findViewById(R.id.txt_users_listitem_userstatus);
 
-        SellerBean sellerBean = mSellerBeanList.get(position);
-        sellerIdTxt.setText(Integer.toString(sellerBean.getId()));
-        sellerNameTxt.setText(sellerBean.getName());
-        sellerPasswordTxt.setText(sellerBean.getPassword());
-        sellerStatusTxt.setText(Integer.toString(sellerBean.getStatus()));
+        UserBean userBean = mUserBeanList.get(position);
+        userIdTxt.setText(Integer.toString(userBean.getId()));
+        userNameTxt.setText(userBean.getName());
+        userPasswordTxt.setText(userBean.getPassword());
+        userStatusTxt.setText(Integer.toString(userBean.getStatus()));
 
         return convertView;
     }

@@ -15,17 +15,21 @@ package com.example.lifeng.myapplication.presenter;
 import com.example.lifeng.myapplication.activity.IUserManagementView;
 import com.example.lifeng.myapplication.bean.UserBean;
 import com.example.lifeng.myapplication.model.IUserModel;
+import com.example.lifeng.myapplication.model.IUserModelImpl;
+
+import java.util.ArrayList;
 
 /**
  * @author lifeng
  * @version 1.0 16/7/19
  * @description 普通用户管理的Presenter
  */
-public class UserManagerViewPresenter {
+public class UserManagementViewPresenter {
     private IUserModel mUserModel;
     private IUserManagementView mUserManagementView;
 
-    public UserManagerViewPresenter(IUserManagementView userManagementView) {
+    public UserManagementViewPresenter(IUserManagementView userManagementView) {
+        mUserModel = new IUserModelImpl();
         mUserManagementView = userManagementView;
     }
 
@@ -42,7 +46,16 @@ public class UserManagerViewPresenter {
     /**
      * 得到系统中的普通用户
      */
-    public void getUsers() {
-        mUserManagementView.setOutput(mUserModel.getUsers());
+    public void getUsers(ArrayList<UserBean> userBeanArrayList) {
+        mUserModel.getUsers(userBeanArrayList);
+    }
+
+    /**
+     * 删除普通用户
+     *
+     * @param userBean
+     */
+    public void delSeller(UserBean userBean) {
+        mUserModel.delUser(userBean);
     }
 }

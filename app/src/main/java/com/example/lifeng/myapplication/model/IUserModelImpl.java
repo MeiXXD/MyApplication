@@ -35,12 +35,36 @@ public class IUserModelImpl implements IUserModel {
 
     @Override
     public boolean addUser(UserBean userBean) {
-        return false;
+        boolean result = false;
+        //得到输入的用户名和密码
+        String mUserName = userBean.getName();
+        String mUserPassword = userBean.getPassword();
+        int mUserStatus = userBean.getStatus();
+        SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_user where username=\"" + mUserName + "\"", null);
+            if (cursor.moveToFirst()) {
+                Log.e(">>>>>", "普通用户添加失败");
+                result = false;
+            } else {
+                db.execSQL("insert into tb_user(username,userpassword,userstatus) values(\"" + mUserName + "\",\"" + mUserPassword + "\"," + mUserStatus + ")");
+                result = true;
+                Log.e(">>>>>", "普通用户添加成功");
+            }
+            db.close();
+        }
+        return result;
     }
 
     @Override
-    public boolean delUser(UserBean userBean) {
-        return false;
+    public void delUser(UserBean userBean) {
+        int mUserId = userBean.getId();
+        SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            db.execSQL("delete from tb_user where userid=" + mUserId);
+            db.close();
+        }
+        Log.e(">>>>>", "普通用户删除成功");
     }
 
     @Override
@@ -78,8 +102,20 @@ public class IUserModelImpl implements IUserModel {
     }
 
     @Override
-    public ArrayList<UserBean> getUsers() {
-        return null;
+    public void getUsers(ArrayList<UserBean> userBeanArrayList) {
+        SQLiteDatabase db = mDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_user", null);
+            UserBean userBean = null;
+            while (cursor.moveToNext()) {
+                userBean = new UserBean();
+                userBean.setId(cursor.getInt(cursor.getColumnIndex("userid")));
+                userBean.setName(cursor.getString(cursor.getColumnIndex("username")));
+                userBean.setPassword(cursor.getString(cursor.getColumnIndex("userpassword")));
+                userBean.setStatus(cursor.getInt(cursor.getColumnIndex("userstatus")));
+                userBeanArrayList.add(userBean);
+            }
+        }
     }
 
     @Override

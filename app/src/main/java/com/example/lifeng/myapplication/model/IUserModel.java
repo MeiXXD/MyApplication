@@ -35,9 +35,8 @@ public interface IUserModel {
      * 删除普通用户接口
      *
      * @param userBean
-     * @return 是否成功删除普通用户
      */
-    boolean delUser(UserBean userBean);
+    void delUser(UserBean userBean);
 
     /**
      * 普通用户登录接口
@@ -74,9 +73,9 @@ public interface IUserModel {
     /**
      * 得到系统中存在的用户
      *
-     * @return 返回用户列表
+     * @param userBeanArrayList
      */
-    ArrayList<UserBean> getUsers();
+    void getUsers(ArrayList<UserBean> userBeanArrayList);
 
     /**
      * 更新用户状态

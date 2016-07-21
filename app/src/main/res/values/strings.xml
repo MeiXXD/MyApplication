@@ -19,4 +19,10 @@
     <string name="activity_seller_management_listheader_sellername">用户名</string>
     <string name="activity_seller_management_listheader_sellerpassword">密码</string>
     <string name="activity_seller_management_listheader_sellerstatus">状态</string>
+
+    <string name="activity_user_management_add_user">添加普通用户</string>
+    <string name="activity_user_management_listheader_userid">编号</string>
+    <string name="activity_user_management_listheader_username">用户名</string>
+    <string name="activity_user_management_listheader_userpassword">密码</string>
+    <string name="activity_user_management_listheader_userstatus">状态</string>
 </resources>

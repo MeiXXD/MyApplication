@@ -61,7 +61,7 @@ public class SellerManagementActivity extends AppCompatActivity implements ISell
     void init() {
         mSellerBean = new SellerBean();
         mSellerBeanArrayList = new ArrayList<SellerBean>();
-        mSellerManagementViewPresenter = new SellerManagementViewPresenter(this);
+        mSellerManagementViewPresenter = new SellerManagementViewPresenter();
 
         mSellersLv = (ListView) findViewById(R.id.lv_sellers);
         mSellerNameEdt = (EditText) findViewById(R.id.add_seller_listitem_seller_name);

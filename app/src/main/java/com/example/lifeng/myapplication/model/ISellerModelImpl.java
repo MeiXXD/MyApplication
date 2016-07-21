@@ -43,9 +43,11 @@ public class ISellerModelImpl implements ISellerModel {
         if (db.isOpen()) {
             Cursor cursor = db.rawQuery("select * from tb_seller where sellername=\"" + mSellerName + "\"", null);
             if (cursor.moveToFirst()) {
+                Log.e(">>>>>", "销售商添加失败");
                 result = false;
             } else {
                 db.execSQL("insert into tb_seller(sellername,sellerpassword,sellerstatus) values(\"" + mSellerName + "\",\"" + mSellerPassword + "\"," + mSellerStatus + ")");
+                Log.e(">>>>>", "销售商添加成功");
                 result = true;
             }
             db.close();

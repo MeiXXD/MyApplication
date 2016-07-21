@@ -12,7 +12,6 @@
 
 package com.example.lifeng.myapplication.presenter;
 
-import com.example.lifeng.myapplication.activity.ISellerManagementView;
 import com.example.lifeng.myapplication.bean.SellerBean;
 import com.example.lifeng.myapplication.model.ISellerModel;
 import com.example.lifeng.myapplication.model.ISellerModelImpl;
@@ -26,11 +25,9 @@ import java.util.ArrayList;
  */
 public class SellerManagementViewPresenter {
     private ISellerModel mSellerModel;
-    private ISellerManagementView mSellerManagementView;
 
-    public SellerManagementViewPresenter(ISellerManagementView sellerManagementView) {
+    public SellerManagementViewPresenter() {
         mSellerModel = new ISellerModelImpl();
-        mSellerManagementView = sellerManagementView;
     }
 
     /**
