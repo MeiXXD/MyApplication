@@ -24,47 +24,44 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lifeng.myapplication.R;
-import com.example.lifeng.myapplication.bean.AdministratorBean;
-import com.example.lifeng.myapplication.presenter.AdministratorLoginViewPresenter;
+import com.example.lifeng.myapplication.bean.SellerBean;
+import com.example.lifeng.myapplication.presenter.SellerLoginViewPresenter;
 
 /**
  * @author lifeng
- * @version 1.0 16/7/20
- * @description 销售商管理和用户管理tab主界面
+ * @version 1.0 16/7/21
+ * @description 商品、订单管理TabActivity
  */
-public class SellerUserManagementTabActivity extends TabActivity implements View.OnClickListener {
-    private String mAdminName;
-    private String mAdminPassword;
-    private AdministratorBean mAdministratorBean;
-    private AdministratorLoginViewPresenter mAdministratorLoginViewPresenter;
-
-    private Button mAdminLogoutBtn;
+public class GoodsOrdersManagementTabActivity extends TabActivity implements View.OnClickListener {
+    private String mSellerName;
+    private String mSellerPassword;
+    private Button mSellerLogout;
     private TabHost mTabHost;
 
+    private SellerBean mSellerBean;
+    private SellerLoginViewPresenter mSellerLoginViewPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.seller_user_management_tab_activity);
-
+        setContentView(R.layout.goods_orders_management_tab_activity);
         init();
     }
 
     void init() {
-        mAdministratorLoginViewPresenter = new AdministratorLoginViewPresenter();
+        mSellerBean = new SellerBean();
+        mSellerLoginViewPresenter = new SellerLoginViewPresenter();
 
         Intent intent = getIntent();
-        mAdminName = intent.getStringExtra("adminname");
-        mAdminPassword = intent.getStringExtra("adminpassword");
-        mAdministratorBean = new AdministratorBean();
-        mAdministratorBean.setName(mAdminName);
-        mAdministratorBean.setPassword(mAdminPassword);
-        //tabhost逻辑
+        mSellerName = intent.getStringExtra("sellername");
+        mSellerPassword = intent.getStringExtra("sellerpassword");
+
+        mSellerBean.setName(mSellerName);
+        mSellerBean.setPassword(mSellerPassword);
         tabhostInit();
 
-        //button逻辑
-        mAdminLogoutBtn = (Button) findViewById(R.id.btn_admin_logout);
-        mAdminLogoutBtn.setOnClickListener(this);
+        mSellerLogout = (Button) findViewById(R.id.btn_seller_logout);
+        mSellerLogout.setOnClickListener(this);
     }
 
     void tabhostInit() {
@@ -72,8 +69,8 @@ public class SellerUserManagementTabActivity extends TabActivity implements View
         /* 去除标签下方的白线 */
         mTabHost.setPadding(mTabHost.getLeft(), mTabHost.getTop(), mTabHost.getRight(), mTabHost.getBottom() - 5);
 
-        mTabHost.addTab(mTabHost.newTabSpec("usermanagement").setIndicator("普通用户管理").setContent(new Intent(this, UserManagementActivity.class)));
-        mTabHost.addTab(mTabHost.newTabSpec("sellermanagement").setIndicator("销售商管理").setContent(new Intent(this, SellerManagementActivity.class)));
+        mTabHost.addTab(mTabHost.newTabSpec("goodsmanagement").setIndicator("商品管理").setContent(new Intent(this, GoodsManagementActivity.class)));
+        mTabHost.addTab(mTabHost.newTabSpec("ordersmanagement").setIndicator("订单管理").setContent(new Intent(this, OrdersManagementActivity.class)));
 
         mTabHost.getTabWidget().setBackgroundResource(R.color.colorPrimary);
         updateTab(mTabHost);
@@ -101,16 +98,16 @@ public class SellerUserManagementTabActivity extends TabActivity implements View
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_admin_logout:
+            case R.id.btn_seller_logout:
                 new AlertDialog.Builder(this).setTitle("警告").setMessage("确定退出登录?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mAdministratorBean.setStatus(0);
-                        mAdministratorLoginViewPresenter.updateAdminStatus(mAdministratorBean);
-                        Toast.makeText(SellerUserManagementTabActivity.this, "退出登录成功", Toast.LENGTH_SHORT).show();
+                        mSellerBean.setStatus(0);
+                        mSellerLoginViewPresenter.updateSellerStatus(mSellerBean);
+                        Toast.makeText(GoodsOrdersManagementTabActivity.this, "退出登录成功", Toast.LENGTH_SHORT).show();
                         //返回登录页面
                         Intent intent = new Intent();
-                        intent.setClass(SellerUserManagementTabActivity.this, AdministratorLoginActivity.class);
+                        intent.setClass(GoodsOrdersManagementTabActivity.this, SellerLoginActivity.class);
                         startActivity(intent);
                         //关闭当前页面
                         finish();

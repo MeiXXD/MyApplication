@@ -96,10 +96,10 @@ public class ISellerModelImpl implements ISellerModel {
         String mSellerName = sellerBean.getName();
         SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
         if (db.isOpen()) {
-            db.execSQL("update tb_seller set sellerstatus=" + sellerBean.getStatus() + " where username=\"" + mSellerName + "\"");
+            db.execSQL("update tb_seller set sellerstatus=" + sellerBean.getStatus() + " where sellername=\"" + mSellerName + "\"");
             db.close();
         }
-        Log.e(">>>>>", "销售商登录状态更新成功");
+        Log.e(">>>>>", "销售商登录状态更新为:" + Integer.toString(sellerBean.getStatus()));
     }
 
     @Override

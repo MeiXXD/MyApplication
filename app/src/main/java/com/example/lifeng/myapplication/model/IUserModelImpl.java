@@ -126,6 +126,6 @@ public class IUserModelImpl implements IUserModel {
             db.execSQL("update tb_user set userstatus=" + userBean.getStatus() + " where username=\"" + mUserName + "\"");
             db.close();
         }
-        Log.e(">>>>>", "用户登录状态更新成功");
+        Log.e(">>>>>", "用户登录状态更新为:" + Integer.toString(userBean.getStatus()));
     }
 }

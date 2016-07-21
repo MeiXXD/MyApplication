@@ -45,7 +45,7 @@ public class SellerLoginActivity extends AppCompatActivity implements ISellerLog
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seller_login_activity);
         setTitle("销售商登录");
-        Toast.makeText(this, "请输入用户名和密码", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "请输入用户名和密码", Toast.LENGTH_SHORT).show();
         init();
     }
 
@@ -80,7 +80,7 @@ public class SellerLoginActivity extends AppCompatActivity implements ISellerLog
             case R.id.btn_seller_login_login:
                 mIsInputValid = getSellerInput();
                 if (!mIsInputValid) {
-                    Toast.makeText(this, "密码不合法!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "输入不合法!", Toast.LENGTH_SHORT).show();
                 } else {
                     mIsSuccess = mSellerLoginViewPresenter.sellerLogin(mSellerBean);
                     if (mIsSuccess) {
@@ -88,9 +88,11 @@ public class SellerLoginActivity extends AppCompatActivity implements ISellerLog
                         mSellerBean.setStatus(1);
                         mSellerLoginViewPresenter.updateSellerStatus(mSellerBean);
                         Intent intent = new Intent();
-                        // TODO: 16/7/19 登录成功启动的界面待补
-                        intent.setClass(SellerLoginActivity.this, null);
+                        intent.setClass(SellerLoginActivity.this, GoodsOrdersManagementTabActivity.class);
+                        intent.putExtra("sellername", mSellerBean.getName());
+                        intent.putExtra("sellerpassword", mSellerBean.getPassword());
                         startActivity(intent);
+                        finish();
                     } else {
                         Toast.makeText(this, "用户名或密码错误!", Toast.LENGTH_SHORT).show();
                     }

@@ -57,6 +57,6 @@ public class IAdministratorModelImpl implements IAdministratorModel {
             db.execSQL("update tb_admin set adminstatus=" + administratorBean.getStatus() + " where adminname=\"" + mAdminName + "\"");
             db.close();
         }
-        Log.e(">>>>>", "管理员登录状态更新成功");
+        Log.e(">>>>>", "管理员登录状态更新为:" + Integer.toString(administratorBean.getStatus()));
     }
 }

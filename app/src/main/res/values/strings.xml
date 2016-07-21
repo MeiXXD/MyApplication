@@ -3,17 +3,22 @@
     <string name="activity_main_user_login">普通用户登录</string>
     <string name="activity_main_seller_login">销售商登录</string>
     <string name="activity_main_admin_login">系统管理员登录</string>
+
     <string name="activity_user_login_user_name">请输入用户名</string>
-    <string name="activity_seller_login_seller_name">请输入用户名</string>
-    <string name="activity_admin_login_admin_name">请输入用户名</string>
     <string name="activity_user_login_user_password">请输入密码</string>
-    <string name="activity_seller_login_seller_password">请输入密码</string>
-    <string name="activity_admin_login_admin_password">请输入密码</string>
     <string name="activity_user_login_login">登录</string>
+
+    <string name="activity_seller_login_seller_name">请输入用户名</string>
+    <string name="activity_seller_login_seller_password">请输入密码</string>
     <string name="activity_seller_login_login">登录</string>
+
+    <string name="activity_admin_login_admin_name">请输入用户名</string>
+    <string name="activity_admin_login_admin_password">请输入密码</string>
     <string name="activity_admin_login_login">登录</string>
+
     <string name="activity_seller_user_management_titlebar_admin_management">管理员管理平台</string>
     <string name="activity_seller_user_management_titlebar_admin_logout">退出</string>
+
     <string name="activity_seller_management_add_seller">添加销售商</string>
     <string name="activity_seller_management_listheader_sellerid">编号</string>
     <string name="activity_seller_management_listheader_sellername">用户名</string>
@@ -25,4 +30,7 @@
     <string name="activity_user_management_listheader_username">用户名</string>
     <string name="activity_user_management_listheader_userpassword">密码</string>
     <string name="activity_user_management_listheader_userstatus">状态</string>
+
+    <string name="activity_goods_orders_management_titlebar_seller_management">销售商管理平台</string>
+    <string name="activity_goods_orders_management_titlebar_seller_logout">退出</string>
 </resources>

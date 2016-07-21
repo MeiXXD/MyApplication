@@ -94,7 +94,7 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
                         //打开管理界面并传递数据
                         Intent intent = new Intent();
                         intent.setClass(AdministratorLoginActivity.this, SellerUserManagementTabActivity.class);
-                        intent.putExtra("adminid", mAdministratorBean.getName());
+                        intent.putExtra("adminname", mAdministratorBean.getName());
                         intent.putExtra("adminpassword", mAdministratorBean.getPassword());
                         startActivity(intent);
                         finish();

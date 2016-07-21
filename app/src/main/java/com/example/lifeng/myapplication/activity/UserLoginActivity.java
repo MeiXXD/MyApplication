@@ -45,7 +45,7 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_login_activity);
         setTitle("普通用户登录");
-        Toast.makeText(this, "请输入用户名和密码", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "请输入用户名和密码", Toast.LENGTH_SHORT).show();
         init();
     }
 
