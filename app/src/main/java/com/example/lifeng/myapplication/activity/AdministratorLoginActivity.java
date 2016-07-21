@@ -45,7 +45,6 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_login_activity);
         setTitle("系统管理员登录");
-        Toast.makeText(this, "请输入用户名和密码", Toast.LENGTH_SHORT).show();
         init();
     }
 
@@ -92,10 +91,13 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
                         mAdministratorBean.setStatus(1);
                         mAdministratorLoginViewPresenter.updateAdminStatus(mAdministratorBean);
                         Toast.makeText(this, "管理员登录成功!", Toast.LENGTH_SHORT).show();
+                        //打开管理界面并传递数据
                         Intent intent = new Intent();
-                        // TODO: 16/7/20  UserLoginActivity.class需要修改
                         intent.setClass(AdministratorLoginActivity.this, SellerUserManagementTabActivity.class);
+                        intent.putExtra("adminid", mAdministratorBean.getName());
+                        intent.putExtra("adminpassword", mAdministratorBean.getPassword());
                         startActivity(intent);
+                        finish();
                     } else {
                         Toast.makeText(this, "用户名或密码错误!", Toast.LENGTH_SHORT).show();
                     }

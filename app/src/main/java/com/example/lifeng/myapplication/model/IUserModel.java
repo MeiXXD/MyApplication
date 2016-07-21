@@ -48,14 +48,6 @@ public interface IUserModel {
     boolean userLogin(UserBean userBean);
 
     /**
-     * 普通用户注销接口
-     *
-     * @param userBean
-     * @return 是否成功注销
-     */
-    boolean userLogout(UserBean userBean);
-
-    /**
      * 普通用户修改用户信息接口
      *
      * @param userBean

@@ -63,11 +63,6 @@ public class IUserModelImpl implements IUserModel {
     }
 
     @Override
-    public boolean userLogout(UserBean userBean) {
-        return false;
-    }
-
-    @Override
     public boolean modifyUserInfo(UserBean userBean) {
         return false;
     }
