@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -117,5 +118,13 @@ public class GoodsManagementActivity extends AppCompatActivity implements View.O
         mGoodsBeanArrayList.clear();
         mGoodsManagementViewPresenter.getGoods(mGoodsBeanArrayList);
         mGoodsManagementListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            new AlertDialog.Builder(GoodsManagementActivity.this).setTitle("注意").setMessage("请退出登录!").setPositiveButton("确定", null).show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

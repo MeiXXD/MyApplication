@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  * @description 输入内容判断工具类
  */
 public class InputJudge {
-    // TODO: 16/7/22 判断是否为正小数有待完善 
+    // TODO: 16/7/22 判断是否为正小数有待完善
     public static boolean isPositiveDoubleNumber(String str) {
         Pattern pattern = Pattern.compile("\\+{0,1}[0]\\.[1-9]*|\\+{0,1}[1-9]\\d*\\.\\d*");
         Matcher isPositiveDoubleNumber = pattern.matcher(str);

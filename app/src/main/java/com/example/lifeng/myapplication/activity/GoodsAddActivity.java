@@ -77,7 +77,7 @@ public class GoodsAddActivity extends AppCompatActivity implements IGoodsAddView
         String description = mGoodsDescriptionEdt.getText().toString().trim();
 
         if (!name.isEmpty() && !amounts.isEmpty() && !price.isEmpty() && !briefDescription.isEmpty() && !description.isEmpty()) {
-            boolean temp = InputJudge.isPositiveInteger(amounts) && (InputJudge.isPositiveInteger(price) || InputJudge.isPositiveDoubleNumber(amounts));
+            boolean temp = InputJudge.isPositiveInteger(amounts) && (InputJudge.isPositiveInteger(price) || InputJudge.isPositiveDoubleNumber(price));
             if (temp) {
                 mGoodsBean.setName(name);
                 mGoodsBean.setAmounts(Integer.valueOf(amounts));
