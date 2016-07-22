@@ -36,6 +36,8 @@
         <activity
             android:name=".activity.GoodsManagementActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".activity.GoodsAddActivity"></activity>
+        <activity android:name=".activity.GoodsInfoModifyActivity"></activity>
     </application>
 
 </manifest>

@@ -64,9 +64,9 @@ public class UserManagementActivity extends AppCompatActivity implements IUserMa
         mUserManagementViewPresenter = new UserManagementViewPresenter(this);
 
         mUsersLv = (ListView) findViewById(R.id.lv_users);
-        mUserNameEdt = (EditText) findViewById(R.id.add_user_listitem_user_name);
-        mUserPasswordEdt = (EditText) findViewById(R.id.add_user_listitem_user_password);
-        mAddUserBtn = (Button) findViewById(R.id.add_user_listitem_add_user);
+        mUserNameEdt = (EditText) findViewById(R.id.edt_user_listitem_user_name);
+        mUserPasswordEdt = (EditText) findViewById(R.id.edt_user_listitem_user_password);
+        mAddUserBtn = (Button) findViewById(R.id.btn_user_listitem_add_user);
         mAddUserBtn.setOnClickListener(this);
 
         mUsersListAdapter = new UsersListAdapter(this, mUserBeanArrayList);
@@ -94,7 +94,7 @@ public class UserManagementActivity extends AppCompatActivity implements IUserMa
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.add_user_listitem_add_user:
+            case R.id.btn_user_listitem_add_user:
                 mIsInputValid = getAdminInput();
                 if (mIsInputValid) {
                     boolean temp = mUserManagementViewPresenter.addUser(mUserBean);

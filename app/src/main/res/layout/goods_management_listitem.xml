@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="16dp">
+
+    <ImageView
+        android:id="@+id/img_goods_listitem_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/goods" />
+
+    <TextView
+        android:id="@+id/txt_goods_listview_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/img_goods_listitem_image"
+        android:layout_toRightOf="@id/img_goods_listitem_image"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_goods_listview_price"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_goods_listview_name"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/img_goods_listitem_image"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/txt_goods_listview_amount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_goods_listview_price"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/img_goods_listitem_image"
+        android:textColor="#666666"
+        android:textSize="16dp" />
+
+</RelativeLayout>

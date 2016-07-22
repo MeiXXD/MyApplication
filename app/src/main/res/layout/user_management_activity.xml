@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/add_user_listitem_user_name"
+            android:id="@+id/edt_user_listitem_user_name"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
@@ -25,7 +25,7 @@
             android:textSize="25dp" />
 
         <EditText
-            android:id="@+id/add_user_listitem_user_password"
+            android:id="@+id/edt_user_listitem_user_password"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
@@ -37,7 +37,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/add_user_listitem_add_user"
+        android:id="@+id/btn_user_listitem_add_user"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="25dp"

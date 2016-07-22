@@ -42,24 +42,20 @@ public interface IGoodsModel {
      * 删除商品接口
      *
      * @param goodsBean
-     * @return 商品是否成功删除
      */
-    boolean delGoods(GoodsBean goodsBean);
+    void delGoods(GoodsBean goodsBean);
 
     /**
      * 修改商品信息
      *
      * @param goodsBean
-     * @return 商品信息是否修改成功
      */
-    boolean modifyGoods(GoodsBean goodsBean);
+    void modifyGoods(GoodsBean goodsBean);
 
     /**
      * 得到全部商品信息接口(浏览商品目录)
-     *
-     * @return 返回全部商品的列表
      */
-    ArrayList<GoodsBean> getAllGoods();
+    void getGoods(ArrayList<GoodsBean> goodsBeanArrayList);
 
     /**
      * 商品搜索接口
