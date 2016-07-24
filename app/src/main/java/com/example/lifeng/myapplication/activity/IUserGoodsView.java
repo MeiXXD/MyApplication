@@ -15,7 +15,7 @@ package com.example.lifeng.myapplication.activity;
 /**
  * @author lifeng
  * @version 1.0 16/7/19
- * @description 订单管理View
+ * @description 商品View
  */
-public interface IOrderManagementView {
+public interface IUserGoodsView {
 }

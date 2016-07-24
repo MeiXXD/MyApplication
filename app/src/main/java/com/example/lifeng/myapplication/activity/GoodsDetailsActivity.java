@@ -12,10 +12,20 @@
 
 package com.example.lifeng.myapplication.activity;
 
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.example.lifeng.myapplication.R;
+
 /**
  * @author lifeng
- * @version 1.0 16/7/19
- * @description 普通用户信息修改View
+ * @version 1.0 16/7/24
+ * @description 商品详情页面
  */
-public interface IUserInfoModificationView {
+public class GoodsDetailsActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.goods_details_activity);
+    }
 }

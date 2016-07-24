@@ -12,10 +12,20 @@
 
 package com.example.lifeng.myapplication.activity;
 
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.example.lifeng.myapplication.R;
+
 /**
  * @author lifeng
- * @version 1.0 16/7/19
- * @description 商品目录View
+ * @version 1.0 16/7/24
+ * @description 商品界面
  */
-public interface IGoodsDirectoryView {
+public class UserGoodsActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.user_goods_activity);
+    }
 }
