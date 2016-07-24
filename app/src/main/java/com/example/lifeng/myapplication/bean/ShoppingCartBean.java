@@ -14,34 +14,26 @@ package com.example.lifeng.myapplication.bean;
 
 /**
  * @author lifeng
- * @description 订单bean
- * @date 16/7/18
+ * @version 1.0 16/7/24
+ * @description 购物车Bean
  */
-public class OrderBean {
+public class ShoppingCartBean {
     /**
-     * 订单编号
+     * 编号ID
      */
     private int mId;
     /**
-     * 订单日期
+     * 数量
      */
-    private String mDate;
+    private int mAmounts;
     /**
      * 用户
      */
     private UserBean mUserBean;
     /**
-     * 订单包含的商品(一个订单只能包含意见商品)
+     * 商品
      */
     private GoodsBean mGoodsBean;
-    /**
-     * 订单状态
-     */
-    private int mStatus;
-    /**
-     * 总计
-     */
-    private double mAccount;
 
     public int getId() {
         return mId;
@@ -51,12 +43,12 @@ public class OrderBean {
         mId = id;
     }
 
-    public String getDate() {
-        return mDate;
+    public int getAmounts() {
+        return mAmounts;
     }
 
-    public void setDate(String date) {
-        mDate = date;
+    public void setAmounts(int amounts) {
+        mAmounts = amounts;
     }
 
     public UserBean getUserBean() {
@@ -67,7 +59,7 @@ public class OrderBean {
         mUserBean = userBean;
     }
 
-    public GoodsBean getGoodsBeanArrayList() {
+    public GoodsBean getGoodsBean() {
         return mGoodsBean;
     }
 
@@ -75,23 +67,7 @@ public class OrderBean {
         mGoodsBean = goodsBean;
     }
 
-    public int getStatus() {
-        return mStatus;
-    }
-
-    public void setStatus(int status) {
-        mStatus = status;
-    }
-
-    public double getAccount() {
-        return mAccount;
-    }
-
-    public void setAccount(double account) {
-        mAccount = account;
-    }
-
-    public OrderBean() {
+    public ShoppingCartBean() {
         mUserBean = new UserBean();
         mGoodsBean = new GoodsBean();
     }

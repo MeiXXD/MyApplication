@@ -12,7 +12,6 @@
 
 package com.example.lifeng.myapplication.model;
 
-import com.example.lifeng.myapplication.bean.GoodsBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 
 import java.util.ArrayList;
@@ -53,14 +52,6 @@ public interface IUserModel {
      * @return 是否成功修改
      */
     boolean modifyUserInfo(UserBean userBean);
-
-    /**
-     * 普通用户将商品添加到购物车接口
-     *
-     * @param goodsBean
-     * @return 是否添加成功
-     */
-    boolean addTOShoppingCart(GoodsBean goodsBean);
 
     /**
      * 普通用户下订单前的验证接口

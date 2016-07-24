@@ -16,7 +16,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.lifeng.myapplication.bean.GoodsBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 
 import java.util.ArrayList;
@@ -92,10 +91,6 @@ public class IUserModelImpl implements IUserModel {
         return false;
     }
 
-    @Override
-    public boolean addTOShoppingCart(GoodsBean goodsBean) {
-        return false;
-    }
 
     @Override
     public boolean verifyAgain(UserBean userBean) {

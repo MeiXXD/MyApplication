@@ -50,33 +50,42 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_SELLER = "tb_seller";
     private static final String TABLE_GOODS = "tb_goods";
     private static final String TABLE_ORDER = "tb_order";
+    private static final String TABLE_SHOPPING_CART = "tb_shopping_cart";
 
     //表定义
     private static final String CREATE_TABLE_ADMIN_SQL = "create table " + TABLE_ADMIN + "(adminid integer primary key autoincrement,adminstatus interger not null,adminname TEXT not null,adminpassword TEXT not null)";
     private static final String CREATE_TABLE_USER_SQL = "create table " + TABLE_USER + "(userid integer primary key autoincrement,userstatus interger not null,isvip interger,username TEXT not null,userpassword TEXT not null,email TEXT,address TEXT)";
     private static final String CREATE_TABLE_SELLER_SQL = "create table " + TABLE_SELLER + "(sellerid integer primary key autoincrement,sellerstatus interger not null,sellername TEXT not null,sellerpassword TEXT not null)";
     private static final String CREATE_TABLE_GOODS_SQL = "create table " + TABLE_GOODS + "(goodsid integer primary key autoincrement,goodsname TEXT,price double,amounts integer,description TEXT,briefdescription TEXT,goodsimage TEXT,kind TEXT)";
-    private static final String CREATE_TABLE_ORDER_SQL = "create table " + TABLE_ORDER + "(orderid integer primary key autoincrement,userid integer not null,goodsid integer not null,orderdate TEXT,orderstatus integer,orderaccount TEXT)";
+    private static final String CREATE_TABLE_ORDER_SQL = "create table " + TABLE_ORDER + "(orderid integer primary key autoincrement,userid integer not null,goodsid integer not null,orderdate TEXT,orderstatus integer,orderaccount TEXT,address TEXT)";
+    private static final String CREATE_TABLE_SHOPPING_CART_SQL = "create table " + TABLE_SHOPPING_CART + "(id integer primary key autoincrement,userid integer not null,goodsid integer not null,amounts integer)";
 
     //初始管理员插入
     private static final String INSERT_ADMIN_SQL = "insert into tb_admin (adminid,adminstatus,adminname,adminpassword) values(1,0,'admin','admin')";
-    private static final String DQL_DROP = "drop table if exists ";
+    private static final String SQL_DROP = "drop table if exists ";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         //首次使用drop表
-        db.execSQL(DQL_DROP + TABLE_ADMIN);
-        db.execSQL(DQL_DROP + TABLE_USER);
-        db.execSQL(DQL_DROP + TABLE_SELLER);
-        db.execSQL(DQL_DROP + TABLE_GOODS);
-        db.execSQL(DQL_DROP + TABLE_ORDER);
+        db.execSQL(SQL_DROP + TABLE_ADMIN);
+        db.execSQL(SQL_DROP + TABLE_USER);
+        db.execSQL(SQL_DROP + TABLE_SELLER);
+        db.execSQL(SQL_DROP + TABLE_GOODS);
+        db.execSQL(SQL_DROP + TABLE_ORDER);
+        db.execSQL(SQL_DROP + TABLE_SHOPPING_CART);
         //创建表
         db.execSQL(CREATE_TABLE_ADMIN_SQL);
-        Log.e(">>>", CREATE_TABLE_ADMIN_SQL);
+        Log.e(">>>>>", CREATE_TABLE_ADMIN_SQL);
         db.execSQL(CREATE_TABLE_USER_SQL);
+        Log.e(">>>>>", CREATE_TABLE_USER_SQL);
         db.execSQL(CREATE_TABLE_SELLER_SQL);
+        Log.e(">>>>>", CREATE_TABLE_SELLER_SQL);
         db.execSQL(CREATE_TABLE_GOODS_SQL);
+        Log.e(">>>>>", CREATE_TABLE_GOODS_SQL);
         db.execSQL(CREATE_TABLE_ORDER_SQL);
+        Log.e(">>>>>", CREATE_TABLE_ORDER_SQL);
+        db.execSQL(CREATE_TABLE_SHOPPING_CART_SQL);
+        Log.e(">>>>>", CREATE_TABLE_SHOPPING_CART_SQL);
         //添加管理员
         db.execSQL(INSERT_ADMIN_SQL);
     }
