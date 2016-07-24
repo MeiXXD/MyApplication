@@ -29,6 +29,7 @@
     <string name="activity_user_management_listheader_userid">编号</string>
     <string name="activity_user_management_listheader_username">用户名</string>
     <string name="activity_user_management_listheader_userpassword">密码</string>
+    <string name="activity_user_management_listheader_isvip">会员</string>
     <string name="activity_user_management_listheader_userstatus">状态</string>
 
     <string name="activity_goods_orders_management_titlebar_seller_management">销售商管理平台</string>
@@ -51,5 +52,6 @@
     <string name="activity_goods_info_modify_goods_description">描述:</string>
     <string name="activity_goods_info_modify_goods_images">图片:</string>
     <string name="activity_goods_info_modify_modify">确定修改</string>
+    <string name="activity_goods_info_modify_goods_kind">类别</string>
 
 </resources>

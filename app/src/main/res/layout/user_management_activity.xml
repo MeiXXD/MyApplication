@@ -34,6 +34,7 @@
             android:singleLine="true"
             android:textAlignment="center"
             android:textSize="25dp" />
+
     </LinearLayout>
 
     <Button
@@ -61,7 +62,7 @@
             android:textSize="25dp" />
 
         <TextView
-            android:layout_width="65dp"
+            android:layout_width="90dp"
             android:layout_height="30dp"
             android:layout_weight="1"
             android:paddingLeft="5dp"
@@ -75,6 +76,15 @@
             android:layout_weight="1"
             android:paddingLeft="5dp"
             android:text="@string/activity_user_management_listheader_userpassword"
+            android:textAlignment="center"
+            android:textSize="25dp" />
+
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:text="@string/activity_user_management_listheader_isvip"
             android:textAlignment="center"
             android:textSize="25dp" />
 

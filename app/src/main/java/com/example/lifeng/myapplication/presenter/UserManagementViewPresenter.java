@@ -55,7 +55,17 @@ public class UserManagementViewPresenter {
      *
      * @param userBean
      */
-    public void delSeller(UserBean userBean) {
+    public void delUser(UserBean userBean) {
         mUserModel.delUser(userBean);
+    }
+
+    /**
+     * 设置用户为会员
+     *
+     * @param userBean
+     * @return 是否设置成功
+     */
+    public boolean setUserIsVip(UserBean userBean) {
+        return mUserModel.setUserIsVip(userBean);
     }
 }

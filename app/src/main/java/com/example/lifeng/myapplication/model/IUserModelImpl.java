@@ -40,6 +40,7 @@ public class IUserModelImpl implements IUserModel {
         String mUserName = userBean.getName();
         String mUserPassword = userBean.getPassword();
         int mUserStatus = userBean.getStatus();
+        int mUserIsVip = userBean.getIsVip();
         SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
         if (db.isOpen()) {
             Cursor cursor = db.rawQuery("select * from tb_user where username=\"" + mUserName + "\"", null);
@@ -47,7 +48,7 @@ public class IUserModelImpl implements IUserModel {
                 Log.e(">>>>>", "普通用户添加失败");
                 result = false;
             } else {
-                db.execSQL("insert into tb_user(username,userpassword,userstatus) values(\"" + mUserName + "\",\"" + mUserPassword + "\"," + mUserStatus + ")");
+                db.execSQL("insert into tb_user(username,userpassword,userstatus,isvip) values(\"" + mUserName + "\",\"" + mUserPassword + "\"," + mUserStatus + "," + mUserIsVip + ")");
                 result = true;
                 Log.e(">>>>>", "普通用户添加成功");
             }
@@ -113,6 +114,7 @@ public class IUserModelImpl implements IUserModel {
                 userBean.setName(cursor.getString(cursor.getColumnIndex("username")));
                 userBean.setPassword(cursor.getString(cursor.getColumnIndex("userpassword")));
                 userBean.setStatus(cursor.getInt(cursor.getColumnIndex("userstatus")));
+                userBean.setIsVip(cursor.getInt(cursor.getColumnIndex("isvip")));
                 userBeanArrayList.add(userBean);
             }
         }
@@ -127,5 +129,26 @@ public class IUserModelImpl implements IUserModel {
             db.close();
         }
         Log.e(">>>>>", "用户登录状态更新为:" + Integer.toString(userBean.getStatus()));
+    }
+
+    @Override
+    public boolean setUserIsVip(UserBean userBean) {
+        String mUserName = userBean.getName();
+        int isVip = 0;
+        SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_user where username=\"" + mUserName + "\"", null);
+            if (cursor.moveToNext()) {
+                isVip = cursor.getInt(cursor.getColumnIndex("isvip"));
+            }
+            if (1 == isVip) {
+                return false;
+            } else {
+                isVip = userBean.getIsVip();
+                db.execSQL("update tb_user set isvip=" + isVip + " where username=\"" + mUserName + "\"");
+            }
+            db.close();
+        }
+        return true;
     }
 }

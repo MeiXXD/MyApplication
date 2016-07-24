@@ -33,6 +33,7 @@ public class GoodsAddActivity extends AppCompatActivity implements IGoodsAddView
     private EditText mGoodsNameEdt;
     private EditText mGoodsAmountsEdt;
     private EditText mGoodsPirceEdt;
+    private EditText mGoodsKindEdt;
     private EditText mGoodsBriefDescriptionEdt;
     private EditText mGoodsDescriptionEdt;
     private Button mGoodsAddBtn;
@@ -56,6 +57,7 @@ public class GoodsAddActivity extends AppCompatActivity implements IGoodsAddView
         mGoodsNameEdt = (EditText) findViewById(R.id.edt_goods_add_goods_name);
         mGoodsAmountsEdt = (EditText) findViewById(R.id.edt_goods_add_goods_amounts);
         mGoodsPirceEdt = (EditText) findViewById(R.id.edt_goods_add_goods_price);
+        mGoodsKindEdt = (EditText) findViewById(R.id.edt_goods_add_goods_kind);
         mGoodsBriefDescriptionEdt = (EditText) findViewById(R.id.edt_goods_add_goods_brief_description);
         mGoodsDescriptionEdt = (EditText) findViewById(R.id.edt_goods_add_goods_description);
         mGoodsAddBtn = (Button) findViewById(R.id.btn_goods_add_add);
@@ -73,15 +75,17 @@ public class GoodsAddActivity extends AppCompatActivity implements IGoodsAddView
         String name = mGoodsNameEdt.getText().toString().trim();
         String amounts = mGoodsAmountsEdt.getText().toString().trim();
         String price = mGoodsPirceEdt.getText().toString().trim();
+        String kind = mGoodsKindEdt.getText().toString().trim();
         String briefDescription = mGoodsBriefDescriptionEdt.getText().toString().trim();
         String description = mGoodsDescriptionEdt.getText().toString().trim();
 
-        if (!name.isEmpty() && !amounts.isEmpty() && !price.isEmpty() && !briefDescription.isEmpty() && !description.isEmpty()) {
+        if (!name.isEmpty() && !amounts.isEmpty() && !price.isEmpty() && !kind.isEmpty() && !briefDescription.isEmpty() && !description.isEmpty()) {
             boolean temp = InputJudge.isPositiveInteger(amounts) && (InputJudge.isPositiveInteger(price) || InputJudge.isPositiveDoubleNumber(price));
             if (temp) {
                 mGoodsBean.setName(name);
                 mGoodsBean.setAmounts(Integer.valueOf(amounts));
                 mGoodsBean.setPrice(Double.valueOf(price));
+                mGoodsBean.setKind(kind);
                 mGoodsBean.setBriefDescription(briefDescription);
                 mGoodsBean.setDescription(description);
                 return true;

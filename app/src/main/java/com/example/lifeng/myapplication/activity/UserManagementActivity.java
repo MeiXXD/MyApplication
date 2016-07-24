@@ -36,7 +36,7 @@ import java.util.ArrayList;
  * @version 1.0 16/7/19
  * @description 用户管理Activity
  */
-public class UserManagementActivity extends AppCompatActivity implements IUserManagementView, View.OnClickListener, AdapterView.OnItemLongClickListener {
+public class UserManagementActivity extends AppCompatActivity implements IUserManagementView, View.OnClickListener, AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener {
     private ListView mUsersLv;
     private EditText mUserNameEdt;
     private EditText mUserPasswordEdt;
@@ -72,6 +72,7 @@ public class UserManagementActivity extends AppCompatActivity implements IUserMa
         mUsersListAdapter = new UsersListAdapter(this, mUserBeanArrayList);
         mUsersLv.setAdapter(mUsersListAdapter);
         mUsersLv.setOnItemLongClickListener(this);
+        mUsersLv.setOnItemClickListener(this);
 
         mUserManagementViewPresenter.getUsers(mUserBeanArrayList);
         mUsersListAdapter.notifyDataSetChanged();
@@ -97,6 +98,7 @@ public class UserManagementActivity extends AppCompatActivity implements IUserMa
             case R.id.btn_user_listitem_add_user:
                 mIsInputValid = getAdminInput();
                 if (mIsInputValid) {
+                    mUserBean.setIsVip(0);
                     boolean temp = mUserManagementViewPresenter.addUser(mUserBean);
                     if (!temp) {
                         Toast.makeText(UserManagementActivity.this, "用户名已存在!", Toast.LENGTH_SHORT).show();
@@ -116,10 +118,10 @@ public class UserManagementActivity extends AppCompatActivity implements IUserMa
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         final UserBean userBean = mUserBeanArrayList.get(position);
-        new AlertDialog.Builder(UserManagementActivity.this).setTitle("警告").setMessage("确定删除该销售商?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(UserManagementActivity.this).setTitle("警告").setMessage("确定删除该用户?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mUserManagementViewPresenter.delSeller(userBean);
+                mUserManagementViewPresenter.delUser(userBean);
                 mUserBeanArrayList.clear();
                 mUserManagementViewPresenter.getUsers(mUserBeanArrayList);
                 mUsersListAdapter.notifyDataSetChanged();
@@ -135,5 +137,25 @@ public class UserManagementActivity extends AppCompatActivity implements IUserMa
             new AlertDialog.Builder(UserManagementActivity.this).setTitle("注意").setMessage("请退出登录!").setPositiveButton("确定", null).show();
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final UserBean userBean = mUserBeanArrayList.get(position);
+        new AlertDialog.Builder(UserManagementActivity.this).setTitle("提示").setMessage("设置为会员?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                userBean.setIsVip(1);
+                boolean isSuccess = mUserManagementViewPresenter.setUserIsVip(userBean);
+                if (!isSuccess) {
+                    Toast.makeText(UserManagementActivity.this, "设置失败", Toast.LENGTH_SHORT).show();
+                } else {
+                    mUserBeanArrayList.clear();
+                    mUserManagementViewPresenter.getUsers(mUserBeanArrayList);
+                    mUsersListAdapter.notifyDataSetChanged();
+                    Toast.makeText(UserManagementActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).setNegativeButton("取消", null).show();
     }
 }

@@ -28,6 +28,10 @@ public class UserBean {
      */
     private int mStatus;
     /**
+     * 用户是否为会员,会员购买享受折扣
+     */
+    private int mIsVip;
+    /**
      * 用户名
      */
     private String mName;
@@ -90,5 +94,13 @@ public class UserBean {
 
     public void setStatus(int status) {
         mStatus = status;
+    }
+
+    public int getIsVip() {
+        return mIsVip;
+    }
+
+    public void setIsVip(int isVip) {
+        mIsVip = isVip;
     }
 }

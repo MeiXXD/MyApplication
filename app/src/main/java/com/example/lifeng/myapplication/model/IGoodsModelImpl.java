@@ -42,12 +42,13 @@ public class IGoodsModelImpl implements IGoodsModel {
         String name = goodsBean.getName();
         int amounts = goodsBean.getAmounts();
         double price = goodsBean.getPrice();
+        String kind = goodsBean.getKind();
         String briefDescription = goodsBean.getBriefDescription();
         String description = goodsBean.getDescription();
         // TODO: 16/7/22 图片未添加
         SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
         if (db.isOpen()) {
-            db.execSQL("insert into tb_goods(goodsname,amounts,price,briefdescription,description) values(\"" + name + "\"," + amounts + "," + price + ",\"" + briefDescription + "\",\"" + description + "\")");
+            db.execSQL("insert into tb_goods(goodsname,amounts,price,kind,briefdescription,description) values(\"" + name + "\"," + amounts + "," + price + ",\"" + kind + "\" ,\"" + briefDescription + "\",\"" + description + "\")");
             db.close();
         }
         Log.e(">>>>>", "商品添加成功");
@@ -70,12 +71,13 @@ public class IGoodsModelImpl implements IGoodsModel {
         int goodsId = goodsBean.getId();
         int goodsAmounts = goodsBean.getAmounts();
         double goodsPrice = goodsBean.getPrice();
+        String goodsKind = goodsBean.getKind();
         String goodsBriefDescription = goodsBean.getBriefDescription();
         String goodsDescription = goodsBean.getDescription();
 
         SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
         if (db.isOpen()) {
-            db.execSQL("update tb_goods set amounts=" + goodsAmounts + ",price=" + goodsPrice + ",briefdescription=\"" + goodsBriefDescription + "\",description=\"" + goodsDescription + "\" where goodsid=" + goodsId);
+            db.execSQL("update tb_goods set amounts=" + goodsAmounts + ",price=" + goodsPrice + ",kind=\"" + goodsKind + "\",briefdescription=\"" + goodsBriefDescription + "\",description=\"" + goodsDescription + "\" where goodsid=" + goodsId);
             db.close();
         }
         Log.e(">>>>>", "商品信息更新成功");
@@ -93,6 +95,7 @@ public class IGoodsModelImpl implements IGoodsModel {
                 goodsBean.setName(cursor.getString(cursor.getColumnIndex("goodsname")));
                 goodsBean.setAmounts(cursor.getInt(cursor.getColumnIndex("amounts")));
                 goodsBean.setPrice(cursor.getDouble(cursor.getColumnIndex("price")));
+                goodsBean.setKind(cursor.getString(cursor.getColumnIndex("kind")));
                 goodsBean.setBriefDescription(cursor.getString(cursor.getColumnIndex("briefdescription")));
                 goodsBean.setDescription(cursor.getString(cursor.getColumnIndex("description")));
                 goodsBeanArrayList.add(goodsBean);

@@ -45,6 +45,7 @@ public class GoodsBean {
     /**
      * 商品数量
      */
+    private String mKind;
     private int mAmounts;
 
     public int getId() {
@@ -101,5 +102,13 @@ public class GoodsBean {
 
     public void setAmounts(int amounts) {
         mAmounts = amounts;
+    }
+
+    public String getKind() {
+        return mKind;
+    }
+
+    public void setKind(String kind) {
+        mKind = kind;
     }
 }

@@ -79,6 +79,7 @@ public class GoodsManagementActivity extends AppCompatActivity implements View.O
         intent.putExtra("goodsname", goodsBean.getName());
         intent.putExtra("goodsamounts", goodsBean.getAmounts());
         intent.putExtra("goodsprice", goodsBean.getPrice());
+        intent.putExtra("goodskind", goodsBean.getKind());
         intent.putExtra("goodsbriefdescription", goodsBean.getBriefDescription());
         intent.putExtra("goodsdescription", goodsBean.getDescription());
         intent.putExtra("goodsimage", goodsBean.getImage());

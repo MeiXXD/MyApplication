@@ -84,4 +84,12 @@ public interface IUserModel {
      */
     void updateUserStatus(UserBean userBean);
 
+    /**
+     * 设置用户为会员
+     *
+     * @param userBean
+     * @return 是否设置成功
+     */
+    boolean setUserIsVip(UserBean userBean);
+
 }

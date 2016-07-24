@@ -69,6 +69,7 @@ public class GoodsManagementListAdapter extends BaseAdapter {
         TextView goodsNameTxt = (TextView) convertView.findViewById(R.id.txt_goods_listview_name);
         TextView goodsPriceTxt = (TextView) convertView.findViewById(R.id.txt_goods_listview_price);
         TextView goodsAmountTxt = (TextView) convertView.findViewById(R.id.txt_goods_listview_amount);
+        TextView goodsKindTxt = (TextView) convertView.findViewById(R.id.txt_goods_listview_kind);
 
         GoodsBean goodsBean = mGoodsBeanList.get(position);
         //显示默认图片
@@ -76,6 +77,7 @@ public class GoodsManagementListAdapter extends BaseAdapter {
         goodsNameTxt.setText(goodsBean.getName());
         goodsPriceTxt.setText("价格(元) : " + Double.toString(goodsBean.getPrice()));
         goodsAmountTxt.setText("库存(件) : " + Integer.toString(goodsBean.getAmounts()));
+        goodsKindTxt.setText(goodsBean.getKind());
 
         return convertView;
     }

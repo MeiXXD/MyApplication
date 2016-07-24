@@ -34,6 +34,7 @@ public class GoodsInfoModifyActivity extends AppCompatActivity implements IGoods
     private EditText mGoodsNameEdt;
     private EditText mGoodsAmountsEdt;
     private EditText mGoodsPirceEdt;
+    private EditText mGoodsKindEdt;
     private EditText mGoodsBriefDescriptionEdt;
     private EditText mGoodsDescriptionEdt;
     private Button mGoodsInfoModifyBtn;
@@ -42,6 +43,7 @@ public class GoodsInfoModifyActivity extends AppCompatActivity implements IGoods
     private String mGoodsName;
     private int mGoodsAmounts;
     private double mGoodsPrice;
+    private String mGoodsKind;
     private String mGoodsBriefDescription;
     private String mGoodsDescription;
     private String mGoodsImage;
@@ -65,6 +67,7 @@ public class GoodsInfoModifyActivity extends AppCompatActivity implements IGoods
         mGoodsNameEdt.setEnabled(false);
         mGoodsAmountsEdt = (EditText) findViewById(R.id.edt_goods_info_modify_goods_amounts);
         mGoodsPirceEdt = (EditText) findViewById(R.id.edt_goods_info_modify_goods_price);
+        mGoodsKindEdt = (EditText) findViewById(R.id.edt_goods_info_modify_goods_kind);
         mGoodsBriefDescriptionEdt = (EditText) findViewById(R.id.edt_goods_info_modify_goods_brief_description);
         mGoodsDescriptionEdt = (EditText) findViewById(R.id.edt_goods_info_modify_goods_description);
         mGoodsInfoModifyBtn = (Button) findViewById(R.id.btn_goods_info_modify_modify);
@@ -74,6 +77,7 @@ public class GoodsInfoModifyActivity extends AppCompatActivity implements IGoods
         mGoodsName = intent.getStringExtra("goodsname");
         mGoodsAmounts = intent.getIntExtra("goodsamounts", 0);
         mGoodsPrice = intent.getDoubleExtra("goodsprice", 0.0);
+        mGoodsKind = intent.getStringExtra("goodskind");
         mGoodsBriefDescription = intent.getStringExtra("goodsbriefdescription");
         mGoodsDescription = intent.getStringExtra("goodsdescription");
         mGoodsImage = intent.getStringExtra("goodsimage");
@@ -81,6 +85,7 @@ public class GoodsInfoModifyActivity extends AppCompatActivity implements IGoods
         mGoodsNameEdt.setText(mGoodsName);
         mGoodsAmountsEdt.setText(Integer.toString(mGoodsAmounts));
         mGoodsPirceEdt.setText(Double.toString(mGoodsPrice));
+        mGoodsKindEdt.setText(mGoodsKind);
         mGoodsBriefDescriptionEdt.setText(mGoodsBriefDescription);
         mGoodsDescriptionEdt.setText(mGoodsDescription);
 
@@ -95,16 +100,18 @@ public class GoodsInfoModifyActivity extends AppCompatActivity implements IGoods
         String name = mGoodsNameEdt.getText().toString().trim();
         String amounts = mGoodsAmountsEdt.getText().toString().trim();
         String price = mGoodsPirceEdt.getText().toString().trim();
+        String kind = mGoodsKindEdt.getText().toString().trim();
         String briefDescription = mGoodsBriefDescriptionEdt.getText().toString().trim();
         String description = mGoodsDescriptionEdt.getText().toString().trim();
 
-        if (!name.isEmpty() && !amounts.isEmpty() && !price.isEmpty() && !briefDescription.isEmpty() && !description.isEmpty()) {
+        if (!name.isEmpty() && !amounts.isEmpty() && !price.isEmpty() && !kind.isEmpty() && !briefDescription.isEmpty() && !description.isEmpty()) {
             boolean temp = InputJudge.isPositiveInteger(amounts) && (InputJudge.isPositiveInteger(price) || InputJudge.isPositiveDoubleNumber(price));
             if (temp) {
                 mGoodsBean.setId(mGoodsId);
                 mGoodsBean.setName(name);
                 mGoodsBean.setAmounts(Integer.valueOf(amounts));
                 mGoodsBean.setPrice(Double.valueOf(price));
+                mGoodsBean.setKind(kind);
                 mGoodsBean.setBriefDescription(briefDescription);
                 mGoodsBean.setDescription(description);
                 return true;

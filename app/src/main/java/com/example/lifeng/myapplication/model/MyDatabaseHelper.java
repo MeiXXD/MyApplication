@@ -53,9 +53,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     //表定义
     private static final String CREATE_TABLE_ADMIN_SQL = "create table " + TABLE_ADMIN + "(adminid integer primary key autoincrement,adminstatus interger not null,adminname TEXT not null,adminpassword TEXT not null)";
-    private static final String CREATE_TABLE_USER_SQL = "create table " + TABLE_USER + "(userid integer primary key autoincrement,userstatus interger not null,username TEXT not null,userpassword TEXT not null,email TEXT,address TEXT)";
+    private static final String CREATE_TABLE_USER_SQL = "create table " + TABLE_USER + "(userid integer primary key autoincrement,userstatus interger not null,isvip interger,username TEXT not null,userpassword TEXT not null,email TEXT,address TEXT)";
     private static final String CREATE_TABLE_SELLER_SQL = "create table " + TABLE_SELLER + "(sellerid integer primary key autoincrement,sellerstatus interger not null,sellername TEXT not null,sellerpassword TEXT not null)";
-    private static final String CREATE_TABLE_GOODS_SQL = "create table " + TABLE_GOODS + "(goodsid integer primary key autoincrement,goodsname TEXT,price double,amounts integer,description TEXT,briefdescription TEXT,goodsimage TEXT)";
+    private static final String CREATE_TABLE_GOODS_SQL = "create table " + TABLE_GOODS + "(goodsid integer primary key autoincrement,goodsname TEXT,price double,amounts integer,description TEXT,briefdescription TEXT,goodsimage TEXT,kind TEXT)";
     private static final String CREATE_TABLE_ORDER_SQL = "create table " + TABLE_ORDER + "(orderid integer primary key autoincrement,userid integer not null,goodsid integer not null,orderdate TEXT,orderstatus integer,orderaccount TEXT)";
 
     //初始管理员插入

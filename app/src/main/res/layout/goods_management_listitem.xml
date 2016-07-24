@@ -36,11 +36,22 @@
 
     <TextView
         android:id="@+id/txt_goods_listview_amount"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/txt_goods_listview_price"
         android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/txt_goods_listview_kind"
         android:layout_toRightOf="@id/img_goods_listitem_image"
+        android:textColor="#666666"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@id/txt_goods_listview_kind"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/txt_goods_listview_price"
+        android:layout_marginTop="5dp"
         android:textColor="#666666"
         android:textSize="16dp" />
 

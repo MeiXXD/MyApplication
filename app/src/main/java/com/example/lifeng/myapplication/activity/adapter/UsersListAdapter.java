@@ -68,12 +68,14 @@ public class UsersListAdapter extends BaseAdapter {
         TextView userNameTxt = (TextView) convertView.findViewById(R.id.txt_users_listitem_username);
         TextView userPasswordTxt = (TextView) convertView.findViewById(R.id.txt_users_listitem_userpassword);
         TextView userStatusTxt = (TextView) convertView.findViewById(R.id.txt_users_listitem_userstatus);
+        TextView userIsVipTxt = (TextView) convertView.findViewById(R.id.txt_users_listitem_isvip);
 
         UserBean userBean = mUserBeanList.get(position);
         userIdTxt.setText(Integer.toString(userBean.getId()));
         userNameTxt.setText(userBean.getName());
         userPasswordTxt.setText(userBean.getPassword());
         userStatusTxt.setText(Integer.toString(userBean.getStatus()));
+        userIsVipTxt.setText(Integer.toString(userBean.getIsVip()));
 
         return convertView;
     }
