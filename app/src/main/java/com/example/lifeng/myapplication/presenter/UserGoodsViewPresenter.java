@@ -19,6 +19,8 @@ import com.example.lifeng.myapplication.model.IGoodsModel;
 import com.example.lifeng.myapplication.model.IGoodsModelImpl;
 import com.example.lifeng.myapplication.model.IShoppingCartModel;
 import com.example.lifeng.myapplication.model.IShoppingCartModelImpl;
+import com.example.lifeng.myapplication.model.IUserModel;
+import com.example.lifeng.myapplication.model.IUserModelImpl;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,7 @@ import java.util.ArrayList;
  */
 public class UserGoodsViewPresenter {
     private IGoodsModel mGoodsModel;
+    private IUserModel mUserModel;
     private IShoppingCartModel mShoppingCartModel;
     private UserBean mUserBean;
 
@@ -36,6 +39,7 @@ public class UserGoodsViewPresenter {
         mUserBean = userBean;
         mGoodsModel = new IGoodsModelImpl();
         mShoppingCartModel = new IShoppingCartModelImpl();
+        mUserModel = new IUserModelImpl();
     }
 
     public void getGoodsByKind(ArrayList<GoodsBean> goodsBeanArrayList, String kind) {
@@ -54,5 +58,9 @@ public class UserGoodsViewPresenter {
         ShoppingCartBean shoppingCartBean = new ShoppingCartBean(mUserBean, goodsBean);
         shoppingCartBean.setAmounts(1);
         mShoppingCartModel.addToShoppingCart(shoppingCartBean);
+    }
+
+    public void logout(UserBean userBean) {
+        mUserModel.updateUserStatus(userBean);
     }
 }

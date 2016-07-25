@@ -93,6 +93,7 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
                         intent.putExtra("username", mUserBean.getName());
                         intent.putExtra("userpassword", mUserBean.getPassword());
                         startActivity(intent);
+                        finish();
                     } else {
                         Toast.makeText(this, "用户名或密码错误!", Toast.LENGTH_SHORT).show();
                     }
