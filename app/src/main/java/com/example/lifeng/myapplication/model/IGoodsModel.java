@@ -58,6 +58,21 @@ public interface IGoodsModel {
     void getGoods(ArrayList<GoodsBean> goodsBeanArrayList);
 
     /**
+     * 得到指定类别的全部商品
+     *
+     * @param goodsBeanArrayList
+     * @param kind
+     */
+    void getGoodsByKind(ArrayList<GoodsBean> goodsBeanArrayList, String kind);
+
+    /**
+     * 得到商品的全部种类
+     *
+     * @param stringArrayList
+     */
+    void getGoodsKinds(ArrayList<String> stringArrayList);
+
+    /**
      * 商品搜索接口
      *
      * @param goodsBean

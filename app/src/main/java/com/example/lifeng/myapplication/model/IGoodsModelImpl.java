@@ -100,6 +100,48 @@ public class IGoodsModelImpl implements IGoodsModel {
                 goodsBean.setDescription(cursor.getString(cursor.getColumnIndex("description")));
                 goodsBeanArrayList.add(goodsBean);
             }
+            cursor.close();
+            db.close();
+        }
+    }
+
+    @Override
+    public void getGoodsByKind(ArrayList<GoodsBean> goodsBeanArrayList, String kind) {
+        if ("全部" == kind) {
+            getGoods(goodsBeanArrayList);
+        } else {
+            SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
+            if (db.isOpen()) {
+                Cursor cursor = db.rawQuery("select * from tb_goods where kind=\"" + kind + "\"", null);
+                GoodsBean goodsBean = null;
+                while (cursor.moveToNext()) {
+                    goodsBean = new GoodsBean();
+                    goodsBean.setId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+                    goodsBean.setName(cursor.getString(cursor.getColumnIndex("goodsname")));
+                    goodsBean.setAmounts(cursor.getInt(cursor.getColumnIndex("amounts")));
+                    goodsBean.setPrice(cursor.getDouble(cursor.getColumnIndex("price")));
+                    goodsBean.setKind(cursor.getString(cursor.getColumnIndex("kind")));
+                    goodsBean.setBriefDescription(cursor.getString(cursor.getColumnIndex("briefdescription")));
+                    goodsBean.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                    goodsBeanArrayList.add(goodsBean);
+                }
+                cursor.close();
+                db.close();
+            }
+        }
+    }
+
+    @Override
+    public void getGoodsKinds(ArrayList<String> stringArrayList) {
+        stringArrayList.add("全部");
+        SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select kind from tb_goods group by kind", null);
+            while (cursor.moveToNext()) {
+                stringArrayList.add(cursor.getString(cursor.getColumnIndex("kind")));
+            }
+            cursor.close();
+            db.close();
         }
     }
 

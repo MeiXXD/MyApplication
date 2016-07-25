@@ -12,6 +12,9 @@
 
 package com.example.lifeng.myapplication.model;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import com.example.lifeng.myapplication.bean.ShoppingCartBean;
 
 /**
@@ -28,6 +31,22 @@ public class IShoppingCartModelImpl implements IShoppingCartModel {
 
     @Override
     public void addToShoppingCart(ShoppingCartBean shoppingCartBean) {
-
+        int goodsId = shoppingCartBean.getGoodsBean().getId();
+        int userId = shoppingCartBean.getUserBean().getId();
+        int amounts = shoppingCartBean.getAmounts();
+        SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_shopping_cart where userid=" + userId + " and goodsid=" + goodsId, null);
+            if (cursor.moveToFirst()) {
+                //存在则更新数量
+                amounts = cursor.getInt(cursor.getColumnIndex("amounts")) + amounts;
+                db.execSQL("update tb_shopping_cart set amounts=" + amounts + " where userid=" + userId + " and goodsid=" + goodsId);
+            } else {
+                //不存在则插入
+                db.execSQL("insert into tb_shopping_cart(userid,goodsid,amounts) values(" + userId + "," + goodsId + "," + amounts + ")");
+            }
+            cursor.close();
+            db.close();
+        }
     }
 }

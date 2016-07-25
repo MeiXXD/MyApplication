@@ -67,8 +67,8 @@ public class ShoppingCartBean {
         mGoodsBean = goodsBean;
     }
 
-    public ShoppingCartBean() {
-        mUserBean = new UserBean();
-        mGoodsBean = new GoodsBean();
+    public ShoppingCartBean(UserBean userBean, GoodsBean goodsBean) {
+        mUserBean = userBean;
+        mGoodsBean = goodsBean;
     }
 }

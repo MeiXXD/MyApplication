@@ -88,8 +88,10 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
                         mUserBean.setStatus(1);
                         mUserLoginViewPresenter.updateUserStatus(mUserBean);
                         Intent intent = new Intent();
-                        // TODO: 16/7/19 登录成功启动的界面待补
-                        intent.setClass(UserLoginActivity.this, null);
+                        intent.setClass(UserLoginActivity.this, UserTabActivity.class);
+                        intent.putExtra("userid", mUserBean.getId());
+                        intent.putExtra("username", mUserBean.getName());
+                        intent.putExtra("userpassword", mUserBean.getPassword());
                         startActivity(intent);
                     } else {
                         Toast.makeText(this, "用户名或密码错误!", Toast.LENGTH_SHORT).show();

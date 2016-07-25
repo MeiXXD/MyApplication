@@ -77,6 +77,7 @@ public class IUserModelImpl implements IUserModel {
         if (db.isOpen()) {
             Cursor cursor = db.rawQuery("select * from tb_user where username=? and userpassword=?", new String[]{mUserName, mUserPassword});
             if (cursor.moveToFirst()) {
+                userBean.setId(cursor.getInt(cursor.getColumnIndex("userid")));
                 result = true;
             }
             cursor.close();

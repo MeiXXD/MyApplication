@@ -38,6 +38,11 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name=".activity.GoodsAddActivity"></activity>
         <activity android:name=".activity.GoodsInfoModifyActivity"></activity>
+        <activity android:name=".activity.UserTabActivity"></activity>
+        <activity android:name=".activity.UserGoodsActivity"></activity>
+        <activity android:name=".activity.UserShoppingCartActivity"></activity>
+        <activity android:name=".activity.UserMyActivity"></activity>
+        <activity android:name=".activity.GoodsDetailsActivity"></activity>
     </application>
 
 </manifest>

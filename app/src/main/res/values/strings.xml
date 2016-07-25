@@ -54,4 +54,7 @@
     <string name="activity_goods_info_modify_modify">确定修改</string>
     <string name="activity_goods_info_modify_goods_kind">类别</string>
 
+    <string name="activity_user_goods_goods_kind">类别:</string>
+    <string name="activity_user_goods_add_to_shopping_cart">添加到购物车</string>
+
 </resources>
