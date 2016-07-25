@@ -59,4 +59,7 @@
 
     <string name="activity_goods_details_goods_amounts">数量(件):</string>
     <string name="activity_goods_details_add_shopping_cart">加入购物车</string>
+
+    <string name="activity_shopping_cart_settle_accounts">结算</string>
+    <string name="activity_shopping_cart_total">总计(元):</string>
 </resources>

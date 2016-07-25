@@ -13,6 +13,9 @@
 package com.example.lifeng.myapplication.model;
 
 import com.example.lifeng.myapplication.bean.ShoppingCartBean;
+import com.example.lifeng.myapplication.bean.UserBean;
+
+import java.util.ArrayList;
 
 /**
  * @author lifeng
@@ -26,4 +29,11 @@ public interface IShoppingCartModel {
      * @param shoppingCartBean
      */
     void addToShoppingCart(ShoppingCartBean shoppingCartBean);
+
+    /**
+     * 得到用户的购物车清单
+     *
+     * @param shoppingCartBeanArrayList
+     */
+    void getUserShoppingCart(ArrayList<ShoppingCartBean> shoppingCartBeanArrayList, UserBean userBean);
 }

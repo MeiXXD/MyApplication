@@ -15,7 +15,11 @@ package com.example.lifeng.myapplication.model;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.lifeng.myapplication.bean.GoodsBean;
 import com.example.lifeng.myapplication.bean.ShoppingCartBean;
+import com.example.lifeng.myapplication.bean.UserBean;
+
+import java.util.ArrayList;
 
 /**
  * @author lifeng
@@ -46,6 +50,38 @@ public class IShoppingCartModelImpl implements IShoppingCartModel {
                 db.execSQL("insert into tb_shopping_cart(userid,goodsid,amounts) values(" + userId + "," + goodsId + "," + amounts + ")");
             }
             cursor.close();
+            db.close();
+        }
+    }
+
+    @Override
+    public void getUserShoppingCart(ArrayList<ShoppingCartBean> shoppingCartBeanArrayList, UserBean userBean) {
+        int userId = userBean.getId();
+        GoodsBean goodsBean = null;
+        ShoppingCartBean shoppingCartBean = null;
+        SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor1 = db.rawQuery("select * from tb_shopping_cart where userid=" + userId, null);
+            while (cursor1.moveToNext()) {
+                int goodsId = cursor1.getInt(cursor1.getColumnIndex("goodsid"));
+                goodsBean = new GoodsBean();
+                goodsBean.setId(goodsId);
+                Cursor cursor2 = db.rawQuery("select * from tb_goods where goodsid=" + goodsId, null);
+                while (cursor2.moveToNext()) {
+                    goodsBean.setPrice(cursor2.getDouble(cursor2.getColumnIndex("price")));
+                    goodsBean.setName(cursor2.getString(cursor2.getColumnIndex("goodsname")));
+                }
+                shoppingCartBean = new ShoppingCartBean(userBean, goodsBean);
+                Cursor cursor3 = db.rawQuery("select * from tb_shopping_cart where userid=" + userId + " and goodsid=" + goodsId, null);
+                if (cursor3.moveToFirst()) {
+                    shoppingCartBean.setAmounts(cursor3.getInt(cursor3.getColumnIndex("amounts")));
+                }
+                shoppingCartBeanArrayList.add(shoppingCartBean);
+
+                cursor3.close();
+                cursor2.close();
+            }
+            cursor1.close();
             db.close();
         }
     }

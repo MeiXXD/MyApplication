@@ -1,8 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-</LinearLayout>
+    <ListView
+        android:id="@+id/lv_shopping_cart"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:choiceMode="singleChoice"
+        android:descendantFocusability="beforeDescendants"></ListView>
+
+    <TextView
+        android:id="@+id/txt_shopping_cart_total"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/lv_shopping_cart"
+        android:gravity="center_vertical"
+        android:text="@string/activity_shopping_cart_total"
+        android:textSize="20dp" />
+
+
+    <Button
+        android:id="@+id/btn_settle_accounts"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/lv_shopping_cart"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/txt_shopping_cart_total"
+        android:background="@android:color/holo_orange_dark"
+        android:text="@string/activity_shopping_cart_settle_accounts"
+        android:textSize="20dp" />
+
+</RelativeLayout>

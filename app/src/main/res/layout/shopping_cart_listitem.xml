@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="16dp">
+
+    <RadioButton
+        android:id="@+id/radbtn_shopping_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
+
+    <ImageView
+        android:id="@+id/img_shopping_cart_goods_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignBottom="@id/radbtn_shopping_cart"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@+id/radbtn_shopping_cart"
+        android:src="@drawable/goods" />
+
+    <TextView
+        android:id="@+id/txt_shopping_cart_goods_name"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_alignTop="@id/img_shopping_cart_goods_image"
+        android:layout_toRightOf="@id/img_shopping_cart_goods_image"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_shopping_cart_goods_price"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/txt_shopping_cart_goods_name"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/img_shopping_cart_goods_image"
+        android:textSize="17dp" />
+
+    <TextView
+        android:id="@+id/txt_shopping_cart_amounts"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@id/txt_shopping_cart_goods_price"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/txt_shopping_cart_goods_name"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/txt_shopping_cart_goods_price"
+        android:textSize="17dp" />
+
+</RelativeLayout>

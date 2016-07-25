@@ -46,6 +46,8 @@ public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnIt
     private ArrayList<GoodsBean> mUserGoodsBeanArrayList;
     private UserGoodsListAdapter mUserGoodsListAdapter;
 
+    private KindsSpinnerAdapter mKindsSpinnerAdapter;
+
     private UserGoodsViewPresenter mUserGoodsViewPresenter;
     private UserBean mUserBean;
 
@@ -83,9 +85,10 @@ public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnIt
         //spinner逻辑
         mGoodsKindSpinner = (Spinner) findViewById(R.id.spinner_user_goods_kind);
         mUserGoodsViewPresenter.getGoodsKinds(mStringArrayList);
-        KindsSpinnerAdapter kindsSpinnerAdapter = new KindsSpinnerAdapter(this, android.R.layout.simple_spinner_item, mStringArrayList.toArray(new String[mStringArrayList.size()]));
-        mGoodsKindSpinner.setAdapter(kindsSpinnerAdapter);
+        mKindsSpinnerAdapter = new KindsSpinnerAdapter(this, android.R.layout.simple_spinner_item, mStringArrayList.toArray(new String[mStringArrayList.size()]));
+        mGoodsKindSpinner.setAdapter(mKindsSpinnerAdapter);
         mGoodsKindSpinner.setOnItemSelectedListener(this);
+        mKindsSpinnerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -136,5 +139,17 @@ public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnIt
         }
 
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mUserGoodsBeanArrayList.clear();
+        mUserGoodsViewPresenter.getGoods(mUserGoodsBeanArrayList);
+        mUserGoodsListAdapter.notifyDataSetChanged();
+
+        mStringArrayList.clear();
+        mUserGoodsViewPresenter.getGoodsKinds(mStringArrayList);
+        mKindsSpinnerAdapter.notifyDataSetChanged();
     }
 }
