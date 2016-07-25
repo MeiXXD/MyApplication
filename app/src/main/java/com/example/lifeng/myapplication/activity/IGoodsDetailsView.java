@@ -12,10 +12,25 @@
 
 package com.example.lifeng.myapplication.activity;
 
+import com.example.lifeng.myapplication.bean.GoodsBean;
+
 /**
  * @author lifeng
  * @version 1.0 16/7/19
  * @description 商品详情View
  */
 public interface IGoodsDetailsView {
+    /**
+     * 得到用户输入的数量
+     *
+     * @return 输入是否合法
+     */
+    boolean getUserInput();
+
+    /**
+     * UI交互,设置输出
+     *
+     * @param goodsBean
+     */
+    void setOutput(GoodsBean goodsBean);
 }

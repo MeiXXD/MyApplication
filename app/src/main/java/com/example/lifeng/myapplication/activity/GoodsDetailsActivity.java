@@ -15,43 +15,113 @@ package com.example.lifeng.myapplication.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.bean.GoodsBean;
+import com.example.lifeng.myapplication.bean.ShoppingCartBean;
 import com.example.lifeng.myapplication.bean.UserBean;
+import com.example.lifeng.myapplication.presenter.GoodsDetaisViewPresenter;
+import com.example.lifeng.myapplication.utils.InputJudge;
 
 /**
  * @author lifeng
  * @version 1.0 16/7/24
  * @description 商品详情页面
  */
-public class GoodsDetailsActivity extends AppCompatActivity {
+public class GoodsDetailsActivity extends AppCompatActivity implements View.OnClickListener, IGoodsDetailsView {
     private UserBean mUserBean;
     private int mGoodsId;
     private GoodsBean mGoodsBean;
+    private ShoppingCartBean mShoppingCartBean;
+
+    private ImageView mGoodsDetailsGoodsImg;
+    private TextView mGoodsDetailsGoodsNameTxt;
+    private TextView mGoodsDetailsGoodsPriceTxt;
+    private TextView mGoodsDetailsGoodsAmountsTxt;
+    private TextView mGoodsDetailsGoodsDescriptionTxt;
+    private EditText mGoodsDetailsGoodsDescriptionEdt;
+    private Button mGoodsDetailsAddShoppingCartBtn;
+
+    private GoodsDetaisViewPresenter mGoodsDetaisViewPresenter;
+
+    private boolean mIsInputValid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.goods_details_activity);
+        setTitle("商品详情");
 
         init();
     }
 
     void init() {
-        mUserBean = new UserBean();
-        mGoodsBean = new GoodsBean();
+        mIsInputValid = false;
+        mGoodsDetaisViewPresenter = new GoodsDetaisViewPresenter(this);
 
         Intent intent = getIntent();
-        mGoodsId = intent.getIntExtra("goodsid", 0);
+        mUserBean = new UserBean();
         mUserBean.setId(intent.getIntExtra("userid", 0));
         mUserBean.setName(intent.getStringExtra("username"));
         mUserBean.setPassword(intent.getStringExtra("userpassword"));
 
-        Log.e(">>>>>", Integer.toString(mGoodsId));
-        Log.e(">>>>>", Integer.toString(mUserBean.getId()));
-        Log.e(">>>>>", mUserBean.getName());
-        Log.e(">>>>>", mUserBean.getPassword());
+        mGoodsBean = new GoodsBean();
+        mGoodsId = intent.getIntExtra("goodsid", 0);
+        mGoodsBean.setId(mGoodsId);
+
+        mShoppingCartBean = new ShoppingCartBean(mUserBean, mGoodsBean);
+
+        mGoodsDetailsGoodsImg = (ImageView) findViewById(R.id.img_goods_details_goods_image);
+        mGoodsDetailsGoodsNameTxt = (TextView) findViewById(R.id.txt_goods_details_goods_name);
+        mGoodsDetailsGoodsPriceTxt = (TextView) findViewById(R.id.txt_goods_details_goods_price);
+        mGoodsDetailsGoodsAmountsTxt = (TextView) findViewById(R.id.txt_goods_details_goods_amounts);
+        mGoodsDetailsGoodsDescriptionTxt = (TextView) findViewById(R.id.txt_goods_details_goods_description);
+        mGoodsDetailsGoodsDescriptionEdt = (EditText) findViewById(R.id.edt_goods_details_goods_amounts);
+        mGoodsDetailsAddShoppingCartBtn = (Button) findViewById(R.id.btn_goods_details_add_shopping_cart);
+        mGoodsDetailsAddShoppingCartBtn.setOnClickListener(this);
+
+        mGoodsDetaisViewPresenter.getGoodsDetails(mGoodsBean);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_goods_details_add_shopping_cart:
+                mIsInputValid = getUserInput();
+                if (!mIsInputValid) {
+                    Toast.makeText(this, "输入不合法", Toast.LENGTH_SHORT).show();
+                } else {
+                    mGoodsDetaisViewPresenter.addToShoppingCart(mShoppingCartBean);
+                    Toast.makeText(this, "已添加到购物车", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+
+
+    @Override
+    public boolean getUserInput() {
+        String amounts = mGoodsDetailsGoodsDescriptionEdt.getText().toString().trim();
+        if (!amounts.isEmpty() && InputJudge.isPositiveInteger(amounts)) {
+            mShoppingCartBean.setAmounts(Integer.valueOf(amounts));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void setOutput(GoodsBean goodsBean) {
+        mGoodsDetailsGoodsImg.setImageResource(R.drawable.goods);
+        mGoodsDetailsGoodsNameTxt.setText(goodsBean.getName());
+        mGoodsDetailsGoodsPriceTxt.setText("价格(元): " + Double.toString(goodsBean.getPrice()));
+        mGoodsDetailsGoodsAmountsTxt.setText("库存(件): " + Integer.toString(goodsBean.getAmounts()));
+        mGoodsDetailsGoodsDescriptionTxt.setText(goodsBean.getDescription());
     }
 }

@@ -33,8 +33,23 @@ public class IGoodsModelImpl implements IGoodsModel {
     }
 
     @Override
-    public GoodsBean getGoodsInfo(GoodsBean goodsBean) {
-        return null;
+    public GoodsBean getGoodsDetails(GoodsBean goodsBean) {
+        GoodsBean mGoodsBean = null;
+        int goodsId = goodsBean.getId();
+        SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_goods where goodsid=" + goodsId, null);
+            if (cursor.moveToFirst()) {
+                mGoodsBean = new GoodsBean();
+                mGoodsBean.setName(cursor.getString(cursor.getColumnIndex("goodsname")));
+                mGoodsBean.setPrice(cursor.getDouble(cursor.getColumnIndex("price")));
+                mGoodsBean.setAmounts(cursor.getInt(cursor.getColumnIndex("amounts")));
+                mGoodsBean.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+            }
+            cursor.close();
+            db.close();
+        }
+        return mGoodsBean;
     }
 
     @Override

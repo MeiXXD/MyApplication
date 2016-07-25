@@ -26,9 +26,9 @@ public interface IGoodsModel {
      * 得到商品信息接口
      *
      * @param goodsBean
-     * @return 返回商品信息
+     * @return 返回查询得到的对象
      */
-    GoodsBean getGoodsInfo(GoodsBean goodsBean);
+    GoodsBean getGoodsDetails(GoodsBean goodsBean);
 
     /**
      * 添加商品接口

@@ -45,8 +45,9 @@ public class GoodsBean {
     /**
      * 商品数量
      */
-    private String mKind;
     private int mAmounts;
+
+    private String mKind;
 
     public int getId() {
         return mId;
