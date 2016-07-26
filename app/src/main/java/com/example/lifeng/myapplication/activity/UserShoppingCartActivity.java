@@ -17,7 +17,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -76,9 +75,6 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
         mShoppingCartLv.setAdapter(mShoppingCartListAdapter);
         mShoppingCartLv.setOnItemClickListener(this);
         mShoppingCartLv.setOnItemLongClickListener(this);
-
-        mUserShoppingCartViewPresenter.getUserShoppingCart(mShoppingCartBeanArrayList, mUserBean);
-        mShoppingCartListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -112,7 +108,6 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.e(">>>>>>", "onItemClick" + position);
         mShoppingCartListAdapter.setSelectedIndex(position);
         mShoppingCartListAdapter.notifyDataSetChanged();
 
@@ -133,8 +128,16 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
     }
 
     @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        // TODO: 16/7/26 长按从购物车删除该商品
+    public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+        new AlertDialog.Builder(this).setTitle("警告").setMessage("确定从购物车删除该商品?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mUserShoppingCartViewPresenter.delFromShoppingCart(mShoppingCartBeanArrayList.get(position));
+                mShoppingCartBeanArrayList.clear();
+                mUserShoppingCartViewPresenter.getUserShoppingCart(mShoppingCartBeanArrayList, mUserBean);
+                mShoppingCartListAdapter.notifyDataSetChanged();
+            }
+        }).setNegativeButton("取消", null).show();
         return false;
     }
 }

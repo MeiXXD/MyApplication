@@ -64,9 +64,6 @@ public class GoodsManagementActivity extends AppCompatActivity implements View.O
         mGoodsAddBtn.setOnClickListener(this);
         mGoodsLv.setOnItemClickListener(this);
         mGoodsLv.setOnItemLongClickListener(this);
-
-        mGoodsManagementViewPresenter.getGoods(mGoodsBeanArrayList);
-        mGoodsManagementListAdapter.notifyDataSetChanged();
     }
 
     @Override

@@ -14,6 +14,7 @@ package com.example.lifeng.myapplication.model;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.lifeng.myapplication.bean.GoodsBean;
 import com.example.lifeng.myapplication.bean.ShoppingCartBean;
@@ -52,6 +53,7 @@ public class IShoppingCartModelImpl implements IShoppingCartModel {
             cursor.close();
             db.close();
         }
+        Log.e(">>>>>", "添加购物车成功");
     }
 
     @Override
@@ -84,5 +86,18 @@ public class IShoppingCartModelImpl implements IShoppingCartModel {
             cursor1.close();
             db.close();
         }
+        Log.e(">>>>>", "获取用户购物车成功");
+    }
+
+    @Override
+    public void delFromShoppingCart(ShoppingCartBean shoppingCartBean) {
+        int userid = shoppingCartBean.getUserBean().getId();
+        int goodsid = shoppingCartBean.getGoodsBean().getId();
+        SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            db.execSQL("delete from tb_shopping_cart where userid=" + userid + " and goodsid=" + goodsid);
+            db.close();
+        }
+        Log.e(">>>>>", "从购物车删除商品成功");
     }
 }

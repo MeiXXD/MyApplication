@@ -42,4 +42,8 @@ public class UserShoppingCartViewPresenter {
     public void logout(UserBean userBean) {
         mUserModel.updateUserStatus(userBean);
     }
+
+    public void delFromShoppingCart(ShoppingCartBean shoppingCartBean) {
+        mShoppingCartModel.delFromShoppingCart(shoppingCartBean);
+    }
 }

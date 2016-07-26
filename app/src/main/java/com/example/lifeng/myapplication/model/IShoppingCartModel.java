@@ -36,4 +36,11 @@ public interface IShoppingCartModel {
      * @param shoppingCartBeanArrayList
      */
     void getUserShoppingCart(ArrayList<ShoppingCartBean> shoppingCartBeanArrayList, UserBean userBean);
+
+    /**
+     * 从购物车中删除商品
+     *
+     * @param shoppingCartBean
+     */
+    void delFromShoppingCart(ShoppingCartBean shoppingCartBean);
 }
