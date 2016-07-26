@@ -59,8 +59,4 @@ public class UserGoodsViewPresenter {
         shoppingCartBean.setAmounts(1);
         mShoppingCartModel.addToShoppingCart(shoppingCartBean);
     }
-
-    public void logout(UserBean userBean) {
-        mUserModel.updateUserStatus(userBean);
-    }
 }

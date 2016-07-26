@@ -23,7 +23,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.activity.adapter.ShoppingCartListAdapter;
@@ -52,7 +51,6 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_shopping_cart_activity);
-        setTitle("购物车");
 
         init();
     }
@@ -88,20 +86,7 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            new AlertDialog.Builder(UserShoppingCartActivity.this).setTitle("警告").setMessage("确定要退出登录?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    mUserBean.setStatus(0);
-                    mUserShoppingCartViewPresenter.logout(mUserBean);
-                    Toast.makeText(UserShoppingCartActivity.this, "退出登录成功", Toast.LENGTH_SHORT).show();
-                    //返回登录页面
-                    Intent intent = new Intent();
-                    intent.setClass(UserShoppingCartActivity.this, UserLoginActivity.class);
-                    startActivity(intent);
-                    //关闭当前页面
-                    finish();
-                }
-            }).setNegativeButton("取消", null).show();
+            new AlertDialog.Builder(UserShoppingCartActivity.this).setTitle("注意").setMessage("请退出登录").setPositiveButton("确定", null).show();
         }
         return super.onKeyDown(keyCode, event);
     }

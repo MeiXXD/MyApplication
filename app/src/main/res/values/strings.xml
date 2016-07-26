@@ -54,6 +54,11 @@
     <string name="activity_goods_info_modify_modify">确定修改</string>
     <string name="activity_goods_info_modify_goods_kind">类别</string>
 
+    <string name="tab_activity_user_goods">商品目录</string>
+    <string name="tab_activity_user_shopping_cart">购物车</string>
+    <string name="tab_activity_user_my">我的</string>
+    <string name="tab_activity_user_logout">退出</string>
+
     <string name="activity_user_goods_goods_kind">类别:</string>
     <string name="activity_user_goods_add_to_shopping_cart">添加到购物车</string>
 

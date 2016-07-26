@@ -12,7 +12,6 @@
 
 package com.example.lifeng.myapplication.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -22,7 +21,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.activity.adapter.KindsSpinnerAdapter;
@@ -55,7 +53,6 @@ public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_goods_activity);
-        setTitle("商品");
 
         init();
     }
@@ -122,22 +119,8 @@ public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnIt
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            new AlertDialog.Builder(UserGoodsActivity.this).setTitle("警告").setMessage("确定要退出登录?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    mUserBean.setStatus(0);
-                    mUserGoodsViewPresenter.logout(mUserBean);
-                    Toast.makeText(UserGoodsActivity.this, "退出登录成功", Toast.LENGTH_SHORT).show();
-                    //返回登录页面
-                    Intent intent = new Intent();
-                    intent.setClass(UserGoodsActivity.this, UserLoginActivity.class);
-                    startActivity(intent);
-                    //关闭当前页面
-                    finish();
-                }
-            }).setNegativeButton("取消", null).show();
+            new AlertDialog.Builder(UserGoodsActivity.this).setTitle("注意").setMessage("请退出登录").setPositiveButton("确定", null).show();
         }
-
         return super.onKeyDown(keyCode, event);
     }
 
