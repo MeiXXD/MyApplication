@@ -16,6 +16,8 @@ import com.example.lifeng.myapplication.bean.ShoppingCartBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 import com.example.lifeng.myapplication.model.IShoppingCartModel;
 import com.example.lifeng.myapplication.model.IShoppingCartModelImpl;
+import com.example.lifeng.myapplication.model.IUserModel;
+import com.example.lifeng.myapplication.model.IUserModelImpl;
 
 import java.util.ArrayList;
 
@@ -26,9 +28,11 @@ import java.util.ArrayList;
  */
 public class UserShoppingCartViewPresenter {
     private IShoppingCartModel mShoppingCartModel;
+    private IUserModel mUserModel;
 
     public UserShoppingCartViewPresenter() {
         mShoppingCartModel = new IShoppingCartModelImpl();
+        mUserModel = new IUserModelImpl();
     }
 
     public void getUserShoppingCart(ArrayList<ShoppingCartBean> shoppingCartBeanArrayList, UserBean userBean) {
@@ -37,5 +41,9 @@ public class UserShoppingCartViewPresenter {
 
     public void delFromShoppingCart(ShoppingCartBean shoppingCartBean) {
         mShoppingCartModel.delFromShoppingCart(shoppingCartBean);
+    }
+
+    public boolean verifyPassword(UserBean userBean) {
+        return mUserModel.verifyPassword(userBean);
     }
 }

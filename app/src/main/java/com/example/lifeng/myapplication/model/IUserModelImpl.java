@@ -94,8 +94,20 @@ public class IUserModelImpl implements IUserModel {
 
 
     @Override
-    public boolean verifyAgain(UserBean userBean) {
-        return false;
+    public boolean verifyPassword(UserBean userBean) {
+        boolean result = false;
+        String name = userBean.getName();
+        String password = userBean.getPassword();
+        SQLiteDatabase db = mDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_user where username=\"" + name + "\" and userpassword=\"" + password + "\"", null);
+            if (cursor.moveToFirst()) {
+                result = true;
+            }
+            cursor.close();
+            db.close();
+        }
+        return result;
     }
 
     @Override

@@ -26,34 +26,29 @@ public interface IOrderModel {
     /**
      * 添加订单接口(下单)
      *
-     * @param userBean
      * @param orderBean
-     * @return 订单是否成功添加
      */
-    boolean addOrder(UserBean userBean, OrderBean orderBean);
+    void addOrder(OrderBean orderBean);
 
     /**
-     * 订单处理接口(修改订单状态:确认发货 状态码为1、订单驳回 状态码为-1)
+     * 订单状态处理接口(修改订单状态:确认发货 状态码为1、订单驳回 状态码为-1)
      *
      * @param orderBean
-     * @return 是否成功修改
      */
-    boolean modifyOrder(OrderBean orderBean);
+    void updateOrderStatus(OrderBean orderBean);
 
     /**
      * 得到某个用户的全部订单接口
      *
-     * @param userBean
-     * @return 全部订单信息
+     * @param orderBeanArrayList
+     * @param orderBeanArrayList
      */
-    ArrayList<OrderBean> getOrders(UserBean userBean);
+    void getOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean);
 
     /**
      * 订单查询接口
      *
-     * @param userBean
-     * @param orderBean
-     * @return 返回查询得到的订单
+     * @param orderBeanArrayList
      */
-    ArrayList<OrderBean> searchOrders(UserBean userBean, OrderBean orderBean);
+    void searchOrders(ArrayList<OrderBean> orderBeanArrayList);
 }

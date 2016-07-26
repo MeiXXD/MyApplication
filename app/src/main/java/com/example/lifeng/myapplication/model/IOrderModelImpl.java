@@ -24,22 +24,22 @@ import java.util.ArrayList;
  */
 public class IOrderModelImpl implements IOrderModel {
     @Override
-    public boolean addOrder(UserBean userBean, OrderBean orderBean) {
-        return false;
+    public void addOrder(OrderBean orderBean) {
+
     }
 
     @Override
-    public boolean modifyOrder(OrderBean orderBean) {
-        return false;
+    public void updateOrderStatus(OrderBean orderBean) {
+
     }
 
     @Override
-    public ArrayList<OrderBean> getOrders(UserBean userBean) {
-        return null;
+    public void getOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean) {
+
     }
 
     @Override
-    public ArrayList<OrderBean> searchOrders(UserBean userBean, OrderBean orderBean) {
-        return null;
+    public void searchOrders(ArrayList<OrderBean> orderBeanArrayList) {
+
     }
 }

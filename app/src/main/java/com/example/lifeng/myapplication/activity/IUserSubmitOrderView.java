@@ -17,5 +17,9 @@ package com.example.lifeng.myapplication.activity;
  * @version 1.0 16/7/19
  * @description 普通用户下订单View
  */
-public interface IUserPlaceOrderView {
+public interface IUserSubmitOrderView {
+    /**
+     * 得到订单的各种信息
+     */
+    void getOrderInput();
 }

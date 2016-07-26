@@ -26,18 +26,16 @@ public class OrderBean {
      * 订单日期
      */
     private String mDate;
-    /**
-     * 用户
-     */
-    private UserBean mUserBean;
-    /**
-     * 订单包含的商品(一个订单只能包含意见商品)
-     */
-    private GoodsBean mGoodsBean;
+
     /**
      * 订单状态
      */
     private int mStatus;
+
+    /**
+     * 购物车bean,包含userbean和goodsbean,以及amounts
+     */
+    private ShoppingCartBean mShoppingCartBean;
     /**
      * 总计
      */
@@ -59,21 +57,6 @@ public class OrderBean {
         mDate = date;
     }
 
-    public UserBean getUserBean() {
-        return mUserBean;
-    }
-
-    public void setUserBean(UserBean userBean) {
-        mUserBean = userBean;
-    }
-
-    public GoodsBean getGoodsBeanArrayList() {
-        return mGoodsBean;
-    }
-
-    public void setGoodsBean(GoodsBean goodsBean) {
-        mGoodsBean = goodsBean;
-    }
 
     public int getStatus() {
         return mStatus;
@@ -91,8 +74,15 @@ public class OrderBean {
         mAccount = account;
     }
 
+    public ShoppingCartBean getShoppingCartBean() {
+        return mShoppingCartBean;
+    }
+
+    public void setShoppingCartBean(ShoppingCartBean shoppingCartBean) {
+        mShoppingCartBean = shoppingCartBean;
+    }
+
     public OrderBean() {
-        mUserBean = new UserBean();
-        mGoodsBean = new GoodsBean();
+
     }
 }

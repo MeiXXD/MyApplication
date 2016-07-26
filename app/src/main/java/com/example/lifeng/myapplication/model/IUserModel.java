@@ -59,7 +59,7 @@ public interface IUserModel {
      * @param userBean
      * @return 是否验证通过
      */
-    boolean verifyAgain(UserBean userBean);
+    boolean verifyPassword(UserBean userBean);
 
     /**
      * 得到系统中存在的用户
