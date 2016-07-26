@@ -81,8 +81,4 @@ public class OrderBean {
     public void setShoppingCartBean(ShoppingCartBean shoppingCartBean) {
         mShoppingCartBean = shoppingCartBean;
     }
-
-    public OrderBean() {
-
-    }
 }

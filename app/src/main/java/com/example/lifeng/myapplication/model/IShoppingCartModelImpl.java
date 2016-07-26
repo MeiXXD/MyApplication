@@ -65,6 +65,7 @@ public class IShoppingCartModelImpl implements IShoppingCartModel {
         if (db.isOpen()) {
             Cursor cursor1 = db.rawQuery("select * from tb_shopping_cart where userid=" + userId, null);
             while (cursor1.moveToNext()) {
+                int id = cursor1.getInt(cursor1.getColumnIndex("id"));
                 int goodsId = cursor1.getInt(cursor1.getColumnIndex("goodsid"));
                 goodsBean = new GoodsBean();
                 goodsBean.setId(goodsId);
@@ -73,7 +74,7 @@ public class IShoppingCartModelImpl implements IShoppingCartModel {
                     goodsBean.setPrice(cursor2.getDouble(cursor2.getColumnIndex("price")));
                     goodsBean.setName(cursor2.getString(cursor2.getColumnIndex("goodsname")));
                 }
-                shoppingCartBean = new ShoppingCartBean(userBean, goodsBean);
+                shoppingCartBean = new ShoppingCartBean(id, userBean, goodsBean);
                 Cursor cursor3 = db.rawQuery("select * from tb_shopping_cart where userid=" + userId + " and goodsid=" + goodsId, null);
                 if (cursor3.moveToFirst()) {
                     shoppingCartBean.setAmounts(cursor3.getInt(cursor3.getColumnIndex("amounts")));
@@ -99,5 +100,52 @@ public class IShoppingCartModelImpl implements IShoppingCartModel {
             db.close();
         }
         Log.e(">>>>>", "从购物车删除商品成功");
+    }
+
+    @Override
+    public void getShoppingCarOrder(ShoppingCartBean shoppingCartBean) {
+        int userid = -1;
+        int goodsid = -1;
+        UserBean userBean = null;
+        GoodsBean goodsBean = null;
+        SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor1 = db.rawQuery("select * from tb_shopping_cart where id=" + shoppingCartBean.getId(), null);
+            while (cursor1.moveToNext()) {
+                shoppingCartBean.setAmounts(cursor1.getInt(cursor1.getColumnIndex("amounts")));
+                userid = cursor1.getInt(cursor1.getColumnIndex("userid"));
+                goodsid = cursor1.getInt(cursor1.getColumnIndex("goodsid"));
+            }
+            cursor1.close();
+        }
+        //用户表查询
+        if (db.isOpen()) {
+            Cursor cursor2 = db.rawQuery("select * from tb_user where userid=" + userid, null);
+            userBean = shoppingCartBean.getUserBean();
+            userBean.setId(userid);
+            while (cursor2.moveToNext()) {
+                userBean.setName(cursor2.getString(cursor2.getColumnIndex("username")));
+                userBean.setAddress(cursor2.getString(cursor2.getColumnIndex("address")));
+                userBean.setPhone(cursor2.getString(cursor2.getColumnIndex("phone")));
+                userBean.setIsVip(cursor2.getInt(cursor2.getColumnIndex("isvip")));
+            }
+            shoppingCartBean.setUserBean(userBean);
+            cursor2.close();
+        }
+        //商品表查询
+        if (db.isOpen()) {
+            Cursor cursor3 = db.rawQuery("select * from tb_goods where goodsid=" + goodsid, null);
+            goodsBean = shoppingCartBean.getGoodsBean();
+            goodsBean.setId(goodsid);
+            while (cursor3.moveToNext()) {
+                goodsBean.setImage(cursor3.getString(cursor3.getColumnIndex("goodsimage")));
+                goodsBean.setName(cursor3.getString(cursor3.getColumnIndex("goodsname")));
+                goodsBean.setPrice(cursor3.getDouble(cursor3.getColumnIndex("price")));
+                goodsBean.setAmounts(cursor3.getInt(cursor3.getColumnIndex("amounts")));
+            }
+            shoppingCartBean.setGoodsBean(goodsBean);
+        }
+        db.close();
+        Log.e(">>>>>", "获取购物车订单商品信息成功");
     }
 }

@@ -71,4 +71,10 @@ public class ShoppingCartBean {
         mUserBean = userBean;
         mGoodsBean = goodsBean;
     }
+
+    public ShoppingCartBean(int id, UserBean userBean, GoodsBean goodsBean) {
+        mId = id;
+        mUserBean = userBean;
+        mGoodsBean = goodsBean;
+    }
 }

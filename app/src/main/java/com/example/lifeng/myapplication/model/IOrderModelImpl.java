@@ -12,7 +12,11 @@
 
 package com.example.lifeng.myapplication.model;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import com.example.lifeng.myapplication.bean.OrderBean;
+import com.example.lifeng.myapplication.bean.ShoppingCartBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 
 import java.util.ArrayList;
@@ -23,9 +27,29 @@ import java.util.ArrayList;
  * @description IOrderModel实现类
  */
 public class IOrderModelImpl implements IOrderModel {
+    private MyDatabaseHelper mMyDatabaseHelper;
+
+    public IOrderModelImpl() {
+        if (mMyDatabaseHelper == null)
+            mMyDatabaseHelper = MyDatabaseHelper.getInstantce();
+    }
+
     @Override
     public void addOrder(OrderBean orderBean) {
+        ShoppingCartBean shoppingCartBean = orderBean.getShoppingCartBean();
+        int userid = shoppingCartBean.getUserBean().getId();
+        int goodsid = shoppingCartBean.getGoodsBean().getId();
+        int amounts = shoppingCartBean.getAmounts();
+        String date = orderBean.getDate();
+        int status = orderBean.getStatus();
+        double account = orderBean.getAccount();
 
+        SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            db.execSQL("insert into tb_order(userid,goodsid,goodsamounts,orderdate,orderstatus,orderaccount) values(" + userid + "," + goodsid + "," + amounts + ",\"" + date + "\"," + status + "," + account + ")");
+            db.close();
+        }
+        Log.e(">>>>>", "订单添加成功");
     }
 
     @Override

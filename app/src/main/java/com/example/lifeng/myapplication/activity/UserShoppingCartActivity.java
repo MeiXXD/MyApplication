@@ -168,7 +168,7 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
                                 // TODO: 16/7/26 传参数并打开下订单activity
                                 Intent intent = new Intent();
                                 intent.setClass(UserShoppingCartActivity.this, UserSubmitOrderActivity.class);
-
+                                intent.putExtra("shoppingcartid", mShoppingCartBean.getId());
                                 startActivity(intent);
 
                             }

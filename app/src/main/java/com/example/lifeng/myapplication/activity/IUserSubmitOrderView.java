@@ -12,6 +12,8 @@
 
 package com.example.lifeng.myapplication.activity;
 
+import com.example.lifeng.myapplication.bean.ShoppingCartBean;
+
 /**
  * @author lifeng
  * @version 1.0 16/7/19
@@ -19,7 +21,7 @@ package com.example.lifeng.myapplication.activity;
  */
 public interface IUserSubmitOrderView {
     /**
-     * 得到订单的各种信息
+     * 设置输出
      */
-    void getOrderInput();
+    void setOutput(ShoppingCartBean shoppingCartBean);
 }

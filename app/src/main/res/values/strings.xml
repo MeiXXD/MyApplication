@@ -67,4 +67,13 @@
 
     <string name="activity_shopping_cart_settle_accounts">结算</string>
     <string name="activity_shopping_cart_total">总计(元):</string>
+
+    <string name="activity_submit_order_address">收货人信息: </string>
+    <string name="activity_submit_order_account">商品总额(元):</string>
+    <string name="activity_submit_order_vip_discount">会员折扣:</string>
+    <string name="activity_submit_order_freight">运费(元):</string>
+    <string name="activity_submit_order_discount_account">折后总额(元):</string>
+    <string name="activity_submit_order_submit">提交订单</string>
+    <string name="activity_submit_order_cancel">取消订单</string>
+
 </resources>

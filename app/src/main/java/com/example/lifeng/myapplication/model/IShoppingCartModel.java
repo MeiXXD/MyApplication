@@ -20,7 +20,6 @@ import java.util.ArrayList;
 /**
  * @author lifeng
  * @version 1.0 16/7/24
- * @description 购物车Model
  */
 public interface IShoppingCartModel {
     /**
@@ -43,4 +42,11 @@ public interface IShoppingCartModel {
      * @param shoppingCartBean
      */
     void delFromShoppingCart(ShoppingCartBean shoppingCartBean);
+
+    /**
+     * 得到购物车订单信息
+     *
+     * @param shoppingCartBean
+     */
+    void getShoppingCarOrder(ShoppingCartBean shoppingCartBean);
 }

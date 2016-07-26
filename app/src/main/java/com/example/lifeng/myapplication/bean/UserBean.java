@@ -40,9 +40,9 @@ public class UserBean {
      */
     private String mPassword;
     /**
-     * 邮箱
+     * 手机号码
      */
-    private String mEmail;
+    private String mPhone;
     /**
      * 收货地址
      */
@@ -72,12 +72,12 @@ public class UserBean {
         mPassword = password;
     }
 
-    public String getEmail() {
-        return mEmail;
+    public String getPhone() {
+        return mPhone;
     }
 
-    public void setEmail(String email) {
-        mEmail = email;
+    public void setPhone(String phone) {
+        mPhone = phone;
     }
 
     public String getAddress() {
