@@ -79,4 +79,11 @@ public interface IGoodsModel {
      * @return 返回搜索得到的商品列表
      */
     ArrayList<GoodsBean> searchGoods(GoodsBean goodsBean);
+
+    /**
+     * 更新库存
+     *
+     * @param goodsBean
+     */
+    void updateGoodsAmounts(GoodsBean goodsBean);
 }

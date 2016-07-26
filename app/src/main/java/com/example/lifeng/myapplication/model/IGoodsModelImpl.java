@@ -164,4 +164,14 @@ public class IGoodsModelImpl implements IGoodsModel {
     public ArrayList<GoodsBean> searchGoods(GoodsBean goodsBean) {
         return null;
     }
+
+    @Override
+    public void updateGoodsAmounts(GoodsBean goodsBean) {
+        SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            db.execSQL("update tb_goods set amounts=" + goodsBean.getAmounts() + " where goodsid=" + goodsBean.getId());
+            db.close();
+        }
+        Log.e(">>>>>", "商品库存已更新");
+    }
 }

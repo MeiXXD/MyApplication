@@ -144,14 +144,23 @@ public class UserSubmitOrderActivity extends AppCompatActivity implements View.O
                 finish();
                 break;
             case R.id.btn_submit_order:
-                mOrderBean.setAccount(mAccount);
-                mOrderBean.setStatus(0);
-                mOrderBean.setShoppingCartBean(mShoppingCartBean);
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                mOrderBean.setDate(dateFormat.format(new Date()));
-                mUserSubmitOrderViewPresenter.submitOrder(mOrderBean);
-                finish();
-                Toast.makeText(this, "添加订单成功", Toast.LENGTH_SHORT).show();
+                int goodsAmounts = mGoodsBean.getAmounts();
+                int orderAmounts = mShoppingCartBean.getAmounts();
+                if (goodsAmounts >= orderAmounts) {
+                    mOrderBean.setAccount(mAccount);
+                    mOrderBean.setStatus(0);
+                    mOrderBean.setShoppingCartBean(mShoppingCartBean);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    mOrderBean.setDate(dateFormat.format(new Date()));
+                    mUserSubmitOrderViewPresenter.submitOrder(mOrderBean);
+                    mUserSubmitOrderViewPresenter.updateShoppingCart(mShoppingCartBean);
+                    mGoodsBean.setAmounts(goodsAmounts - orderAmounts);
+                    mUserSubmitOrderViewPresenter.updateGoodsAmounts(mGoodsBean);
+                    finish();
+                    Toast.makeText(this, "添加订单成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(UserSubmitOrderActivity.this, "库存不足", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }

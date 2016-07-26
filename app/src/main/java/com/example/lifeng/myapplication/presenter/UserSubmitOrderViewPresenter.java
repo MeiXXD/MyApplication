@@ -13,8 +13,11 @@
 package com.example.lifeng.myapplication.presenter;
 
 import com.example.lifeng.myapplication.activity.IUserSubmitOrderView;
+import com.example.lifeng.myapplication.bean.GoodsBean;
 import com.example.lifeng.myapplication.bean.OrderBean;
 import com.example.lifeng.myapplication.bean.ShoppingCartBean;
+import com.example.lifeng.myapplication.model.IGoodsModel;
+import com.example.lifeng.myapplication.model.IGoodsModelImpl;
 import com.example.lifeng.myapplication.model.IOrderModel;
 import com.example.lifeng.myapplication.model.IOrderModelImpl;
 import com.example.lifeng.myapplication.model.IShoppingCartModel;
@@ -28,12 +31,14 @@ import com.example.lifeng.myapplication.model.IShoppingCartModelImpl;
 public class UserSubmitOrderViewPresenter {
     private IShoppingCartModel mShoppingCartModel;
     private IUserSubmitOrderView mUserSubmitOrderView;
+    private IGoodsModel mGoodsModel;
     private IOrderModel mOrderModel;
 
     public UserSubmitOrderViewPresenter(IUserSubmitOrderView userSubmitOrderView) {
         mUserSubmitOrderView = userSubmitOrderView;
         mShoppingCartModel = new IShoppingCartModelImpl();
         mOrderModel = new IOrderModelImpl();
+        mGoodsModel = new IGoodsModelImpl();
     }
 
     public void getShoppingCartOrder(ShoppingCartBean shoppingCartBean) {
@@ -43,5 +48,13 @@ public class UserSubmitOrderViewPresenter {
 
     public void submitOrder(OrderBean orderBean) {
         mOrderModel.addOrder(orderBean);
+    }
+
+    public void updateShoppingCart(ShoppingCartBean shoppingCartBean) {
+        mShoppingCartModel.delFromShoppingCart(shoppingCartBean);
+    }
+
+    public void updateGoodsAmounts(GoodsBean goodsBean) {
+        mGoodsModel.updateGoodsAmounts(goodsBean);
     }
 }

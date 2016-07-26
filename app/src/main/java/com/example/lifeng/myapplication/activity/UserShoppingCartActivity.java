@@ -84,6 +84,7 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
 
     @Override
     protected void onResume() {
+        mShoppingCartListAdapter.setSelectedIndex(-1);
         mShoppingCartBeanArrayList.clear();
         mUserShoppingCartViewPresenter.getUserShoppingCart(mShoppingCartBeanArrayList, mUserBean);
         mShoppingCartListAdapter.notifyDataSetChanged();
