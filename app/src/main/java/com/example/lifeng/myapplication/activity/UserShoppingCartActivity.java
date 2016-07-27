@@ -205,6 +205,8 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mUserShoppingCartViewPresenter.delFromShoppingCart(mShoppingCartBeanArrayList.get(position));
+                mShoppingCartBean = null;
+                mTotalTxt.setText("总计(元): ");
                 mShoppingCartBeanArrayList.clear();
                 mUserShoppingCartViewPresenter.getUserShoppingCart(mShoppingCartBeanArrayList, mUserBean);
                 mShoppingCartListAdapter.notifyDataSetChanged();

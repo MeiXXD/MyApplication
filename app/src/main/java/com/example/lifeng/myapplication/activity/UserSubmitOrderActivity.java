@@ -147,9 +147,17 @@ public class UserSubmitOrderActivity extends AppCompatActivity implements View.O
                 int goodsAmounts = mGoodsBean.getAmounts();
                 int orderAmounts = mShoppingCartBean.getAmounts();
                 if (goodsAmounts >= orderAmounts) {
+                    mOrderBean.setUserId(mShoppingCartBean.getUserBean().getId());
+                    mOrderBean.setPhone(mShoppingCartBean.getUserBean().getPhone());
+                    mOrderBean.setAddress(mShoppingCartBean.getUserBean().getAddress());
+
+                    mOrderBean.setGoodsId(mShoppingCartBean.getGoodsBean().getId());
+                    mOrderBean.setGoodsPrice(mShoppingCartBean.getGoodsBean().getPrice());
+                    mOrderBean.setAmounts(orderAmounts);
+
                     mOrderBean.setAccount(mAccount);
                     mOrderBean.setStatus(0);
-                    mOrderBean.setShoppingCartBean(mShoppingCartBean);
+
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     mOrderBean.setDateTime(dateFormat.format(new Date()));
                     mUserSubmitOrderViewPresenter.submitOrder(mOrderBean);

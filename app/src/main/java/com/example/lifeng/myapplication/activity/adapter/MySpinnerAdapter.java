@@ -25,13 +25,13 @@ import java.util.ArrayList;
 /**
  * @author lifeng
  * @version 1.0 16/7/25
- * @description 商品种类spinner adapter
+ * @description 自定义spinner adapter
  */
-public class KindsSpinnerAdapter extends ArrayAdapter<String> {
+public class MySpinnerAdapter extends ArrayAdapter<String> {
     private Context mContext;
     private ArrayList<String> mStringArrayList;
 
-    public KindsSpinnerAdapter(Context context, int textViewResourceId, String[] objects) {
+    public MySpinnerAdapter(Context context, int textViewResourceId, String[] objects) {
         super(context, textViewResourceId, objects);
         mContext = context;
         mStringArrayList = new ArrayList<>();

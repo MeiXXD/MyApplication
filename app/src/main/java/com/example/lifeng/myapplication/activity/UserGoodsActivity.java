@@ -23,7 +23,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.lifeng.myapplication.R;
-import com.example.lifeng.myapplication.activity.adapter.KindsSpinnerAdapter;
+import com.example.lifeng.myapplication.activity.adapter.MySpinnerAdapter;
 import com.example.lifeng.myapplication.activity.adapter.UserGoodsListAdapter;
 import com.example.lifeng.myapplication.bean.GoodsBean;
 import com.example.lifeng.myapplication.bean.UserBean;
@@ -44,7 +44,7 @@ public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnIt
     private ArrayList<GoodsBean> mUserGoodsBeanArrayList;
     private UserGoodsListAdapter mUserGoodsListAdapter;
 
-    private KindsSpinnerAdapter mKindsSpinnerAdapter;
+    private MySpinnerAdapter mMySpinnerAdapter;
 
     private UserGoodsViewPresenter mUserGoodsViewPresenter;
     private UserBean mUserBean;
@@ -82,10 +82,10 @@ public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnIt
         //spinner逻辑
         mGoodsKindSpinner = (Spinner) findViewById(R.id.spinner_user_goods_kind);
         mUserGoodsViewPresenter.getGoodsKinds(mStringArrayList);
-        mKindsSpinnerAdapter = new KindsSpinnerAdapter(this, android.R.layout.simple_spinner_item, mStringArrayList.toArray(new String[mStringArrayList.size()]));
-        mGoodsKindSpinner.setAdapter(mKindsSpinnerAdapter);
+        mMySpinnerAdapter = new MySpinnerAdapter(this, android.R.layout.simple_spinner_item, mStringArrayList.toArray(new String[mStringArrayList.size()]));
+        mGoodsKindSpinner.setAdapter(mMySpinnerAdapter);
         mGoodsKindSpinner.setOnItemSelectedListener(this);
-        mKindsSpinnerAdapter.notifyDataSetChanged();
+        mMySpinnerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -133,6 +133,6 @@ public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnIt
 
         mStringArrayList.clear();
         mUserGoodsViewPresenter.getGoodsKinds(mStringArrayList);
-        mKindsSpinnerAdapter.notifyDataSetChanged();
+        mMySpinnerAdapter.notifyDataSetChanged();
     }
 }

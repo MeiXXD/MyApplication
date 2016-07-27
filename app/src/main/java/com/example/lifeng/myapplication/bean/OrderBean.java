@@ -33,9 +33,40 @@ public class OrderBean {
     private int mStatus;
 
     /**
-     * 购物车bean,包含userbean和goodsbean,以及amounts
+     * 用户ID
      */
-    private ShoppingCartBean mShoppingCartBean;
+    private int mUserId;
+
+    /**
+     * 手机号
+     */
+    private String mPhone;
+
+    /**
+     * 收获地址
+     */
+    private String mAddress;
+
+    /**
+     * 商品ID
+     */
+    private int mGoodsId;
+
+    /**
+     * 商品名
+     */
+    private String mGoodsName;
+
+    /**
+     * 商品价格
+     */
+    private Double mGoodsPrice;
+
+    /**
+     * 购买数量
+     */
+    private int mAmounts;
+
     /**
      * 总计
      */
@@ -74,11 +105,59 @@ public class OrderBean {
         mAccount = account;
     }
 
-    public ShoppingCartBean getShoppingCartBean() {
-        return mShoppingCartBean;
+    public int getUserId() {
+        return mUserId;
     }
 
-    public void setShoppingCartBean(ShoppingCartBean shoppingCartBean) {
-        mShoppingCartBean = shoppingCartBean;
+    public void setUserId(int userId) {
+        mUserId = userId;
+    }
+
+    public String getPhone() {
+        return mPhone;
+    }
+
+    public void setPhone(String phone) {
+        mPhone = phone;
+    }
+
+    public String getAddress() {
+        return mAddress;
+    }
+
+    public void setAddress(String address) {
+        mAddress = address;
+    }
+
+    public int getGoodsId() {
+        return mGoodsId;
+    }
+
+    public void setGoodsId(int goodsId) {
+        mGoodsId = goodsId;
+    }
+
+    public Double getGoodsPrice() {
+        return mGoodsPrice;
+    }
+
+    public void setGoodsPrice(Double goodsPrice) {
+        mGoodsPrice = goodsPrice;
+    }
+
+    public int getAmounts() {
+        return mAmounts;
+    }
+
+    public void setAmounts(int amounts) {
+        mAmounts = amounts;
+    }
+
+    public String getGoodsName() {
+        return mGoodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        mGoodsName = goodsName;
     }
 }
