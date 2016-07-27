@@ -43,6 +43,11 @@ public class UserBean {
      * 手机号码
      */
     private String mPhone;
+
+    /**
+     * 邮箱
+     */
+    private String mMail;
     /**
      * 收货地址
      */
@@ -102,5 +107,13 @@ public class UserBean {
 
     public void setIsVip(int isVip) {
         mIsVip = isVip;
+    }
+
+    public String getMail() {
+        return mMail;
+    }
+
+    public void setMail(String mail) {
+        mMail = mail;
     }
 }

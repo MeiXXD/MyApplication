@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.bean.SellerBean;
 import com.example.lifeng.myapplication.presenter.SellerLoginViewPresenter;
+import com.example.lifeng.myapplication.utils.InputJudge;
 
 /**
  * @author lifeng
@@ -66,7 +67,7 @@ public class SellerLoginActivity extends AppCompatActivity implements ISellerLog
     public boolean getSellerInput() {
         String mSellerName = mSellerNameEdt.getText().toString().trim();
         String mSellerPassword = mSellerPasswordEdt.getText().toString().trim();
-        if (mSellerPassword.contains("\'") || mSellerPassword.contains("\"") || mSellerPassword.isEmpty()) {
+        if (!InputJudge.isInputValid(mSellerName) || !InputJudge.isInputValid(mSellerPassword)) {
             return false;
         }
         mSellerBean.setName(mSellerName);

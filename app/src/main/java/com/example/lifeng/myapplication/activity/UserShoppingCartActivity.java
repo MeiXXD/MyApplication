@@ -32,6 +32,7 @@ import com.example.lifeng.myapplication.activity.adapter.ShoppingCartListAdapter
 import com.example.lifeng.myapplication.bean.ShoppingCartBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 import com.example.lifeng.myapplication.presenter.UserShoppingCartViewPresenter;
+import com.example.lifeng.myapplication.utils.InputJudge;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -123,7 +124,7 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String password = passwordTxt.getText().toString().trim();
-                        if (password.contains("\'") || password.contains("\"") || password.isEmpty()) {
+                        if (!InputJudge.isInputValid(password)) {
                             Toast.makeText(UserShoppingCartActivity.this, "输入不合法,请重新输入", Toast.LENGTH_SHORT).show();
 
                             //输入不合法则对话框不消失
@@ -166,12 +167,10 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
                                     e.printStackTrace();
                                 }
 
-                                // TODO: 16/7/26 传参数并打开下订单activity
                                 Intent intent = new Intent();
                                 intent.setClass(UserShoppingCartActivity.this, UserSubmitOrderActivity.class);
                                 intent.putExtra("shoppingcartid", mShoppingCartBean.getId());
                                 startActivity(intent);
-
                             }
                         }
                     }

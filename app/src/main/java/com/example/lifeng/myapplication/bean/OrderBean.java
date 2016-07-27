@@ -23,9 +23,9 @@ public class OrderBean {
      */
     private int mId;
     /**
-     * 订单日期
+     * 订单时间
      */
-    private String mDate;
+    private String mDateTime;
 
     /**
      * 订单状态
@@ -49,12 +49,12 @@ public class OrderBean {
         mId = id;
     }
 
-    public String getDate() {
-        return mDate;
+    public String getDateTime() {
+        return mDateTime;
     }
 
-    public void setDate(String date) {
-        mDate = date;
+    public void setDateTime(String datetime) {
+        mDateTime = datetime;
     }
 
 

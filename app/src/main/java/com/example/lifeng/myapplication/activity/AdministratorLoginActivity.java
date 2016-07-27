@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.bean.AdministratorBean;
 import com.example.lifeng.myapplication.presenter.AdministratorLoginViewPresenter;
+import com.example.lifeng.myapplication.utils.InputJudge;
 
 /**
  * @author lifeng
@@ -65,7 +66,7 @@ public class AdministratorLoginActivity extends AppCompatActivity implements IAd
     public boolean getAdministratorInput() {
         String mAdminName = mAdminNameEdt.getText().toString().trim();
         String mAdminPassword = mAdminPasswordEdt.getText().toString().trim();
-        if (mAdminName.isEmpty() || mAdminPassword.contains("\'") || mAdminPassword.contains("\"") || mAdminPassword.isEmpty()) {
+        if (!InputJudge.isInputValid(mAdminName) || !InputJudge.isInputValid(mAdminPassword)) {
             return false;
         }
         mAdministratorBean.setName(mAdminName);

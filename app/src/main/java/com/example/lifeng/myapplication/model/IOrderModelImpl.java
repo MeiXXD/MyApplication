@@ -40,13 +40,13 @@ public class IOrderModelImpl implements IOrderModel {
         int userid = shoppingCartBean.getUserBean().getId();
         int goodsid = shoppingCartBean.getGoodsBean().getId();
         int amounts = shoppingCartBean.getAmounts();
-        String date = orderBean.getDate();
+        String datetime = orderBean.getDateTime();
         int status = orderBean.getStatus();
         double account = orderBean.getAccount();
 
         SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
         if (db.isOpen()) {
-            db.execSQL("insert into tb_order(userid,goodsid,goodsamounts,orderdate,orderstatus,orderaccount) values(" + userid + "," + goodsid + "," + amounts + ",\"" + date + "\"," + status + "," + account + ")");
+            db.execSQL("insert into tb_order(userid,goodsid,goodsamounts,datetime,orderstatus,orderaccount) values(" + userid + "," + goodsid + "," + amounts + ",\"" + datetime + "\"," + status + "," + account + ")");
             db.close();
         }
         Log.e(">>>>>", "订单添加成功");

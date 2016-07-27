@@ -39,4 +39,18 @@ public class InputJudge {
         }
         return true;
     }
+
+    /**
+     * 验证输入是否合法
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isInputValid(String str) {
+        if (!str.isEmpty() && !str.contains("\'") && !str.contains("\"")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

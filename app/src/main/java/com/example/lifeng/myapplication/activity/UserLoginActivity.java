@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.bean.UserBean;
 import com.example.lifeng.myapplication.presenter.UserLoginViewPresenter;
+import com.example.lifeng.myapplication.utils.InputJudge;
 
 /**
  * @author lifeng
@@ -66,7 +67,7 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
     public boolean getUserInput() {
         String mUserName = mUserNameEdt.getText().toString().trim();
         String mUserPassword = mUserPasswordEdt.getText().toString().trim();
-        if (mUserPassword.contains("\'") || mUserPassword.contains("\"") || mUserPassword.isEmpty()) {
+        if (!InputJudge.isInputValid(mUserName) || !InputJudge.isInputValid(mUserPassword)) {
             return false;
         }
         mUserBean.setName(mUserName);
