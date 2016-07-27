@@ -85,6 +85,8 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
 
     @Override
     protected void onResume() {
+        mShoppingCartBean = null;
+        mTotalTxt.setText("总计(元): ");
         mShoppingCartListAdapter.setSelectedIndex(-1);
         mShoppingCartBeanArrayList.clear();
         mUserShoppingCartViewPresenter.getUserShoppingCart(mShoppingCartBeanArrayList, mUserBean);
@@ -117,37 +119,22 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_settle_accounts:
-                LinearLayout verifyPasswordLly = (LinearLayout) getLayoutInflater().inflate(R.layout.dialog_verify_password, null);
-                final TextView passwordTxt = (TextView) verifyPasswordLly.findViewById(R.id.txt_dialog_verify_password_password);
+                if (mShoppingCartBeanArrayList.size() == 0) {
+                    Toast.makeText(this, "请首先添加购物车", Toast.LENGTH_SHORT).show();
+                } else if (null == mShoppingCartBean) {
+                    Toast.makeText(this, "请选择需要购买的商品", Toast.LENGTH_SHORT).show();
+                } else {
+                    LinearLayout verifyPasswordLly = (LinearLayout) getLayoutInflater().inflate(R.layout.dialog_verify_password, null);
+                    final TextView passwordTxt = (TextView) verifyPasswordLly.findViewById(R.id.txt_dialog_verify_password_password);
 
-                mDialog = new AlertDialog.Builder(UserShoppingCartActivity.this).setTitle("请输入密码").setView(verifyPasswordLly).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String password = passwordTxt.getText().toString().trim();
-                        if (!InputJudge.isInputValid(password)) {
-                            Toast.makeText(UserShoppingCartActivity.this, "输入不合法,请重新输入", Toast.LENGTH_SHORT).show();
+                    mDialog = new AlertDialog.Builder(UserShoppingCartActivity.this).setTitle("请输入密码").setView(verifyPasswordLly).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String password = passwordTxt.getText().toString().trim();
+                            if (!InputJudge.isInputValid(password)) {
+                                Toast.makeText(UserShoppingCartActivity.this, "输入不合法,请重新输入", Toast.LENGTH_SHORT).show();
 
-                            //输入不合法则对话框不消失
-                            try {
-                                Field field = mDialog.getClass().getSuperclass().getSuperclass().getDeclaredField("mShowing");
-                                field.setAccessible(true);
-                                field.set(mDialog, false);
-                                mDialog.dismiss();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                        } else {
-                            //重新校验密码
-                            UserBean userBean = new UserBean();
-                            userBean.setName(mUserBean.getName());
-                            userBean.setPassword(password);
-
-                            boolean isPasswordCorrect = mUserShoppingCartViewPresenter.verifyPassword(userBean);
-                            if (!isPasswordCorrect) {
-                                Toast.makeText(UserShoppingCartActivity.this, "用户名密码不匹配", Toast.LENGTH_SHORT).show();
-
-                                //密码不对,则对话框不消失
+                                //输入不合法则对话框不消失
                                 try {
                                     Field field = mDialog.getClass().getSuperclass().getSuperclass().getDeclaredField("mShowing");
                                     field.setAccessible(true);
@@ -156,37 +143,58 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                            } else {
-                                //密码用户名匹配,则进入下订单页面
-                                try {
-                                    Field field = mDialog.getClass().getSuperclass().getSuperclass().getDeclaredField("mShowing");
-                                    field.setAccessible(true);
-                                    field.set(mDialog, true);
-                                    mDialog.dismiss();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
 
-                                Intent intent = new Intent();
-                                intent.setClass(UserShoppingCartActivity.this, UserSubmitOrderActivity.class);
-                                intent.putExtra("shoppingcartid", mShoppingCartBean.getId());
-                                startActivity(intent);
+                            } else {
+                                //重新校验密码
+                                UserBean userBean = new UserBean();
+                                userBean.setName(mUserBean.getName());
+                                userBean.setPassword(password);
+
+                                boolean isPasswordCorrect = mUserShoppingCartViewPresenter.verifyPassword(userBean);
+                                if (!isPasswordCorrect) {
+                                    Toast.makeText(UserShoppingCartActivity.this, "用户名密码不匹配", Toast.LENGTH_SHORT).show();
+
+                                    //密码不对,则对话框不消失
+                                    try {
+                                        Field field = mDialog.getClass().getSuperclass().getSuperclass().getDeclaredField("mShowing");
+                                        field.setAccessible(true);
+                                        field.set(mDialog, false);
+                                        mDialog.dismiss();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    //密码用户名匹配,则进入下订单页面
+                                    try {
+                                        Field field = mDialog.getClass().getSuperclass().getSuperclass().getDeclaredField("mShowing");
+                                        field.setAccessible(true);
+                                        field.set(mDialog, true);
+                                        mDialog.dismiss();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    Intent intent = new Intent();
+                                    intent.setClass(UserShoppingCartActivity.this, UserSubmitOrderActivity.class);
+                                    intent.putExtra("shoppingcartid", mShoppingCartBean.getId());
+                                    startActivity(intent);
+                                }
                             }
                         }
-                    }
-                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            Field field = mDialog.getClass().getSuperclass().getSuperclass().getDeclaredField("mShowing");
-                            field.setAccessible(true);
-                            field.set(mDialog, true);
-                            mDialog.dismiss();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                Field field = mDialog.getClass().getSuperclass().getSuperclass().getDeclaredField("mShowing");
+                                field.setAccessible(true);
+                                field.set(mDialog, true);
+                                mDialog.dismiss();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                }).show();
+                    }).show();
+                }
                 break;
         }
     }

@@ -49,9 +49,16 @@ public interface IUserModel {
      * 普通用户修改用户信息接口
      *
      * @param userBean
-     * @return 是否成功修改
      */
-    boolean modifyUserInfo(UserBean userBean);
+    void modifyUserInfo(UserBean userBean);
+
+    /**
+     * 得到用户信息
+     *
+     * @param userBean
+     * @return
+     */
+    UserBean getUserInfo(UserBean userBean);
 
     /**
      * 普通用户下订单前的验证接口

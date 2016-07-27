@@ -12,25 +12,21 @@
 
 package com.example.lifeng.myapplication.activity;
 
-import com.example.lifeng.myapplication.bean.UserBean;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.example.lifeng.myapplication.R;
 
 /**
  * @author lifeng
- * @version 1.0 16/7/19
- * @description 普通用户信息修改View
+ * @version 1.0 16/7/27
+ * @description 我的订单管理界面
  */
-public interface IUserInfoModifyView {
-    /**
-     * UI交互,得到输入的信息
-     *
-     * @return 输入是否合法
-     */
-    boolean getInput();
-
-    /**
-     * UI交互,设置界面输出信息
-     *
-     * @param userBean
-     */
-    void setOutput(UserBean userBean);
+public class MyOrderManagement extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_order_management);
+        setTitle("我的订单管理");
+    }
 }

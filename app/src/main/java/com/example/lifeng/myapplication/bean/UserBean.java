@@ -47,7 +47,7 @@ public class UserBean {
     /**
      * 邮箱
      */
-    private String mMail;
+    private String mEmail;
     /**
      * 收货地址
      */
@@ -109,11 +109,11 @@ public class UserBean {
         mIsVip = isVip;
     }
 
-    public String getMail() {
-        return mMail;
+    public String getEmail() {
+        return mEmail;
     }
 
-    public void setMail(String mail) {
-        mMail = mail;
+    public void setEmail(String email) {
+        mEmail = email;
     }
 }

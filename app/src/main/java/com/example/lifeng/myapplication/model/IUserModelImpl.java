@@ -88,10 +88,41 @@ public class IUserModelImpl implements IUserModel {
     }
 
     @Override
-    public boolean modifyUserInfo(UserBean userBean) {
-        return false;
+    public void modifyUserInfo(UserBean userBean) {
+        int id = userBean.getId();
+        String password = userBean.getPassword();
+        String phone = userBean.getPhone();
+        String email = userBean.getEmail();
+        String address = userBean.getAddress();
+
+        SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            db.execSQL("update tb_user set userpassword=\"" + password + "\",phone=\"" + phone + "\",mail=\"" + email + "\",address=\"" + address + "\" where userid=" + id);
+        }
+        db.close();
+        Log.e(">>>>>", "用户信息更新成功");
     }
 
+    @Override
+    public UserBean getUserInfo(UserBean userBean) {
+        UserBean mUserBean = null;
+        SQLiteDatabase db = mDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_user where userid=" + userBean.getId(), null);
+            if (cursor.moveToNext()) {
+                mUserBean = new UserBean();
+                mUserBean.setId(cursor.getInt(cursor.getColumnIndex("userid")));
+                mUserBean.setName(cursor.getString(cursor.getColumnIndex("username")));
+                mUserBean.setPassword(cursor.getString(cursor.getColumnIndex("userpassword")));
+                mUserBean.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
+                mUserBean.setEmail(cursor.getString(cursor.getColumnIndex("mail")));
+                mUserBean.setAddress(cursor.getString(cursor.getColumnIndex("address")));
+                mUserBean.setIsVip(cursor.getInt(cursor.getColumnIndex("isvip")));
+            }
+            db.close();
+        }
+        return mUserBean;
+    }
 
     @Override
     public boolean verifyPassword(UserBean userBean) {

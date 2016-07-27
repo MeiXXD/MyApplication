@@ -21,7 +21,13 @@ import java.util.regex.Pattern;
  * @description 输入内容判断工具类
  */
 public class InputJudge {
-    // TODO: 16/7/22 判断是否为正小数有待完善
+
+    /**
+     * 判断是否为正小数
+     *
+     * @param str
+     * @return
+     */
     public static boolean isPositiveDoubleNumber(String str) {
         Pattern pattern = Pattern.compile("\\+{0,1}[0]\\.[1-9]*|\\+{0,1}[1-9]\\d*\\.\\d*");
         Matcher isPositiveDoubleNumber = pattern.matcher(str);
@@ -31,6 +37,12 @@ public class InputJudge {
         return true;
     }
 
+    /**
+     * 判断是否为正整数
+     *
+     * @param str
+     * @return
+     */
     public static boolean isPositiveInteger(String str) {
         Pattern pattern = Pattern.compile("^\\+{0,1}[1-9]\\d*");
         Matcher isPositiveInteger = pattern.matcher(str);
@@ -52,5 +64,20 @@ public class InputJudge {
         } else {
             return false;
         }
+    }
+
+    /**
+     * 判断输入格式是否为正确的邮箱格式
+     *
+     * @param email
+     * @return
+     */
+    public static boolean isEmailValid(String email) {
+        Pattern pattern = Pattern.compile("[\\w[.-]]+@[\\w[.-]]+\\.[\\w]+");
+        Matcher isEmail = pattern.matcher(email);
+        if (!isEmail.matches()) {
+            return false;
+        }
+        return true;
     }
 }

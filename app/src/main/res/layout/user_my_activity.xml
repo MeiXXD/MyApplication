@@ -3,6 +3,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <Button
+        android:id="@+id/btn_my_userinfo_modify"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@android:color/holo_orange_dark"
+        android:text="@string/activity_my_userinfo_modify"
+        android:textSize="50dp" />
+
+    <Button
+        android:id="@+id/btn_my_order_management"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:background="@android:color/holo_orange_dark"
+        android:text="@string/activity_my_order_management"
+        android:textSize="50dp" />
 
 </LinearLayout>

@@ -76,4 +76,15 @@
     <string name="activity_submit_order_submit">提交订单</string>
     <string name="activity_submit_order_cancel">取消订单</string>
 
+    <string name="activity_my_userinfo_modify">资料修改</string>
+    <string name="activity_my_order_management">订单管理</string>
+
+    <string name="activity_user_info_modify_user_password">密码:</string>
+    <string name="activity_user_info_modify_isvip">是否会员:</string>
+    <string name="activity_user_info_modify_user_phone">联系方式:</string>
+    <string name="activity_user_info_modify_user_email">电子邮箱:</string>
+    <string name="activity_user_info_modify_user_adress">收货地址:</string>
+    <string name="activity_user_info_modify_cancel_modify">取消修改</string>
+    <string name="activity_user_info_modify_submit_modify">提交修改</string>
+
 </resources>

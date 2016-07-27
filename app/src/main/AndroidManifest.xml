@@ -52,6 +52,8 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name=".activity.GoodsDetailsActivity"></activity>
         <activity android:name=".activity.UserSubmitOrderActivity"></activity>
+        <activity android:name=".activity.MyInfoModify"></activity>
+        <activity android:name=".activity.MyOrderManagement"></activity>
     </application>
 
 </manifest>
