@@ -24,14 +24,22 @@ import java.util.ArrayList;
  * @version 1.0 16/7/27
  * @description 用户订单管理Presenter
  */
-public class UserOrderManagementViewPresenter {
+public class MyOrderManagementViewPresenter {
     private IOrderModel mOrderModel;
 
-    public UserOrderManagementViewPresenter() {
+    public MyOrderManagementViewPresenter() {
         mOrderModel = new IOrderModelImpl();
     }
 
     public void getUserAllOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean) {
         mOrderModel.getUsersAllOrders(orderBeanArrayList, userBean);
+    }
+
+    public void getOrderStatusKinds(ArrayList<String> stringArrayList) {
+        mOrderModel.getOrderStatusKinds(stringArrayList);
+    }
+
+    public void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String status) {
+        mOrderModel.getOrdersByStatus(orderBeanArrayList, userBean, status);
     }
 }

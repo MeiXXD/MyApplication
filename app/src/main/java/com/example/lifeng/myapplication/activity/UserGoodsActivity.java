@@ -75,8 +75,6 @@ public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnIt
         mUserGoodsLv = (ListView) findViewById(R.id.lv_user_goods_goods);
         mUserGoodsLv.setAdapter(mUserGoodsListAdapter);
         mUserGoodsLv.setOnItemClickListener(this);
-        mUserGoodsViewPresenter.getGoods(mUserGoodsBeanArrayList);
-        mUserGoodsListAdapter.notifyDataSetChanged();
 
 
         //spinner逻辑
@@ -99,8 +97,7 @@ public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnIt
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        mUserGoodsViewPresenter.getGoods(mUserGoodsBeanArrayList);
-        mUserGoodsListAdapter.notifyDataSetChanged();
+
     }
 
     @Override

@@ -16,10 +16,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:gravity="center"
             android:text="@string/activity_my_order_management_order_status"
-            android:textSize="15dp" />
+            android:textSize="30dp" />
 
         <Spinner
             android:id="@+id/spinner_my_order_management_order_status"

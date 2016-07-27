@@ -32,7 +32,7 @@ import com.example.lifeng.myapplication.utils.InputJudge;
  * @version 1.0 16/7/27
  * @description 我的信息修改界面
  */
-public class MyInfoModify extends AppCompatActivity implements View.OnClickListener, IUserInfoModifyView {
+public class MyInfoModifyActivity extends AppCompatActivity implements View.OnClickListener, IUserInfoModifyView {
     private ImageView mUserImg;
     private TextView mUserNameTxt;
     private EditText mUserPasswordEdt;

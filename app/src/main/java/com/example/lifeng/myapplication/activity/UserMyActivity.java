@@ -66,14 +66,14 @@ public class UserMyActivity extends AppCompatActivity implements View.OnClickLis
                 intent.putExtra("userid", mUserBean.getId());
                 intent.putExtra("username", mUserBean.getName());
                 intent.putExtra("userpassword", mUserBean.getPassword());
-                intent.setClass(this, MyInfoModify.class);
+                intent.setClass(this, MyInfoModifyActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_my_order_management:
                 intent.putExtra("userid", mUserBean.getId());
                 intent.putExtra("username", mUserBean.getName());
                 intent.putExtra("userpassword", mUserBean.getPassword());
-                intent.setClass(this, MyOrderManagement.class);
+                intent.setClass(this, MyOrderManagementActivity.class);
                 startActivity(intent);
                 break;
         }

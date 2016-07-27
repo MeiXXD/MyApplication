@@ -122,42 +122,46 @@ public class IOrderModelImpl implements IOrderModel {
 
     @Override
     public void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String status) {
-        int mStatus = -2;
-        if (status.equals("订单驳回")) {
-            mStatus = -1;
-        } else if (status.equals("等待卖家确认")) {
-            mStatus = 0;
+        if (status.equals("全部")) {
+            getUsersAllOrders(orderBeanArrayList, userBean);
         } else {
-            mStatus = 1;
-        }
-        int userid = userBean.getId();
-        OrderBean orderBean;
-        SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
-        if (db.isOpen()) {
-            Cursor cursor1 = db.rawQuery("select * from tb_order where userid=" + userid + " and orderstatus=" + mStatus, null);
-            while (cursor1.moveToNext()) {
-                orderBean = new OrderBean();
-                orderBean.setId(cursor1.getInt(cursor1.getColumnIndex("orderid")));
-                orderBean.setUserId(userid);
-                orderBean.setPhone(cursor1.getString(cursor1.getColumnIndex("phone")));
-                orderBean.setAddress(cursor1.getString(cursor1.getColumnIndex("address")));
-                orderBean.setGoodsId(cursor1.getInt(cursor1.getColumnIndex("goodsid")));
-                orderBean.setGoodsPrice(cursor1.getDouble(cursor1.getColumnIndex("goodsprice")));
-                orderBean.setAmounts(cursor1.getInt(cursor1.getColumnIndex("goodsamounts")));
-                orderBean.setDateTime(cursor1.getString(cursor1.getColumnIndex("datetime")));
-                orderBean.setStatus(cursor1.getInt(cursor1.getColumnIndex("orderstatus")));
-                orderBean.setAccount(cursor1.getDouble(cursor1.getColumnIndex("orderaccount")));
-
-                Cursor cursor2 = db.rawQuery("select * from tb_goods where goodsid=" + orderBean.getGoodsId(), null);
-                if (cursor2.moveToFirst()) {
-                    orderBean.setGoodsName(cursor2.getString(cursor2.getColumnIndex("goodsname")));
-                }
-                cursor2.close();
-
-                orderBeanArrayList.add(orderBean);
+            int mStatus = -2;
+            if (status.equals("订单驳回")) {
+                mStatus = -1;
+            } else if (status.equals("等待卖家确认")) {
+                mStatus = 0;
+            } else {
+                mStatus = 1;
             }
-            cursor1.close();
+            int userid = userBean.getId();
+            OrderBean orderBean;
+            SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
+            if (db.isOpen()) {
+                Cursor cursor1 = db.rawQuery("select * from tb_order where userid=" + userid + " and orderstatus=" + mStatus, null);
+                while (cursor1.moveToNext()) {
+                    orderBean = new OrderBean();
+                    orderBean.setId(cursor1.getInt(cursor1.getColumnIndex("orderid")));
+                    orderBean.setUserId(userid);
+                    orderBean.setPhone(cursor1.getString(cursor1.getColumnIndex("phone")));
+                    orderBean.setAddress(cursor1.getString(cursor1.getColumnIndex("address")));
+                    orderBean.setGoodsId(cursor1.getInt(cursor1.getColumnIndex("goodsid")));
+                    orderBean.setGoodsPrice(cursor1.getDouble(cursor1.getColumnIndex("goodsprice")));
+                    orderBean.setAmounts(cursor1.getInt(cursor1.getColumnIndex("goodsamounts")));
+                    orderBean.setDateTime(cursor1.getString(cursor1.getColumnIndex("datetime")));
+                    orderBean.setStatus(cursor1.getInt(cursor1.getColumnIndex("orderstatus")));
+                    orderBean.setAccount(cursor1.getDouble(cursor1.getColumnIndex("orderaccount")));
+
+                    Cursor cursor2 = db.rawQuery("select * from tb_goods where goodsid=" + orderBean.getGoodsId(), null);
+                    if (cursor2.moveToFirst()) {
+                        orderBean.setGoodsName(cursor2.getString(cursor2.getColumnIndex("goodsname")));
+                    }
+                    cursor2.close();
+
+                    orderBeanArrayList.add(orderBean);
+                }
+                cursor1.close();
+            }
+            db.close();
         }
-        db.close();
     }
 }
