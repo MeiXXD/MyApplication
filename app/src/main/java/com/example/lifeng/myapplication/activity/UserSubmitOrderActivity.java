@@ -153,6 +153,7 @@ public class UserSubmitOrderActivity extends AppCompatActivity implements View.O
                     mOrderBean.setAddress(mShoppingCartBean.getUserBean().getAddress());
 
                     mOrderBean.setGoodsId(mShoppingCartBean.getGoodsBean().getId());
+                    mOrderBean.setGoodsName(mShoppingCartBean.getGoodsBean().getName());
                     mOrderBean.setGoodsPrice(mShoppingCartBean.getGoodsBean().getPrice());
                     mOrderBean.setAmounts(orderAmounts);
 

@@ -46,18 +46,19 @@ public interface IOrderModel {
     void getUsersAllOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean);
 
     /**
-     * 订单查询接口
+     * 订单搜索接口
      *
      * @param orderBeanArrayList
+     * @param keyword
      */
-    void searchOrders(ArrayList<OrderBean> orderBeanArrayList);
+    void searchOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String keyword);
 
     /**
      * 得到商品的种类(按照状态分类)
      *
      * @param stringArrayList
      */
-    void getOrderStatusKinds(ArrayList<String> stringArrayList);
+    void getOrderStatusKinds(ArrayList<String> stringArrayList, UserBean userBean);
 
     /**
      * 获取指定状态的订单

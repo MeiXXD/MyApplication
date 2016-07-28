@@ -15,8 +15,10 @@ package com.example.lifeng.myapplication.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -34,9 +36,10 @@ import java.util.ArrayList;
  * @version 1.0 16/7/27
  * @description 我的订单管理界面
  */
-public class MyOrderManagementActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MyOrderManagementActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, ListView.OnItemClickListener, View.OnClickListener {
     private ListView mMyOrdersLv;
     private Spinner mOrderStatusSpinner;
+    private EditText mOrderSearchEdt;
 
     private UserBean mUserBean;
     private MyOrderManagementViewPresenter mMyOrderManagementViewPresenter;
@@ -58,6 +61,9 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
     void init() {
         mOrderStatusSpinner = (Spinner) findViewById(R.id.spinner_my_order_management_order_status);
         mMyOrdersLv = (ListView) findViewById(R.id.lv_my_order_management_my_orders);
+        mOrderSearchEdt = (EditText) findViewById(R.id.edt_user_goods_goods_search);
+        mOrderSearchEdt.setInputType(InputType.TYPE_NULL);
+        mOrderSearchEdt.setOnClickListener(this);
 
         mUserBean = new UserBean();
         mMyOrderManagementViewPresenter = new MyOrderManagementViewPresenter();
@@ -69,9 +75,10 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
 
         mMyOrderManagementAdapter = new MyOrderManagementAdapter(this, mOrderBeanArrayList);
         mMyOrdersLv.setAdapter(mMyOrderManagementAdapter);
+        mMyOrdersLv.setOnItemClickListener(this);
 
         mStringArrayList = new ArrayList<>();
-        mMyOrderManagementViewPresenter.getOrderStatusKinds(mStringArrayList);
+        mMyOrderManagementViewPresenter.getOrderStatusKinds(mStringArrayList, mUserBean);
         mMySpinnerAdapter = new MySpinnerAdapter(this, android.R.layout.simple_spinner_item, mStringArrayList.toArray(new String[mStringArrayList.size()]));
         mOrderStatusSpinner.setAdapter(mMySpinnerAdapter);
         mOrderStatusSpinner.setOnItemSelectedListener(this);
@@ -86,7 +93,7 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
         mMyOrderManagementAdapter.notifyDataSetChanged();
 
         mStringArrayList.clear();
-        mMyOrderManagementViewPresenter.getOrderStatusKinds(mStringArrayList);
+        mMyOrderManagementViewPresenter.getOrderStatusKinds(mStringArrayList, mUserBean);
         mMySpinnerAdapter.notifyDataSetChanged();
     }
 
@@ -101,5 +108,37 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        OrderBean orderBean = mOrderBeanArrayList.get(position);
+        Intent intent = new Intent();
+        intent.setClass(this, OrderDetails.class);
+        intent.putExtra("orderid", orderBean.getId());
+        intent.putExtra("orderusername", mUserBean.getName());
+        intent.putExtra("orderuserphone", orderBean.getPhone());
+        intent.putExtra("orderuseraddress", orderBean.getAddress());
+        intent.putExtra("ordergoodsname", orderBean.getGoodsName());
+        intent.putExtra("ordergoodsprice", orderBean.getGoodsPrice());
+        intent.putExtra("ordergoodsamounts", orderBean.getAmounts());
+        intent.putExtra("orderaccount", orderBean.getAccount());
+        intent.putExtra("orderdatetime", orderBean.getDateTime());
+        intent.putExtra("orderstatus", orderBean.getStatus());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.edt_user_goods_goods_search:
+                Intent intent = new Intent();
+                intent.putExtra("userid", mUserBean.getId());
+                intent.putExtra("username", mUserBean.getName());
+                intent.putExtra("userpassword", mUserBean.getPassword());
+                intent.setClass(MyOrderManagementActivity.this, OrdersSearchActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

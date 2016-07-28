@@ -21,25 +21,17 @@ import java.util.ArrayList;
 
 /**
  * @author lifeng
- * @version 1.0 16/7/27
- * @description 用户订单管理Presenter
+ * @version 1.0 16/7/28
+ * @description 订单搜索的Presenter
  */
-public class MyOrderManagementViewPresenter {
+public class OrdersSearchViewPresenter {
     private IOrderModel mOrderModel;
 
-    public MyOrderManagementViewPresenter() {
+    public OrdersSearchViewPresenter() {
         mOrderModel = new IOrderModelImpl();
     }
 
-    public void getUserAllOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean) {
-        mOrderModel.getUsersAllOrders(orderBeanArrayList, userBean);
-    }
-
-    public void getOrderStatusKinds(ArrayList<String> stringArrayList, UserBean userBean) {
-        mOrderModel.getOrderStatusKinds(stringArrayList, userBean);
-    }
-
-    public void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String status) {
-        mOrderModel.getOrdersByStatus(orderBeanArrayList, userBean, status);
+    public void searchOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String keyword) {
+        mOrderModel.searchOrders(orderBeanArrayList, userBean, keyword);
     }
 }

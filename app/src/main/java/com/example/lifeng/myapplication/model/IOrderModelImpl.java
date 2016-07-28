@@ -41,6 +41,7 @@ public class IOrderModelImpl implements IOrderModel {
         String address = orderBean.getAddress();
 
         int goodsid = orderBean.getGoodsId();
+        String goodsname = orderBean.getGoodsName();
         double goodsprice = orderBean.getGoodsPrice();
         int goodsamounts = orderBean.getAmounts();
 
@@ -50,7 +51,7 @@ public class IOrderModelImpl implements IOrderModel {
 
         SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
         if (db.isOpen()) {
-            db.execSQL("insert into tb_order(userid,phone,address,goodsid,goodsprice,goodsamounts,datetime,orderstatus,orderaccount) values(" + userid + ",\"" + phone + "\",\"" + address + "\"," + goodsid + "," + goodsprice + "," + goodsamounts + ",\"" + datetime + "\"," + status + "," + account + ")");
+            db.execSQL("insert into tb_order(userid,phone,address,goodsid,goodsname,goodsprice,goodsamounts,datetime,orderstatus,orderaccount) values(" + userid + ",\"" + phone + "\",\"" + address + "\"," + goodsid + ",\"" + goodsname + "\"," + goodsprice + "," + goodsamounts + ",\"" + datetime + "\"," + status + "," + account + ")");
             db.close();
         }
         Log.e(">>>>>", "订单添加成功");
@@ -67,44 +68,63 @@ public class IOrderModelImpl implements IOrderModel {
         OrderBean orderBean;
         SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
         if (db.isOpen()) {
-            Cursor cursor1 = db.rawQuery("select * from tb_order where userid=" + userid, null);
-            while (cursor1.moveToNext()) {
+            Cursor cursor = db.rawQuery("select * from tb_order where userid=" + userid, null);
+            while (cursor.moveToNext()) {
                 orderBean = new OrderBean();
-                orderBean.setId(cursor1.getInt(cursor1.getColumnIndex("orderid")));
+                orderBean.setId(cursor.getInt(cursor.getColumnIndex("orderid")));
                 orderBean.setUserId(userid);
-                orderBean.setPhone(cursor1.getString(cursor1.getColumnIndex("phone")));
-                orderBean.setAddress(cursor1.getString(cursor1.getColumnIndex("address")));
-                orderBean.setGoodsId(cursor1.getInt(cursor1.getColumnIndex("goodsid")));
-                orderBean.setGoodsPrice(cursor1.getDouble(cursor1.getColumnIndex("goodsprice")));
-                orderBean.setAmounts(cursor1.getInt(cursor1.getColumnIndex("goodsamounts")));
-                orderBean.setDateTime(cursor1.getString(cursor1.getColumnIndex("datetime")));
-                orderBean.setStatus(cursor1.getInt(cursor1.getColumnIndex("orderstatus")));
-                orderBean.setAccount(cursor1.getDouble(cursor1.getColumnIndex("orderaccount")));
-
-                Cursor cursor2 = db.rawQuery("select * from tb_goods where goodsid=" + orderBean.getGoodsId(), null);
-                if (cursor2.moveToFirst()) {
-                    orderBean.setGoodsName(cursor2.getString(cursor2.getColumnIndex("goodsname")));
-                }
-                cursor2.close();
+                orderBean.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
+                orderBean.setAddress(cursor.getString(cursor.getColumnIndex("address")));
+                orderBean.setGoodsId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+                orderBean.setGoodsName(cursor.getString(cursor.getColumnIndex("goodsname")));
+                orderBean.setGoodsPrice(cursor.getDouble(cursor.getColumnIndex("goodsprice")));
+                orderBean.setAmounts(cursor.getInt(cursor.getColumnIndex("goodsamounts")));
+                orderBean.setDateTime(cursor.getString(cursor.getColumnIndex("datetime")));
+                orderBean.setStatus(cursor.getInt(cursor.getColumnIndex("orderstatus")));
+                orderBean.setAccount(cursor.getDouble(cursor.getColumnIndex("orderaccount")));
 
                 orderBeanArrayList.add(orderBean);
             }
-            cursor1.close();
+            cursor.close();
         }
         db.close();
     }
 
     @Override
-    public void searchOrders(ArrayList<OrderBean> orderBeanArrayList) {
+    public void searchOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String keyword) {
+        int userid = userBean.getId();
+        OrderBean orderBean;
+        SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_order where userid=" + userid + " and goodsname like '%" + keyword + "%' or goodsid like '%" + keyword + "%' or orderid like '%" + keyword + "%'", null);
+            while (cursor.moveToNext()) {
+                orderBean = new OrderBean();
+                orderBean.setId(cursor.getInt(cursor.getColumnIndex("orderid")));
+                orderBean.setUserId(userid);
+                orderBean.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
+                orderBean.setAddress(cursor.getString(cursor.getColumnIndex("address")));
+                orderBean.setGoodsId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+                orderBean.setGoodsName(cursor.getString(cursor.getColumnIndex("goodsname")));
+                orderBean.setGoodsPrice(cursor.getDouble(cursor.getColumnIndex("goodsprice")));
+                orderBean.setAmounts(cursor.getInt(cursor.getColumnIndex("goodsamounts")));
+                orderBean.setDateTime(cursor.getString(cursor.getColumnIndex("datetime")));
+                orderBean.setStatus(cursor.getInt(cursor.getColumnIndex("orderstatus")));
+                orderBean.setAccount(cursor.getDouble(cursor.getColumnIndex("orderaccount")));
 
+                orderBeanArrayList.add(orderBean);
+            }
+            cursor.close();
+        }
+        db.close();
     }
 
     @Override
-    public void getOrderStatusKinds(ArrayList<String> stringArrayList) {
+    public void getOrderStatusKinds(ArrayList<String> stringArrayList, UserBean userBean) {
+        int userid = userBean.getId();
         stringArrayList.add("全部");
         SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
         if (db.isOpen()) {
-            Cursor cursor = db.rawQuery("select orderstatus from tb_order group by orderstatus", null);
+            Cursor cursor = db.rawQuery("select orderstatus from tb_order where userid=" + userid + " group by orderstatus", null);
             while (cursor.moveToNext()) {
                 int status = cursor.getInt(cursor.getColumnIndex("orderstatus"));
                 if (-1 == status) {
@@ -137,29 +157,24 @@ public class IOrderModelImpl implements IOrderModel {
             OrderBean orderBean;
             SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
             if (db.isOpen()) {
-                Cursor cursor1 = db.rawQuery("select * from tb_order where userid=" + userid + " and orderstatus=" + mStatus, null);
-                while (cursor1.moveToNext()) {
+                Cursor cursor = db.rawQuery("select * from tb_order where userid=" + userid + " and orderstatus=" + mStatus, null);
+                while (cursor.moveToNext()) {
                     orderBean = new OrderBean();
-                    orderBean.setId(cursor1.getInt(cursor1.getColumnIndex("orderid")));
+                    orderBean.setId(cursor.getInt(cursor.getColumnIndex("orderid")));
                     orderBean.setUserId(userid);
-                    orderBean.setPhone(cursor1.getString(cursor1.getColumnIndex("phone")));
-                    orderBean.setAddress(cursor1.getString(cursor1.getColumnIndex("address")));
-                    orderBean.setGoodsId(cursor1.getInt(cursor1.getColumnIndex("goodsid")));
-                    orderBean.setGoodsPrice(cursor1.getDouble(cursor1.getColumnIndex("goodsprice")));
-                    orderBean.setAmounts(cursor1.getInt(cursor1.getColumnIndex("goodsamounts")));
-                    orderBean.setDateTime(cursor1.getString(cursor1.getColumnIndex("datetime")));
-                    orderBean.setStatus(cursor1.getInt(cursor1.getColumnIndex("orderstatus")));
-                    orderBean.setAccount(cursor1.getDouble(cursor1.getColumnIndex("orderaccount")));
-
-                    Cursor cursor2 = db.rawQuery("select * from tb_goods where goodsid=" + orderBean.getGoodsId(), null);
-                    if (cursor2.moveToFirst()) {
-                        orderBean.setGoodsName(cursor2.getString(cursor2.getColumnIndex("goodsname")));
-                    }
-                    cursor2.close();
+                    orderBean.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
+                    orderBean.setAddress(cursor.getString(cursor.getColumnIndex("address")));
+                    orderBean.setGoodsId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+                    orderBean.setGoodsName(cursor.getString(cursor.getColumnIndex("goodsname")));
+                    orderBean.setGoodsPrice(cursor.getDouble(cursor.getColumnIndex("goodsprice")));
+                    orderBean.setAmounts(cursor.getInt(cursor.getColumnIndex("goodsamounts")));
+                    orderBean.setDateTime(cursor.getString(cursor.getColumnIndex("datetime")));
+                    orderBean.setStatus(cursor.getInt(cursor.getColumnIndex("orderstatus")));
+                    orderBean.setAccount(cursor.getDouble(cursor.getColumnIndex("orderaccount")));
 
                     orderBeanArrayList.add(orderBean);
                 }
-                cursor1.close();
+                cursor.close();
             }
             db.close();
         }
