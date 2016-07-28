@@ -14,11 +14,13 @@ package com.example.lifeng.myapplication.activity.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,9 +39,21 @@ public class SellerOrdersManagementAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater;
     private ArrayList<OrderBean> mOrderBeanArrayList;
 
+    public static SparseBooleanArray mSparseBooleanArray;
+
     public SellerOrdersManagementAdapter(Activity activity, ArrayList<OrderBean> orderBeanArrayList) {
         mActivity = activity;
         mOrderBeanArrayList = orderBeanArrayList;
+        mSparseBooleanArray = new SparseBooleanArray();
+        for (int i = 0; i < mSparseBooleanArray.size(); i++) {
+            mSparseBooleanArray.put(i, false);
+        }
+    }
+
+    public static void resetCheckStatus() {
+        for (int i = 0; i < mSparseBooleanArray.size(); i++) {
+            mSparseBooleanArray.put(i, false);
+        }
     }
 
     @Override
@@ -58,14 +72,26 @@ public class SellerOrdersManagementAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (null == mLayoutInflater) {
             mLayoutInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if (null == convertView) {
             convertView = mLayoutInflater.inflate(R.layout.seller_orders_management_listitem, null);
         }
+
         CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.cbx_seller_orders_management_order);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mSparseBooleanArray.put(position, true);
+                } else {
+                    mSparseBooleanArray.put(position, false);
+                }
+            }
+        });
+        checkBox.setChecked(mSparseBooleanArray.get(position));
         TextView orderId = (TextView) convertView.findViewById(R.id.txt_seller_orders_management_order_id);
         ImageView orderGoodsImg = (ImageView) convertView.findViewById(R.id.img_seller_orders_management_goods_image);
         TextView orderGoodsName = (TextView) convertView.findViewById(R.id.txt_seller_orders_management_goods_name);
@@ -94,6 +120,7 @@ public class SellerOrdersManagementAdapter extends BaseAdapter {
         } else {
             orderStatus.setText("订单驳回");
         }
+
 
         return convertView;
     }

@@ -59,7 +59,12 @@ public class IOrderModelImpl implements IOrderModel {
 
     @Override
     public void updateOrderStatus(OrderBean orderBean) {
-
+        SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            db.execSQL("update tb_order set orderstatus=" + orderBean.getStatus() + " where orderid=" + orderBean.getId());
+        }
+        db.close();
+        Log.e(">>>>>", "订单状态更新成功");
     }
 
     @Override

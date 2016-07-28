@@ -3,7 +3,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
@@ -13,10 +12,7 @@
         android:layout_width="25dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/rly_order"
-        android:layout_alignTop="@+id/rly_order"
-        android:clickable="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false" />
+        android:layout_alignTop="@+id/rly_order" />
 
     <RelativeLayout
         android:id="@+id/rly_order"

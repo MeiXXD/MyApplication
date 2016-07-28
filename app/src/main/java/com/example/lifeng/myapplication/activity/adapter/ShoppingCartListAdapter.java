@@ -73,7 +73,6 @@ public class ShoppingCartListAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(R.layout.shopping_cart_listitem, null);
         }
 
-        // TODO: 16/7/25 选择去结账
         RadioButton shoppingCartRadBtn = (RadioButton) convertView.findViewById(R.id.radbtn_shopping_cart);
         ImageView goodsImg = (ImageView) convertView.findViewById(R.id.img_shopping_cart_goods_image);
         TextView goodsNameTxt = (TextView) convertView.findViewById(R.id.txt_shopping_cart_goods_name);

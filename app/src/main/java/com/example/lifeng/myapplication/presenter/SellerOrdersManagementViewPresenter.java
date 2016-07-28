@@ -41,4 +41,8 @@ public class SellerOrdersManagementViewPresenter {
     public void getAllOrders(ArrayList<OrderBean> orderBeanArrayList) {
         mOrderModel.getAllOrders(orderBeanArrayList);
     }
+
+    public void updateOrderStatus(OrderBean orderBean) {
+        mOrderModel.updateOrderStatus(orderBean);
+    }
 }
