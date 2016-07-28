@@ -51,7 +51,7 @@ public class GoodsSearchActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_goods_search);
+        setContentView(R.layout.goods_search_activity);
 
         init();
     }

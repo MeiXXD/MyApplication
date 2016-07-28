@@ -124,7 +124,7 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
                 } else if (null == mShoppingCartBean) {
                     Toast.makeText(this, "请选择需要购买的商品", Toast.LENGTH_SHORT).show();
                 } else {
-                    LinearLayout verifyPasswordLly = (LinearLayout) getLayoutInflater().inflate(R.layout.dialog_verify_password, null);
+                    LinearLayout verifyPasswordLly = (LinearLayout) getLayoutInflater().inflate(R.layout.verify_password_dialog, null);
                     final TextView passwordTxt = (TextView) verifyPasswordLly.findViewById(R.id.txt_dialog_verify_password_password);
 
                     mDialog = new AlertDialog.Builder(UserShoppingCartActivity.this).setTitle("请输入密码").setView(verifyPasswordLly).setPositiveButton("确定", new DialogInterface.OnClickListener() {

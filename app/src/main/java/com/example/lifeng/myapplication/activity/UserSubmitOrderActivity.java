@@ -67,7 +67,7 @@ public class UserSubmitOrderActivity extends AppCompatActivity implements View.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_submit_order);
+        setContentView(R.layout.user_submit_order_activity);
         setTitle("下订单");
 
         init();

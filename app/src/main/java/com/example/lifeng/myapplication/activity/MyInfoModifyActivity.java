@@ -50,7 +50,7 @@ public class MyInfoModifyActivity extends AppCompatActivity implements View.OnCl
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_info_modify);
+        setContentView(R.layout.my_info_modify_activity);
         setTitle("我的信息修改");
 
         init();

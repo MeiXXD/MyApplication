@@ -49,7 +49,7 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_order_management);
+        setContentView(R.layout.my_order_management_activity);
         setTitle("我的订单管理");
 
         init();
