@@ -109,4 +109,15 @@
 
     <string name="activity_my_order_management_order_search">输入商品名/商品编号/订单号搜索</string>
 
+    <string name="activity_seller_orders_management_order_status">订单状态</string>
+    <string name="activity_seller_orders_management_order_confirm">订单确认</string>
+    <string name="activity_seller_orders_management_order_reject">订单驳回</string>
+
+    <string name="activity_seller_orders_management_listitem_order_id">订单编号:</string>
+    <string name="activity_seller_orders_management_listitem_user_id">用户编号:</string>
+    <string name="activity_seller_orders_management_listitem_order_account">实付款(元):</string>
+    <string name="activity_seller_orders_management_listitem_order_datetime">下单时间:</string>
+    <string name="activity_seller_orders_management_listitem_order_status">订单状态:</string>
+    <string name="activity_seller_orders_management_listitem_mark">X</string>
+
 </resources>

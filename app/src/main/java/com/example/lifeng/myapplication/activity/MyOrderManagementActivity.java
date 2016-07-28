@@ -23,7 +23,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.lifeng.myapplication.R;
-import com.example.lifeng.myapplication.activity.adapter.MyOrderManagementAdapter;
+import com.example.lifeng.myapplication.activity.adapter.MyOrdersManagementAdapter;
 import com.example.lifeng.myapplication.activity.adapter.MySpinnerAdapter;
 import com.example.lifeng.myapplication.bean.OrderBean;
 import com.example.lifeng.myapplication.bean.UserBean;
@@ -46,13 +46,13 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
 
     private ArrayList<String> mStringArrayList;
     private ArrayList<OrderBean> mOrderBeanArrayList;
-    private MyOrderManagementAdapter mMyOrderManagementAdapter;
+    private MyOrdersManagementAdapter mMyOrdersManagementAdapter;
     private MySpinnerAdapter mMySpinnerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_order_management_activity);
+        setContentView(R.layout.my_orders_management_activity);
         setTitle("我的订单管理");
 
         init();
@@ -73,8 +73,8 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
         mUserBean.setName(intent.getStringExtra("username"));
         mUserBean.setPassword(intent.getStringExtra("userpassword"));
 
-        mMyOrderManagementAdapter = new MyOrderManagementAdapter(this, mOrderBeanArrayList);
-        mMyOrdersLv.setAdapter(mMyOrderManagementAdapter);
+        mMyOrdersManagementAdapter = new MyOrdersManagementAdapter(this, mOrderBeanArrayList);
+        mMyOrdersLv.setAdapter(mMyOrdersManagementAdapter);
         mMyOrdersLv.setOnItemClickListener(this);
 
         mStringArrayList = new ArrayList<>();
@@ -82,7 +82,6 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
         mMySpinnerAdapter = new MySpinnerAdapter(this, android.R.layout.simple_spinner_item, mStringArrayList.toArray(new String[mStringArrayList.size()]));
         mOrderStatusSpinner.setAdapter(mMySpinnerAdapter);
         mOrderStatusSpinner.setOnItemSelectedListener(this);
-        mMyOrderManagementAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -90,7 +89,7 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
         super.onResume();
         mOrderBeanArrayList.clear();
         mMyOrderManagementViewPresenter.getUserAllOrders(mOrderBeanArrayList, mUserBean);
-        mMyOrderManagementAdapter.notifyDataSetChanged();
+        mMyOrdersManagementAdapter.notifyDataSetChanged();
 
         mStringArrayList.clear();
         mMyOrderManagementViewPresenter.getOrderStatusKinds(mStringArrayList, mUserBean);
@@ -102,7 +101,7 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
         String status = parent.getItemAtPosition(position).toString();
         mOrderBeanArrayList.clear();
         mMyOrderManagementViewPresenter.getOrdersByStatus(mOrderBeanArrayList, mUserBean, status);
-        mMyOrderManagementAdapter.notifyDataSetChanged();
+        mMyOrdersManagementAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -136,7 +135,7 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
                 intent.putExtra("userid", mUserBean.getId());
                 intent.putExtra("username", mUserBean.getName());
                 intent.putExtra("userpassword", mUserBean.getPassword());
-                intent.setClass(MyOrderManagementActivity.this, OrdersSearchActivity.class);
+                intent.setClass(MyOrderManagementActivity.this, UserOrdersSearchActivity.class);
                 startActivity(intent);
                 break;
         }

@@ -23,7 +23,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.lifeng.myapplication.R;
-import com.example.lifeng.myapplication.activity.adapter.MyOrderManagementAdapter;
+import com.example.lifeng.myapplication.activity.adapter.MyOrdersManagementAdapter;
 import com.example.lifeng.myapplication.bean.OrderBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 import com.example.lifeng.myapplication.presenter.OrdersSearchViewPresenter;
@@ -36,7 +36,7 @@ import java.util.ArrayList;
  * @version 1.0 16/7/28
  * @description 订单搜索Activity
  */
-public class OrdersSearchActivity extends AppCompatActivity implements View.OnClickListener, IOrdersSearchView, ListView.OnItemClickListener {
+public class UserOrdersSearchActivity extends AppCompatActivity implements View.OnClickListener, IUserOrdersSearchView, ListView.OnItemClickListener {
     private UserBean mUserBean;
     private OrdersSearchViewPresenter mOrdersSearchViewPresenter;
 
@@ -46,7 +46,7 @@ public class OrdersSearchActivity extends AppCompatActivity implements View.OnCl
     private EditText mKeywordEdt;
     private Button mSearchBtn;
     private ListView mOrdersLv;
-    private MyOrderManagementAdapter mMyOrderManagementAdapter;
+    private MyOrdersManagementAdapter mMyOrdersManagementAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +72,8 @@ public class OrdersSearchActivity extends AppCompatActivity implements View.OnCl
         mSearchBtn.setOnClickListener(this);
 
         mOrderBeanArrayList = new ArrayList<>();
-        mMyOrderManagementAdapter = new MyOrderManagementAdapter(this, mOrderBeanArrayList);
-        mOrdersLv.setAdapter(mMyOrderManagementAdapter);
+        mMyOrdersManagementAdapter = new MyOrdersManagementAdapter(this, mOrderBeanArrayList);
+        mOrdersLv.setAdapter(mMyOrdersManagementAdapter);
 
         mOrdersLv.setOnItemClickListener(this);
     }
@@ -85,7 +85,7 @@ public class OrdersSearchActivity extends AppCompatActivity implements View.OnCl
                 if (getUserInput()) {
                     mOrderBeanArrayList.clear();
                     mOrdersSearchViewPresenter.searchOrders(mOrderBeanArrayList, mUserBean, mKeywordStr);
-                    mMyOrderManagementAdapter.notifyDataSetChanged();
+                    mMyOrdersManagementAdapter.notifyDataSetChanged();
                     if (mOrderBeanArrayList.size() == 0) {
                         Toast.makeText(this, "无相关商品", Toast.LENGTH_SHORT).show();
                     }

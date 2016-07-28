@@ -31,7 +31,7 @@
             android:name=".activity.GoodsOrdersManagementTabActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
-            android:name=".activity.OrdersManagementActivity"
+            android:name=".activity.SellerOrdersManagementActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".activity.GoodsManagementActivity"
@@ -59,7 +59,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name=".activity.OrderDetails"></activity>
         <activity
-            android:name=".activity.OrdersSearchActivity"
+            android:name=".activity.UserOrdersSearchActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 

@@ -31,13 +31,13 @@ import java.util.List;
  * @version 1.0 16/7/27
  * @description 用户订单界面的adapter
  */
-public class MyOrderManagementAdapter extends BaseAdapter {
+public class MyOrdersManagementAdapter extends BaseAdapter {
     private Activity mActivity;
     private LayoutInflater mLayoutInflater;
     private List<OrderBean> mOrderBeanList;
 
 
-    public MyOrderManagementAdapter(Activity activity, List<OrderBean> orderBeanList) {
+    public MyOrdersManagementAdapter(Activity activity, List<OrderBean> orderBeanList) {
         mActivity = activity;
         mOrderBeanList = orderBeanList;
     }
@@ -63,17 +63,17 @@ public class MyOrderManagementAdapter extends BaseAdapter {
             mLayoutInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if (null == convertView) {
-            convertView = mLayoutInflater.inflate(R.layout.my_order_listitem, null);
+            convertView = mLayoutInflater.inflate(R.layout.my_orders_listitem, null);
         }
 
         TextView orderIdTxt = (TextView) convertView.findViewById(R.id.txt_my_order_management_order_id);
-        ImageView goodsImg = (ImageView) convertView.findViewById(R.id.img_my_order_management_goods_image);
-        TextView goodsNameTxt = (TextView) convertView.findViewById(R.id.txt_my_order_management_goods_name);
-        TextView goodsPriceTxt = (TextView) convertView.findViewById(R.id.txt_my_order_management_goods_price);
-        TextView amountsTxt = (TextView) convertView.findViewById(R.id.txt_my_order_management_goods_amounts);
-        TextView accountsTxt = (TextView) convertView.findViewById(R.id.txt_my_order_management_order_account);
-        TextView orderDateTimeTxt = (TextView) convertView.findViewById(R.id.txt_my_order_management_order_datetime);
-        TextView orderStatusTxt = (TextView) convertView.findViewById(R.id.txt_my_order_management_order_status);
+        ImageView goodsImg = (ImageView) convertView.findViewById(R.id.img_seller_orders_management_goods_image);
+        TextView goodsNameTxt = (TextView) convertView.findViewById(R.id.txt_seller_orders_management_goods_name);
+        TextView goodsPriceTxt = (TextView) convertView.findViewById(R.id.txt_seller_orders_management_goods_price);
+        TextView amountsTxt = (TextView) convertView.findViewById(R.id.txt_seller_orders_management_goods_amounts);
+        TextView accountsTxt = (TextView) convertView.findViewById(R.id.txt_seller_orders_management_order_account);
+        TextView orderDateTimeTxt = (TextView) convertView.findViewById(R.id.txt_seller_orders_management_order_datetime);
+        TextView orderStatusTxt = (TextView) convertView.findViewById(R.id.txt_seller_orders_management_order_status);
 
         OrderBean orderBean = mOrderBeanList.get(position);
         orderIdTxt.setText(Integer.toString(orderBean.getId()));

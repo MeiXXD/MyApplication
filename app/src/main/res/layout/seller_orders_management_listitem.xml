@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <CheckBox
+        android:id="@+id/cbx_seller_orders_management_order"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rly_order"
+        android:layout_alignTop="@+id/rly_order"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
+
+    <RelativeLayout
+        android:id="@+id/rly_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/cbx_seller_orders_management_order">
+
+        <TextView
+            android:id="@+id/txt_seller_orders_management_order_id1"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:text="@string/activity_seller_orders_management_listitem_order_id"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_seller_orders_management_order_id"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/txt_seller_orders_management_order_id1"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/img_seller_orders_management_goods_image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/txt_seller_orders_management_order_id1"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/txt_seller_orders_management_goods_name"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_below="@id/txt_seller_orders_management_order_id"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/img_seller_orders_management_goods_image"
+            android:gravity="center_vertical"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/txt_seller_orders_management_goods_price"
+            android:layout_width="170dp"
+            android:layout_height="25dp"
+            android:layout_below="@id/txt_seller_orders_management_goods_name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/img_seller_orders_management_goods_image"
+            android:gravity="center_vertical"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/txt_seller_orders_management_mark"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_below="@id/txt_seller_orders_management_goods_name"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/txt_seller_orders_management_goods_price"
+            android:gravity="center_vertical"
+            android:text="@string/activity_seller_orders_management_listitem_mark"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/txt_seller_orders_management_goods_amounts"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_below="@id/txt_seller_orders_management_goods_name"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/txt_seller_orders_management_mark"
+            android:gravity="center_vertical"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/txt_seller_orders_management_user_id1"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/img_seller_orders_management_goods_image"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:text="@string/activity_seller_orders_management_listitem_user_id"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_seller_orders_management_user_id"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/img_seller_orders_management_goods_image"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/txt_seller_orders_management_user_id1"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_seller_orders_management_order_account1"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/txt_seller_orders_management_user_id1"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:text="@string/activity_seller_orders_management_listitem_order_account"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_seller_orders_management_order_account"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/txt_seller_orders_management_user_id"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/txt_seller_orders_management_order_account1"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_serller_orders_management_order_datetime1"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/txt_seller_orders_management_order_account1"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:text="@string/activity_seller_orders_management_listitem_order_datetime"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_seller_orders_management_order_datetime"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/txt_seller_orders_management_order_account"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/txt_serller_orders_management_order_datetime1"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_seller_orders_management_order_status1"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/txt_serller_orders_management_order_datetime1"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:text="@string/activity_seller_orders_management_listitem_order_status"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_seller_orders_management_order_status"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/txt_seller_orders_management_order_datetime"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/txt_seller_orders_management_order_status1"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

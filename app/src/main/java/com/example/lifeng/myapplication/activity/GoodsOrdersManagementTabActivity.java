@@ -70,7 +70,7 @@ public class GoodsOrdersManagementTabActivity extends TabActivity implements Vie
         mTabHost.setPadding(mTabHost.getLeft(), mTabHost.getTop(), mTabHost.getRight(), mTabHost.getBottom() - 5);
 
         mTabHost.addTab(mTabHost.newTabSpec("goodsmanagement").setIndicator("商品管理").setContent(new Intent(this, GoodsManagementActivity.class)));
-        mTabHost.addTab(mTabHost.newTabSpec("ordersmanagement").setIndicator("订单管理").setContent(new Intent(this, OrdersManagementActivity.class)));
+        mTabHost.addTab(mTabHost.newTabSpec("ordersmanagement").setIndicator("订单管理").setContent(new Intent(this, SellerOrdersManagementActivity.class)));
 
         mTabHost.getTabWidget().setBackgroundResource(R.color.colorPrimary);
         updateTab(mTabHost);

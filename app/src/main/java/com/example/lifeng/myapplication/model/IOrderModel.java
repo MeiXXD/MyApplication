@@ -46,6 +46,13 @@ public interface IOrderModel {
     void getUsersAllOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean);
 
     /**
+     * 得到全部订单的接口
+     *
+     * @param orderBeanArrayList
+     */
+    void getAllOrders(ArrayList<OrderBean> orderBeanArrayList);
+
+    /**
      * 订单搜索接口
      *
      * @param orderBeanArrayList
@@ -54,11 +61,28 @@ public interface IOrderModel {
     void searchOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String keyword);
 
     /**
-     * 得到商品的种类(按照状态分类)
+     * 得到某用户的商品状态种类
+     *
+     * @param stringArrayList
+     * @param userBean
+     */
+    void getOrderStatusKinds(ArrayList<String> stringArrayList, UserBean userBean);
+
+    /**
+     * 得到订单的种类
      *
      * @param stringArrayList
      */
-    void getOrderStatusKinds(ArrayList<String> stringArrayList, UserBean userBean);
+    void getOrderStatusKinds(ArrayList<String> stringArrayList);
+
+    /**
+     * 获取某用户的指定状态的订单
+     *
+     * @param orderBeanArrayList
+     * @param userBean
+     * @param status
+     */
+    void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String status);
 
     /**
      * 获取指定状态的订单
@@ -66,5 +90,5 @@ public interface IOrderModel {
      * @param orderBeanArrayList
      * @param status
      */
-    void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String status);
+    void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, String status);
 }

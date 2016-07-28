@@ -17,7 +17,7 @@ package com.example.lifeng.myapplication.activity;
  * @version 1.0 16/7/19
  * @description 订单搜索View
  */
-public interface IOrdersSearchView {
+public interface IUserOrdersSearchView {
     /**
      * UI交互,得到用户的输入信息
      *

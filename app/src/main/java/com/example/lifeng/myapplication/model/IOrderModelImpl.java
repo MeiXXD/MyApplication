@@ -91,6 +91,33 @@ public class IOrderModelImpl implements IOrderModel {
     }
 
     @Override
+    public void getAllOrders(ArrayList<OrderBean> orderBeanArrayList) {
+        OrderBean orderBean;
+        SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_order", null);
+            while (cursor.moveToNext()) {
+                orderBean = new OrderBean();
+                orderBean.setId(cursor.getInt(cursor.getColumnIndex("orderid")));
+                orderBean.setUserId(cursor.getInt(cursor.getColumnIndex("userid")));
+                orderBean.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
+                orderBean.setAddress(cursor.getString(cursor.getColumnIndex("address")));
+                orderBean.setGoodsId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+                orderBean.setGoodsName(cursor.getString(cursor.getColumnIndex("goodsname")));
+                orderBean.setGoodsPrice(cursor.getDouble(cursor.getColumnIndex("goodsprice")));
+                orderBean.setAmounts(cursor.getInt(cursor.getColumnIndex("goodsamounts")));
+                orderBean.setDateTime(cursor.getString(cursor.getColumnIndex("datetime")));
+                orderBean.setStatus(cursor.getInt(cursor.getColumnIndex("orderstatus")));
+                orderBean.setAccount(cursor.getDouble(cursor.getColumnIndex("orderaccount")));
+
+                orderBeanArrayList.add(orderBean);
+            }
+            cursor.close();
+        }
+        db.close();
+    }
+
+    @Override
     public void searchOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String keyword) {
         int userid = userBean.getId();
         OrderBean orderBean;
@@ -141,6 +168,27 @@ public class IOrderModelImpl implements IOrderModel {
     }
 
     @Override
+    public void getOrderStatusKinds(ArrayList<String> stringArrayList) {
+        stringArrayList.add("全部");
+        SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select orderstatus from tb_order group by orderstatus", null);
+            while (cursor.moveToNext()) {
+                int status = cursor.getInt(cursor.getColumnIndex("orderstatus"));
+                if (-1 == status) {
+                    stringArrayList.add("订单驳回");
+                } else if (0 == status) {
+                    stringArrayList.add("等待卖家确认");
+                } else {
+                    stringArrayList.add("确认发货");
+                }
+            }
+            cursor.close();
+            db.close();
+        }
+    }
+
+    @Override
     public void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String status) {
         if (status.equals("全部")) {
             getUsersAllOrders(orderBeanArrayList, userBean);
@@ -162,6 +210,46 @@ public class IOrderModelImpl implements IOrderModel {
                     orderBean = new OrderBean();
                     orderBean.setId(cursor.getInt(cursor.getColumnIndex("orderid")));
                     orderBean.setUserId(userid);
+                    orderBean.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
+                    orderBean.setAddress(cursor.getString(cursor.getColumnIndex("address")));
+                    orderBean.setGoodsId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+                    orderBean.setGoodsName(cursor.getString(cursor.getColumnIndex("goodsname")));
+                    orderBean.setGoodsPrice(cursor.getDouble(cursor.getColumnIndex("goodsprice")));
+                    orderBean.setAmounts(cursor.getInt(cursor.getColumnIndex("goodsamounts")));
+                    orderBean.setDateTime(cursor.getString(cursor.getColumnIndex("datetime")));
+                    orderBean.setStatus(cursor.getInt(cursor.getColumnIndex("orderstatus")));
+                    orderBean.setAccount(cursor.getDouble(cursor.getColumnIndex("orderaccount")));
+
+                    orderBeanArrayList.add(orderBean);
+                }
+                cursor.close();
+            }
+            db.close();
+        }
+    }
+
+    @Override
+    public void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, String status) {
+        if (status.equals("全部")) {
+            getAllOrders(orderBeanArrayList);
+        } else {
+            int mStatus = -2;
+            if (status.equals("订单驳回")) {
+                mStatus = -1;
+            } else if (status.equals("等待卖家确认")) {
+                mStatus = 0;
+            } else {
+                mStatus = 1;
+            }
+
+            OrderBean orderBean;
+            SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
+            if (db.isOpen()) {
+                Cursor cursor = db.rawQuery("select * from tb_order where orderstatus=" + mStatus, null);
+                while (cursor.moveToNext()) {
+                    orderBean = new OrderBean();
+                    orderBean.setId(cursor.getInt(cursor.getColumnIndex("orderid")));
+                    orderBean.setUserId(cursor.getInt(cursor.getColumnIndex("userid")));
                     orderBean.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
                     orderBean.setAddress(cursor.getString(cursor.getColumnIndex("address")));
                     orderBean.setGoodsId(cursor.getInt(cursor.getColumnIndex("goodsid")));
