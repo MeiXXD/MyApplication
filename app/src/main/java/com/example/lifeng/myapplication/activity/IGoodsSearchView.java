@@ -18,4 +18,10 @@ package com.example.lifeng.myapplication.activity;
  * @description 商品搜索View
  */
 public interface IGoodsSearchView {
+    /**
+     * UI交互,得到用户的输入信息
+     *
+     * @return 输入信息是否合法
+     */
+    boolean getUserInput();
 }

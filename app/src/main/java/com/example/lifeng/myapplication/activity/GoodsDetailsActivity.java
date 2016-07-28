@@ -45,7 +45,7 @@ public class GoodsDetailsActivity extends AppCompatActivity implements View.OnCl
     private TextView mGoodsDetailsGoodsPriceTxt;
     private TextView mGoodsDetailsGoodsAmountsTxt;
     private TextView mGoodsDetailsGoodsDescriptionTxt;
-    private EditText mGoodsDetailsGoodsDescriptionEdt;
+    private EditText mGoodsDetailsGoodsAmountsEdt;
     private Button mGoodsDetailsAddShoppingCartBtn;
 
     private GoodsDetaisViewPresenter mGoodsDetaisViewPresenter;
@@ -82,7 +82,7 @@ public class GoodsDetailsActivity extends AppCompatActivity implements View.OnCl
         mGoodsDetailsGoodsPriceTxt = (TextView) findViewById(R.id.txt_goods_details_goods_price);
         mGoodsDetailsGoodsAmountsTxt = (TextView) findViewById(R.id.txt_goods_details_goods_amounts);
         mGoodsDetailsGoodsDescriptionTxt = (TextView) findViewById(R.id.txt_goods_details_goods_description);
-        mGoodsDetailsGoodsDescriptionEdt = (EditText) findViewById(R.id.edt_goods_details_goods_amounts);
+        mGoodsDetailsGoodsAmountsEdt = (EditText) findViewById(R.id.edt_goods_details_goods_amounts);
         mGoodsDetailsAddShoppingCartBtn = (Button) findViewById(R.id.btn_goods_details_add_shopping_cart);
         mGoodsDetailsAddShoppingCartBtn.setOnClickListener(this);
 
@@ -97,8 +97,14 @@ public class GoodsDetailsActivity extends AppCompatActivity implements View.OnCl
                 if (!mIsInputValid) {
                     Toast.makeText(this, "输入不合法", Toast.LENGTH_SHORT).show();
                 } else {
-                    mGoodsDetaisViewPresenter.addToShoppingCart(mShoppingCartBean);
-                    Toast.makeText(this, "已添加到购物车", Toast.LENGTH_SHORT).show();
+                    String[] temp = mGoodsDetailsGoodsAmountsTxt.getText().toString().trim().split(":");
+
+                    if (Integer.valueOf(temp[1].replace(" ", "")) < Integer.valueOf(mGoodsDetailsGoodsAmountsEdt.getText().toString().trim())) {
+                        Toast.makeText(this, "库存不足", Toast.LENGTH_SHORT).show();
+                    } else {
+                        mGoodsDetaisViewPresenter.addToShoppingCart(mShoppingCartBean);
+                        Toast.makeText(this, "已添加到购物车", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
         }
@@ -107,7 +113,7 @@ public class GoodsDetailsActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public boolean getUserInput() {
-        String amounts = mGoodsDetailsGoodsDescriptionEdt.getText().toString().trim();
+        String amounts = mGoodsDetailsGoodsAmountsEdt.getText().toString().trim();
         if (!amounts.isEmpty() && InputJudge.isPositiveInteger(amounts)) {
             mShoppingCartBean.setAmounts(Integer.valueOf(amounts));
             return true;

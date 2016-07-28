@@ -75,10 +75,10 @@ public interface IGoodsModel {
     /**
      * 商品搜索接口
      *
-     * @param goodsBean
-     * @return 返回搜索得到的商品列表
+     * @param goodsBeanArrayList
+     * @param keyword
      */
-    ArrayList<GoodsBean> searchGoods(GoodsBean goodsBean);
+    void searchGoods(ArrayList<GoodsBean> goodsBeanArrayList, String keyword);
 
     /**
      * 更新库存

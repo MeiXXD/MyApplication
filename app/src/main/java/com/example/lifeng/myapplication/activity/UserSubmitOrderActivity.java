@@ -28,6 +28,7 @@ import com.example.lifeng.myapplication.bean.ShoppingCartBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 import com.example.lifeng.myapplication.presenter.UserSubmitOrderViewPresenter;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -127,12 +128,12 @@ public class UserSubmitOrderActivity extends AppCompatActivity implements View.O
         if (userBean.getIsVip() == 1) {
             mUserDiscountTxt.setText("9折");
             mFreightTxt.setText("0");
-            mAccount = goodsBean.getPrice() * shoppingCartBean.getAmounts() * 0.9;
+            mAccount = new BigDecimal(goodsBean.getPrice() * shoppingCartBean.getAmounts() * 0.9).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
             mDiscountAccountTxt.setText(Double.toString(mAccount));
         } else {
             mUserDiscountTxt.setText("无");
             mFreightTxt.setText("5");
-            mAccount = goodsBean.getPrice() * shoppingCartBean.getAmounts() + 5;
+            mAccount = new BigDecimal(goodsBean.getPrice() * shoppingCartBean.getAmounts() + 5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
             mDiscountAccountTxt.setText(Double.toString(mAccount));
         }
     }

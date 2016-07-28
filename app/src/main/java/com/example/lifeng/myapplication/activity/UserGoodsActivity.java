@@ -16,9 +16,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -36,7 +38,8 @@ import java.util.ArrayList;
  * @version 1.0 16/7/24
  * @description 商品界面
  */
-public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnItemSelectedListener, ListView.OnItemClickListener {
+public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnItemSelectedListener, ListView.OnItemClickListener, View.OnClickListener {
+    private EditText mGoodsSearchEdt;
     private Spinner mGoodsKindSpinner;
     private ListView mUserGoodsLv;
 
@@ -58,6 +61,9 @@ public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnIt
     }
 
     private void init() {
+        mGoodsSearchEdt = (EditText) findViewById(R.id.edt_user_goods_goods_search);
+        mGoodsSearchEdt.setInputType(InputType.TYPE_NULL);
+        mGoodsSearchEdt.setOnClickListener(this);
         mStringArrayList = new ArrayList<>();
 
         //intent获取数据
@@ -131,5 +137,19 @@ public class UserGoodsActivity extends AppCompatActivity implements Spinner.OnIt
         mStringArrayList.clear();
         mUserGoodsViewPresenter.getGoodsKinds(mStringArrayList);
         mMySpinnerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.edt_user_goods_goods_search:
+                Intent intent = new Intent();
+                intent.putExtra("userid", mUserBean.getId());
+                intent.putExtra("username", mUserBean.getName());
+                intent.putExtra("userpassword", mUserBean.getPassword());
+                intent.setClass(UserGoodsActivity.this, GoodsSearchActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

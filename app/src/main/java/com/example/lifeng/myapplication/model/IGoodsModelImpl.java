@@ -161,8 +161,25 @@ public class IGoodsModelImpl implements IGoodsModel {
     }
 
     @Override
-    public ArrayList<GoodsBean> searchGoods(GoodsBean goodsBean) {
-        return null;
+    public void searchGoods(ArrayList<GoodsBean> goodsBeanArrayList, String keyword) {
+        SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_goods where goodsname like '%" + keyword + "%' or kind like '%" + keyword + "%'", null);
+            GoodsBean goodsBean = null;
+            while (cursor.moveToNext()) {
+                goodsBean = new GoodsBean();
+                goodsBean.setId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+                goodsBean.setName(cursor.getString(cursor.getColumnIndex("goodsname")));
+                goodsBean.setAmounts(cursor.getInt(cursor.getColumnIndex("amounts")));
+                goodsBean.setPrice(cursor.getDouble(cursor.getColumnIndex("price")));
+                goodsBean.setKind(cursor.getString(cursor.getColumnIndex("kind")));
+                goodsBean.setBriefDescription(cursor.getString(cursor.getColumnIndex("briefdescription")));
+                goodsBean.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                goodsBeanArrayList.add(goodsBean);
+            }
+            cursor.close();
+            db.close();
+        }
     }
 
     @Override
