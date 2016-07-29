@@ -124,7 +124,7 @@ public class MyInfoModifyActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void setOutput(UserBean userBean) {
-        mUserImg.setImageResource(R.drawable.goods);
+        mUserImg.setImageResource(R.drawable.users);
         mUserNameTxt.setText(userBean.getName());
         mUserPasswordEdt.setText(userBean.getPassword());
         mUserIsVipEdt.setText(userBean.getIsVip() == 1 ? "是" : "否");
