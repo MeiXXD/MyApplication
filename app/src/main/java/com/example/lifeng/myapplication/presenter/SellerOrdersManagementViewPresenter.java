@@ -30,10 +30,6 @@ public class SellerOrdersManagementViewPresenter {
         mOrderModel = new IOrderModelImpl();
     }
 
-    public void getOrderStatusKinds(ArrayList<String> stringArrayList) {
-        mOrderModel.getOrderStatusKinds(stringArrayList);
-    }
-
     public void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, String status) {
         mOrderModel.getOrdersByStatus(orderBeanArrayList, status);
     }

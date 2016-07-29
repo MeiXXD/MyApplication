@@ -35,10 +35,6 @@ public class MyOrderManagementViewPresenter {
         mOrderModel.getUsersAllOrders(orderBeanArrayList, userBean);
     }
 
-    public void getOrderStatusKinds(ArrayList<String> stringArrayList, UserBean userBean) {
-        mOrderModel.getOrderStatusKinds(stringArrayList, userBean);
-    }
-
     public void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String status) {
         mOrderModel.getOrdersByStatus(orderBeanArrayList, userBean, status);
     }

@@ -93,6 +93,7 @@ public class IOrderModelImpl implements IOrderModel {
             cursor.close();
         }
         db.close();
+        Log.e(">>>>>", "用户订单获取成功");
     }
 
     @Override
@@ -120,6 +121,7 @@ public class IOrderModelImpl implements IOrderModel {
             cursor.close();
         }
         db.close();
+        Log.e(">>>>>", "全部订单获取成功");
     }
 
     @Override
@@ -148,49 +150,6 @@ public class IOrderModelImpl implements IOrderModel {
             cursor.close();
         }
         db.close();
-    }
-
-    @Override
-    public void getOrderStatusKinds(ArrayList<String> stringArrayList, UserBean userBean) {
-        int userid = userBean.getId();
-        stringArrayList.add("全部");
-        SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
-        if (db.isOpen()) {
-            Cursor cursor = db.rawQuery("select orderstatus from tb_order where userid=" + userid + " group by orderstatus", null);
-            while (cursor.moveToNext()) {
-                int status = cursor.getInt(cursor.getColumnIndex("orderstatus"));
-                if (-1 == status) {
-                    stringArrayList.add("订单驳回");
-                } else if (0 == status) {
-                    stringArrayList.add("等待卖家确认");
-                } else {
-                    stringArrayList.add("确认发货");
-                }
-            }
-            cursor.close();
-            db.close();
-        }
-    }
-
-    @Override
-    public void getOrderStatusKinds(ArrayList<String> stringArrayList) {
-        stringArrayList.add("全部");
-        SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
-        if (db.isOpen()) {
-            Cursor cursor = db.rawQuery("select orderstatus from tb_order group by orderstatus", null);
-            while (cursor.moveToNext()) {
-                int status = cursor.getInt(cursor.getColumnIndex("orderstatus"));
-                if (-1 == status) {
-                    stringArrayList.add("订单驳回");
-                } else if (0 == status) {
-                    stringArrayList.add("等待卖家确认");
-                } else {
-                    stringArrayList.add("确认发货");
-                }
-            }
-            cursor.close();
-            db.close();
-        }
     }
 
     @Override
@@ -231,6 +190,7 @@ public class IOrderModelImpl implements IOrderModel {
             }
             db.close();
         }
+        Log.e(">>>>>", "用户" + status + "订单获取成功");
     }
 
     @Override
@@ -271,5 +231,6 @@ public class IOrderModelImpl implements IOrderModel {
             }
             db.close();
         }
+        Log.e(">>>>>", status + "订单获取成功");
     }
 }

@@ -37,6 +37,8 @@ import java.util.ArrayList;
  * @description 我的订单管理界面
  */
 public class MyOrderManagementActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, ListView.OnItemClickListener, View.OnClickListener {
+    private final String[] mStatusStrings = {"全部", "等待卖家确认", "订单驳回", "确认发货"};
+
     private ListView mMyOrdersLv;
     private Spinner mOrderStatusSpinner;
     private EditText mOrderSearchEdt;
@@ -44,7 +46,6 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
     private UserBean mUserBean;
     private MyOrderManagementViewPresenter mMyOrderManagementViewPresenter;
 
-    private ArrayList<String> mStringArrayList;
     private ArrayList<OrderBean> mOrderBeanArrayList;
     private MyOrdersManagementAdapter mMyOrdersManagementAdapter;
     private MySpinnerAdapter mMySpinnerAdapter;
@@ -77,11 +78,10 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
         mMyOrdersLv.setAdapter(mMyOrdersManagementAdapter);
         mMyOrdersLv.setOnItemClickListener(this);
 
-        mStringArrayList = new ArrayList<>();
-        mMyOrderManagementViewPresenter.getOrderStatusKinds(mStringArrayList, mUserBean);
-        mMySpinnerAdapter = new MySpinnerAdapter(this, android.R.layout.simple_spinner_item, mStringArrayList.toArray(new String[mStringArrayList.size()]));
+        mMySpinnerAdapter = new MySpinnerAdapter(this, android.R.layout.simple_spinner_item, mStatusStrings);
         mOrderStatusSpinner.setAdapter(mMySpinnerAdapter);
         mOrderStatusSpinner.setOnItemSelectedListener(this);
+        mMySpinnerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -90,10 +90,6 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
         mOrderBeanArrayList.clear();
         mMyOrderManagementViewPresenter.getUserAllOrders(mOrderBeanArrayList, mUserBean);
         mMyOrdersManagementAdapter.notifyDataSetChanged();
-
-        mStringArrayList.clear();
-        mMyOrderManagementViewPresenter.getOrderStatusKinds(mStringArrayList, mUserBean);
-        mMySpinnerAdapter.notifyDataSetChanged();
     }
 
     @Override

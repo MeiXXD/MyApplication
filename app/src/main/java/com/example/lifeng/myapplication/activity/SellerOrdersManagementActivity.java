@@ -36,6 +36,8 @@ import java.util.ArrayList;
  * @description 销售商订单管理Activity
  */
 public class SellerOrdersManagementActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, ListView.OnItemClickListener {
+    private final String[] mStatusStrings = {"全部", "等待卖家确认", "订单驳回", "确认发货"};
+
     private Spinner mOrderStatusSpinner;
     private ListView mOrdersLv;
     private Button mOrderRejectBtn;
@@ -45,7 +47,6 @@ public class SellerOrdersManagementActivity extends AppCompatActivity implements
     private SellerOrdersManagementAdapter mSellerOrdersManagementAdapter;
     private SellerOrdersManagementViewPresenter mSellerOrdersManagementViewPresenter;
 
-    private ArrayList<String> mStringArrayList;
     private MySpinnerAdapter mMySpinnerAdapter;
 
     @Override
@@ -68,9 +69,7 @@ public class SellerOrdersManagementActivity extends AppCompatActivity implements
         mSellerOrdersManagementAdapter = new SellerOrdersManagementAdapter(this, mOrderBeanArrayList);
         mOrdersLv.setAdapter(mSellerOrdersManagementAdapter);
 
-        mStringArrayList = new ArrayList<>();
-        mSellerOrdersManagementViewPresenter.getOrderStatusKinds(mStringArrayList);
-        mMySpinnerAdapter = new MySpinnerAdapter(this, android.R.layout.simple_spinner_item, mStringArrayList.toArray(new String[mStringArrayList.size()]));
+        mMySpinnerAdapter = new MySpinnerAdapter(this, android.R.layout.simple_spinner_item, mStatusStrings);
         mOrderStatusSpinner.setAdapter(mMySpinnerAdapter);
         mOrderStatusSpinner.setOnItemSelectedListener(this);
         mMySpinnerAdapter.notifyDataSetChanged();
