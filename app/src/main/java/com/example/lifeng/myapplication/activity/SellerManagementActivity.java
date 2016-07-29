@@ -104,6 +104,9 @@ public class SellerManagementActivity extends AppCompatActivity implements ISell
                         mSellerManagementViewPresenter.getSellers(mSellerBeanArrayList);
                         mSellersListAdapter.notifyDataSetChanged();
                         Toast.makeText(SellerManagementActivity.this, "添加成功!", Toast.LENGTH_SHORT).show();
+                        mSellerNameEdt.setText("");
+                        mSellerPasswordEdt.setText("");
+                        mSellerNameEdt.requestFocus();
                     }
                 } else {
                     Toast.makeText(SellerManagementActivity.this, "输入不合法!", Toast.LENGTH_SHORT).show();

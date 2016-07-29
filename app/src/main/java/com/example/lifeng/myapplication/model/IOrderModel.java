@@ -31,6 +31,13 @@ public interface IOrderModel {
     void addOrder(OrderBean orderBean);
 
     /**
+     * 删除订单接口
+     *
+     * @param orderBean
+     */
+    void delOrder(OrderBean orderBean);
+
+    /**
      * 订单状态处理接口(修改订单状态:确认发货 状态码为1、订单驳回 状态码为-1)
      *
      * @param orderBean

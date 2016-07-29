@@ -105,6 +105,7 @@ public class GoodsAddActivity extends AppCompatActivity implements IGoodsAddView
                     mIsSuccess = mGoodsAddViewPresenter.addGoods(mGoodsBean);
                     if (mIsSuccess) {
                         Toast.makeText(GoodsAddActivity.this, "商品添加成功!", Toast.LENGTH_SHORT).show();
+                        finish();
                     } else {
                         Toast.makeText(GoodsAddActivity.this, "商品添加失败!", Toast.LENGTH_SHORT).show();
                     }

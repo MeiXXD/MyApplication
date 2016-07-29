@@ -12,8 +12,10 @@
 
 package com.example.lifeng.myapplication.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
@@ -21,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.activity.adapter.MyOrdersManagementAdapter;
@@ -36,7 +39,7 @@ import java.util.ArrayList;
  * @version 1.0 16/7/27
  * @description 我的订单管理界面
  */
-public class MyOrderManagementActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, ListView.OnItemClickListener, View.OnClickListener {
+public class MyOrderManagementActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, ListView.OnItemClickListener, ListView.OnItemLongClickListener, View.OnClickListener {
     private final String[] mStatusStrings = {"全部", "等待卖家确认", "订单驳回", "确认发货"};
 
     private ListView mMyOrdersLv;
@@ -77,6 +80,7 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
         mMyOrdersManagementAdapter = new MyOrdersManagementAdapter(this, mOrderBeanArrayList);
         mMyOrdersLv.setAdapter(mMyOrdersManagementAdapter);
         mMyOrdersLv.setOnItemClickListener(this);
+        mMyOrdersLv.setOnItemLongClickListener(this);
 
         mMySpinnerAdapter = new MySpinnerAdapter(this, android.R.layout.simple_spinner_item, mStatusStrings);
         mOrderStatusSpinner.setAdapter(mMySpinnerAdapter);
@@ -135,5 +139,21 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        final OrderBean orderBean = mOrderBeanArrayList.get(position);
+        new AlertDialog.Builder(MyOrderManagementActivity.this).setTitle("警告").setMessage("确定删除该订单?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mMyOrderManagementViewPresenter.delMyOrder(orderBean);
+                mOrderBeanArrayList.clear();
+                mMyOrderManagementViewPresenter.getUserAllOrders(mOrderBeanArrayList, mUserBean);
+                mMyOrdersManagementAdapter.notifyDataSetChanged();
+                Toast.makeText(MyOrderManagementActivity.this, "删除成功!", Toast.LENGTH_SHORT).show();
+            }
+        }).setNegativeButton("取消", null).show();
+        return false;
     }
 }

@@ -38,4 +38,8 @@ public class MyOrderManagementViewPresenter {
     public void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String status) {
         mOrderModel.getOrdersByStatus(orderBeanArrayList, userBean, status);
     }
+
+    public void delMyOrder(OrderBean orderBean) {
+        mOrderModel.delOrder(orderBean);
+    }
 }

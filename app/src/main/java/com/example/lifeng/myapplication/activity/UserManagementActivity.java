@@ -107,6 +107,9 @@ public class UserManagementActivity extends AppCompatActivity implements IUserMa
                         mUserManagementViewPresenter.getUsers(mUserBeanArrayList);
                         mUsersListAdapter.notifyDataSetChanged();
                         Toast.makeText(UserManagementActivity.this, "添加成功!", Toast.LENGTH_SHORT).show();
+                        mUserNameEdt.setText("");
+                        mUserPasswordEdt.setText("");
+                        mUserNameEdt.requestFocus();
                     }
                 } else {
                     Toast.makeText(UserManagementActivity.this, "输入不合法", Toast.LENGTH_SHORT).show();

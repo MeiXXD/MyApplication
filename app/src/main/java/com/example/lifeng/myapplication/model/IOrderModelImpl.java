@@ -58,6 +58,16 @@ public class IOrderModelImpl implements IOrderModel {
     }
 
     @Override
+    public void delOrder(OrderBean orderBean) {
+        SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            db.execSQL("delete from tb_order where orderid=" + orderBean.getId());
+            db.close();
+        }
+        Log.e(">>>>>", "订单删除成功");
+    }
+
+    @Override
     public void updateOrderStatus(OrderBean orderBean) {
         SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
         if (db.isOpen()) {
