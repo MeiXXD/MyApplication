@@ -36,7 +36,7 @@ public class MyInfoModifyActivity extends AppCompatActivity implements View.OnCl
     private ImageView mUserImg;
     private TextView mUserNameTxt;
     private EditText mUserPasswordEdt;
-    private TextView mUserIsVipTxt;
+    private EditText mUserIsVipEdt;
     private EditText mUserPhoneEdt;
     private EditText mUserEmailEdt;
     private EditText mUserAddressEdt;
@@ -60,7 +60,8 @@ public class MyInfoModifyActivity extends AppCompatActivity implements View.OnCl
         mUserImg = (ImageView) findViewById(R.id.img_user_info_image);
         mUserNameTxt = (TextView) findViewById(R.id.txt_user_info_name);
         mUserPasswordEdt = (EditText) findViewById(R.id.edt_user_info_password);
-        mUserIsVipTxt = (TextView) findViewById(R.id.txt_user_info_isvip);
+        mUserIsVipEdt = (EditText) findViewById(R.id.edt_user_info_isvip);
+        mUserIsVipEdt.setEnabled(false);
         mUserPhoneEdt = (EditText) findViewById(R.id.edt_user_info_phone);
         mUserEmailEdt = (EditText) findViewById(R.id.edt_user_info_email);
         mUserAddressEdt = (EditText) findViewById(R.id.edt_user_info_address);
@@ -126,7 +127,7 @@ public class MyInfoModifyActivity extends AppCompatActivity implements View.OnCl
         mUserImg.setImageResource(R.drawable.goods);
         mUserNameTxt.setText(userBean.getName());
         mUserPasswordEdt.setText(userBean.getPassword());
-        mUserIsVipTxt.setText(userBean.getIsVip() == 1 ? "是" : "否");
+        mUserIsVipEdt.setText(userBean.getIsVip() == 1 ? "是" : "否");
         mUserPhoneEdt.setText(userBean.getPhone());
         mUserEmailEdt.setText(userBean.getEmail());
         mUserAddressEdt.setText(userBean.getAddress());

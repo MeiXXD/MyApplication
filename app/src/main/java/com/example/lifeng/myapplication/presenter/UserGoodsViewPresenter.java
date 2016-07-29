@@ -42,18 +42,39 @@ public class UserGoodsViewPresenter {
         mUserModel = new IUserModelImpl();
     }
 
+    /**
+     * 根据种类获得商品
+     *
+     * @param goodsBeanArrayList
+     * @param kind
+     */
     public void getGoodsByKind(ArrayList<GoodsBean> goodsBeanArrayList, String kind) {
         mGoodsModel.getGoodsByKind(goodsBeanArrayList, kind);
     }
 
+    /**
+     * 获取商品种类
+     *
+     * @param stringArrayList
+     */
     public void getGoodsKinds(ArrayList<String> stringArrayList) {
         mGoodsModel.getGoodsKinds(stringArrayList);
     }
 
+    /**
+     * 获得全部商品
+     *
+     * @param goodsBeanArrayList
+     */
     public void getGoods(ArrayList<GoodsBean> goodsBeanArrayList) {
         mGoodsModel.getGoods(goodsBeanArrayList);
     }
 
+    /**
+     * 添加到购物车
+     *
+     * @param goodsBean
+     */
     public void addToShoppingCart(GoodsBean goodsBean) {
         ShoppingCartBean shoppingCartBean = new ShoppingCartBean(mUserBean, goodsBean);
         shoppingCartBean.setAmounts(1);

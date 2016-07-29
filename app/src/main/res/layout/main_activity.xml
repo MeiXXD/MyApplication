@@ -17,6 +17,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
+        android:background="@android:color/holo_orange_dark"
         android:text="@string/activity_main_user_login"
         android:textSize="40dp" />
 
@@ -27,7 +28,8 @@
         android:layout_below="@id/btn_user_login"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/holo_orange_dark"
         android:text="@string/activity_main_seller_login"
         android:textSize="40dp" />
 
@@ -38,7 +40,8 @@
         android:layout_below="@id/btn_seller_login"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/holo_orange_dark"
         android:text="@string/activity_main_admin_login"
         android:textSize="40dp" />
 

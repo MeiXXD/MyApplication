@@ -36,10 +36,20 @@ public class GoodsDetaisViewPresenter {
         mGoodsDetailsView = goodsDetailsView;
     }
 
+    /**
+     * 得到商品详情
+     *
+     * @param goodsBean
+     */
     public void getGoodsDetails(GoodsBean goodsBean) {
         mGoodsDetailsView.setOutput(mGoodsModel.getGoodsDetails(goodsBean));
     }
 
+    /**
+     * 添加到购物车
+     *
+     * @param shoppingCartBean
+     */
     public void addToShoppingCart(ShoppingCartBean shoppingCartBean) {
         mShoppingCartModel.addToShoppingCart(shoppingCartBean);
     }

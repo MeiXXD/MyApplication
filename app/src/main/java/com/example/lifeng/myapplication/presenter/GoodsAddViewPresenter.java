@@ -28,6 +28,12 @@ public class GoodsAddViewPresenter {
         mGoodsModel = new IGoodsModelImpl();
     }
 
+    /**
+     * 添加商品
+     *
+     * @param goodsBean
+     * @return
+     */
     public boolean addGoods(GoodsBean goodsBean) {
         return mGoodsModel.addGoods(goodsBean);
     }

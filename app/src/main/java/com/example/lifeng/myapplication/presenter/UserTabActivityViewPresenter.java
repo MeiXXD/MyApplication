@@ -28,6 +28,11 @@ public class UserTabActivityViewPresenter {
         mUserModel = new IUserModelImpl();
     }
 
+    /**
+     * 用户退出登录
+     *
+     * @param userBean
+     */
     public void userLogout(UserBean userBean) {
         mUserModel.updateUserStatus(userBean);
     }

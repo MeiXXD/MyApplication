@@ -30,10 +30,20 @@ public class GoodsManagementViewPresenter {
         mGoodsModel = new IGoodsModelImpl();
     }
 
+    /**
+     * 得到所有商品
+     *
+     * @param goodsBeanArrayList
+     */
     public void getGoods(ArrayList<GoodsBean> goodsBeanArrayList) {
         mGoodsModel.getGoods(goodsBeanArrayList);
     }
 
+    /**
+     * 删除商品
+     *
+     * @param goodsBean
+     */
     public void delGoods(GoodsBean goodsBean) {
         mGoodsModel.delGoods(goodsBean);
     }

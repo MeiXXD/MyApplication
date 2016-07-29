@@ -48,8 +48,9 @@ public class MySpinnerAdapter extends ArrayAdapter<String> {
         }
         TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
         tv.setText(mStringArrayList.get(position));
-        tv.setTextSize(30);
+        tv.setTextSize(25);
         tv.setGravity(Gravity.CENTER);
+        tv.setHeight(150);
         return convertView;
     }
 
@@ -61,8 +62,9 @@ public class MySpinnerAdapter extends ArrayAdapter<String> {
         }
         TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
         tv.setText(mStringArrayList.get(position));
-        tv.setTextSize(30);
+        tv.setTextSize(25);
         tv.setGravity(Gravity.CENTER);
+        tv.setHeight(150);
         return convertView;
     }
 }

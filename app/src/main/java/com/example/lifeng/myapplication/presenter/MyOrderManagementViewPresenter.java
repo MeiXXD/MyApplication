@@ -31,14 +31,32 @@ public class MyOrderManagementViewPresenter {
         mOrderModel = new IOrderModelImpl();
     }
 
+    /**
+     * 得到用户的所有订单
+     *
+     * @param orderBeanArrayList
+     * @param userBean
+     */
     public void getUserAllOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean) {
         mOrderModel.getUsersAllOrders(orderBeanArrayList, userBean);
     }
 
+    /**
+     * 按照状态获得订单
+     *
+     * @param orderBeanArrayList
+     * @param userBean
+     * @param status
+     */
     public void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String status) {
         mOrderModel.getOrdersByStatus(orderBeanArrayList, userBean, status);
     }
 
+    /**
+     * 删除用户订单
+     *
+     * @param orderBean
+     */
     public void delMyOrder(OrderBean orderBean) {
         mOrderModel.delOrder(orderBean);
     }

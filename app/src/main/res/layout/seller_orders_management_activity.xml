@@ -3,10 +3,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,24 +19,25 @@
             android:layout_weight="2"
             android:gravity="center"
             android:text="@string/activity_seller_orders_management_order_status"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
 
         <Spinner
             android:id="@+id/spinner_seller_orders_management_order_status"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:spinnerMode="dialog"
             android:layout_weight="1"></Spinner>
     </LinearLayout>
 
     <ListView
         android:id="@+id/lv_seller_orders_management_orders"
         android:layout_width="match_parent"
-        android:layout_height="400dp"></ListView>
+        android:layout_height="395dp"></ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal">
 
         <Button

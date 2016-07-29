@@ -30,6 +30,12 @@ public class GoodsSearchViewPresenter {
         mGoodsModel = new IGoodsModelImpl();
     }
 
+    /**
+     * 商品搜索
+     *
+     * @param goodsBeanArrayList
+     * @param keyword
+     */
     public void searchGoods(ArrayList<GoodsBean> goodsBeanArrayList, String keyword) {
         mGoodsModel.searchGoods(goodsBeanArrayList, keyword);
     }

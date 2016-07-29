@@ -31,6 +31,13 @@ public class OrdersSearchViewPresenter {
         mOrderModel = new IOrderModelImpl();
     }
 
+    /**
+     * 用户订单搜索功能
+     *
+     * @param orderBeanArrayList
+     * @param userBean
+     * @param keyword
+     */
     public void searchOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean, String keyword) {
         mOrderModel.searchOrders(orderBeanArrayList, userBean, keyword);
     }

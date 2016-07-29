@@ -2,14 +2,13 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="55dp"
     android:orientation="horizontal">
 
     <EditText
         android:id="@+id/edt_search_keyword"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="5dp"
         android:layout_weight="1"
         android:gravity="center_vertical|left"
         android:hint="@string/titlebar_search_search_keyword"
@@ -24,6 +23,7 @@
         android:layout_weight="3"
         android:background="@android:color/holo_orange_dark"
         android:gravity="center"
+        android:layout_marginBottom="5dp"
         android:text="@string/titlebar_search_search"
         android:textSize="18dp" />
 

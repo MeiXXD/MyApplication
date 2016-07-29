@@ -38,6 +38,11 @@ public class AdministratorLoginViewPresenter {
         return mAdministratorModel.adminLogin(administratorBean);
     }
 
+    /**
+     * 更新管理员状态
+     *
+     * @param administratorBean
+     */
     public void updateAdminStatus(AdministratorBean administratorBean) {
         mAdministratorModel.updateAdminStatus(administratorBean);
     }

@@ -28,6 +28,11 @@ public class GoodsInfoModifyViewPresenter {
         mGoodsModel = new IGoodsModelImpl();
     }
 
+    /**
+     * 商品信息修改
+     *
+     * @param goodsBean
+     */
     public void modifyGoodsInfo(GoodsBean goodsBean) {
         mGoodsModel.modifyGoods(goodsBean);
     }

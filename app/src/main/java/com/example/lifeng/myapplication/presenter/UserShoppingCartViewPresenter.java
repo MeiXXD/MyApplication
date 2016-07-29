@@ -35,14 +35,31 @@ public class UserShoppingCartViewPresenter {
         mUserModel = new IUserModelImpl();
     }
 
+    /**
+     * 得到用户的购物车信息
+     *
+     * @param shoppingCartBeanArrayList
+     * @param userBean
+     */
     public void getUserShoppingCart(ArrayList<ShoppingCartBean> shoppingCartBeanArrayList, UserBean userBean) {
         mShoppingCartModel.getUserShoppingCart(shoppingCartBeanArrayList, userBean);
     }
 
+    /**
+     * 从购物车删除商品
+     *
+     * @param shoppingCartBean
+     */
     public void delFromShoppingCart(ShoppingCartBean shoppingCartBean) {
         mShoppingCartModel.delFromShoppingCart(shoppingCartBean);
     }
 
+    /**
+     * 鉴定密码
+     *
+     * @param userBean
+     * @return
+     */
     public boolean verifyPassword(UserBean userBean) {
         return mUserModel.verifyPassword(userBean);
     }

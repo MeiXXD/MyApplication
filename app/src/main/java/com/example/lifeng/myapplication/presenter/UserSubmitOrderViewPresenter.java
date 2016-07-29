@@ -41,19 +41,39 @@ public class UserSubmitOrderViewPresenter {
         mGoodsModel = new IGoodsModelImpl();
     }
 
+    /**
+     * 获取购物车订单
+     *
+     * @param shoppingCartBean
+     */
     public void getShoppingCartOrder(ShoppingCartBean shoppingCartBean) {
         mShoppingCartModel.getShoppingCarOrder(shoppingCartBean);
         mUserSubmitOrderView.setOutput(shoppingCartBean);
     }
 
+    /**
+     * 提交订单
+     *
+     * @param orderBean
+     */
     public void submitOrder(OrderBean orderBean) {
         mOrderModel.addOrder(orderBean);
     }
 
+    /**
+     * 更新购物车
+     *
+     * @param shoppingCartBean
+     */
     public void updateShoppingCart(ShoppingCartBean shoppingCartBean) {
         mShoppingCartModel.delFromShoppingCart(shoppingCartBean);
     }
 
+    /**
+     * 更新商品库存
+     *
+     * @param goodsBean
+     */
     public void updateGoodsAmounts(GoodsBean goodsBean) {
         mGoodsModel.updateGoodsAmounts(goodsBean);
     }

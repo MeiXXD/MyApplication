@@ -3,10 +3,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/edt_user_goods_goods_search"
@@ -24,15 +24,16 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_weight="2"
-            android:gravity="center"
+            android:gravity="center|left"
             android:text="@string/activity_my_order_management_order_status"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
 
         <Spinner
             android:id="@+id/spinner_my_order_management_order_status"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_weight="1"></Spinner>
+            android:layout_weight="1"
+            android:spinnerMode="dialog"></Spinner>
     </LinearLayout>
 
     <ListView

@@ -5,14 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
     <RelativeLayout
         android:id="@+id/rly_user_info"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -34,11 +33,13 @@
 
     <TextView
         android:id="@+id/txt_user_info_password1"
-        android:layout_width="150dp"
+        android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_below="@id/rly_user_info"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"
         android:gravity="center_vertical"
+        android:singleLine="true"
         android:text="@string/activity_user_info_modify_user_password"
         android:textSize="20dp" />
 
@@ -56,16 +57,17 @@
 
     <TextView
         android:id="@+id/txt_user_info_isvip1"
-        android:layout_width="150dp"
+        android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_below="@id/txt_user_info_password1"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:text="@string/activity_user_info_modify_isvip"
         android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/txt_user_info_isvip"
+    <EditText
+        android:id="@+id/edt_user_info_isvip"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/edt_user_info_password"
@@ -77,9 +79,10 @@
 
     <TextView
         android:id="@+id/txt_user_info_phone1"
-        android:layout_width="150dp"
+        android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_below="@id/txt_user_info_isvip1"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:text="@string/activity_user_info_modify_user_phone"
@@ -89,19 +92,21 @@
         android:id="@+id/edt_user_info_phone"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/txt_user_info_isvip"
+        android:layout_below="@id/edt_user_info_isvip"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/txt_user_info_phone1"
         android:gravity="center_horizontal"
+        android:inputType="phone"
         android:singleLine="true"
         android:textSize="20dp" />
 
     <TextView
         android:id="@+id/txt_user_info_email1"
-        android:layout_width="150dp"
+        android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_below="@id/txt_user_info_phone1"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:text="@string/activity_user_info_modify_user_email"
@@ -121,9 +126,10 @@
 
     <TextView
         android:id="@+id/txt_user_info_address1"
-        android:layout_width="150dp"
+        android:layout_width="100dp"
         android:layout_height="80dp"
         android:layout_below="@id/txt_user_info_email1"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:text="@string/activity_user_info_modify_user_adress"
@@ -142,8 +148,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/edt_user_info_address"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="30dp"
         android:orientation="horizontal">
 

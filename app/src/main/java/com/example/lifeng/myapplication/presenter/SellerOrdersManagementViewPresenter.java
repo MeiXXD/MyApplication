@@ -30,14 +30,30 @@ public class SellerOrdersManagementViewPresenter {
         mOrderModel = new IOrderModelImpl();
     }
 
+    /**
+     * 根据状态获取订单
+     *
+     * @param orderBeanArrayList
+     * @param status
+     */
     public void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, String status) {
         mOrderModel.getOrdersByStatus(orderBeanArrayList, status);
     }
 
+    /**
+     * 得到所有订单
+     *
+     * @param orderBeanArrayList
+     */
     public void getAllOrders(ArrayList<OrderBean> orderBeanArrayList) {
         mOrderModel.getAllOrders(orderBeanArrayList);
     }
 
+    /**
+     * 更新订单状态
+     *
+     * @param orderBean
+     */
     public void updateOrderStatus(OrderBean orderBean) {
         mOrderModel.updateOrderStatus(orderBean);
     }

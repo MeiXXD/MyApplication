@@ -31,10 +31,20 @@ public class UserInfoModifyViewPresenter {
         mUserInfoModifyView = userInfoModifyView;
     }
 
+    /**
+     * 得到用户信息
+     *
+     * @param userBean
+     */
     public void getUserInfo(UserBean userBean) {
         mUserInfoModifyView.setOutput(mUserModel.getUserInfo(userBean));
     }
 
+    /**
+     * 修改用户信息
+     *
+     * @param userBean
+     */
     public void modifyUserInfo(UserBean userBean) {
         mUserModel.modifyUserInfo(userBean);
     }
