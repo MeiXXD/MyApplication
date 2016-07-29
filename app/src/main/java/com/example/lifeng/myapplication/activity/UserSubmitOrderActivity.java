@@ -14,6 +14,7 @@ package com.example.lifeng.myapplication.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -148,26 +149,30 @@ public class UserSubmitOrderActivity extends AppCompatActivity implements View.O
                 int goodsAmounts = mGoodsBean.getAmounts();
                 int orderAmounts = mShoppingCartBean.getAmounts();
                 if (goodsAmounts >= orderAmounts) {
-                    mOrderBean.setUserId(mShoppingCartBean.getUserBean().getId());
-                    mOrderBean.setPhone(mShoppingCartBean.getUserBean().getPhone());
-                    mOrderBean.setAddress(mShoppingCartBean.getUserBean().getAddress());
+                    if (null == mShoppingCartBean.getUserBean().getPhone() || mShoppingCartBean.getUserBean().getPhone().isEmpty() || null == mShoppingCartBean.getUserBean().getAddress() || mShoppingCartBean.getUserBean().getAddress().isEmpty()) {
+                        new AlertDialog.Builder(this).setTitle("警告").setMessage("请前往\"资料修改\"页面,完善电话和收货地址等信息").setPositiveButton("确定", null).show();
+                    } else {
+                        mOrderBean.setUserId(mShoppingCartBean.getUserBean().getId());
+                        mOrderBean.setPhone(mShoppingCartBean.getUserBean().getPhone());
+                        mOrderBean.setAddress(mShoppingCartBean.getUserBean().getAddress());
 
-                    mOrderBean.setGoodsId(mShoppingCartBean.getGoodsBean().getId());
-                    mOrderBean.setGoodsName(mShoppingCartBean.getGoodsBean().getName());
-                    mOrderBean.setGoodsPrice(mShoppingCartBean.getGoodsBean().getPrice());
-                    mOrderBean.setAmounts(orderAmounts);
+                        mOrderBean.setGoodsId(mShoppingCartBean.getGoodsBean().getId());
+                        mOrderBean.setGoodsName(mShoppingCartBean.getGoodsBean().getName());
+                        mOrderBean.setGoodsPrice(mShoppingCartBean.getGoodsBean().getPrice());
+                        mOrderBean.setAmounts(orderAmounts);
 
-                    mOrderBean.setAccount(mAccount);
-                    mOrderBean.setStatus(0);
+                        mOrderBean.setAccount(mAccount);
+                        mOrderBean.setStatus(0);
 
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    mOrderBean.setDateTime(dateFormat.format(new Date()));
-                    mUserSubmitOrderViewPresenter.submitOrder(mOrderBean);
-                    mUserSubmitOrderViewPresenter.updateShoppingCart(mShoppingCartBean);
-                    mGoodsBean.setAmounts(goodsAmounts - orderAmounts);
-                    mUserSubmitOrderViewPresenter.updateGoodsAmounts(mGoodsBean);
-                    finish();
-                    Toast.makeText(this, "添加订单成功", Toast.LENGTH_SHORT).show();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        mOrderBean.setDateTime(dateFormat.format(new Date()));
+                        mUserSubmitOrderViewPresenter.submitOrder(mOrderBean);
+                        mUserSubmitOrderViewPresenter.updateShoppingCart(mShoppingCartBean);
+                        mGoodsBean.setAmounts(goodsAmounts - orderAmounts);
+                        mUserSubmitOrderViewPresenter.updateGoodsAmounts(mGoodsBean);
+                        finish();
+                        Toast.makeText(this, "添加订单成功", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(UserSubmitOrderActivity.this, "库存不足", Toast.LENGTH_SHORT).show();
                 }
