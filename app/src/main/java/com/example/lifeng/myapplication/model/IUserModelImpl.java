@@ -51,6 +51,7 @@ public class IUserModelImpl implements IUserModel {
                 result = true;
                 Log.e(">>>>>", "普通用户添加成功");
             }
+            cursor.close();
             db.close();
         }
         return result;
@@ -119,8 +120,10 @@ public class IUserModelImpl implements IUserModel {
                 mUserBean.setAddress(cursor.getString(cursor.getColumnIndex("address")));
                 mUserBean.setIsVip(cursor.getInt(cursor.getColumnIndex("isvip")));
             }
+            cursor.close();
             db.close();
         }
+        Log.e(">>>>>", "用户信息获取成功");
         return mUserBean;
     }
 
@@ -138,6 +141,7 @@ public class IUserModelImpl implements IUserModel {
             cursor.close();
             db.close();
         }
+        Log.e(">>>>>", "用户密码获再次鉴定:" + Boolean.toString(result));
         return result;
     }
 
@@ -156,7 +160,10 @@ public class IUserModelImpl implements IUserModel {
                 userBean.setIsVip(cursor.getInt(cursor.getColumnIndex("isvip")));
                 userBeanArrayList.add(userBean);
             }
+            cursor.close();
+            db.close();
         }
+        Log.e(">>>>>", "用户列表获取成功");
     }
 
     @Override
@@ -186,8 +193,10 @@ public class IUserModelImpl implements IUserModel {
                 isVip = userBean.getIsVip();
                 db.execSQL("update tb_user set isvip=" + isVip + " where username=\"" + mUserName + "\"");
             }
+            cursor.close();
             db.close();
         }
+        Log.e(">>>>>", "用户VIP信息设置为:" + Integer.toString(isVip));
         return true;
     }
 }

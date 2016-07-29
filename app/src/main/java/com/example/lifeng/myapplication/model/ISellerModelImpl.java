@@ -50,6 +50,7 @@ public class ISellerModelImpl implements ISellerModel {
                 Log.e(">>>>>", "销售商添加成功");
                 result = true;
             }
+            cursor.close();
             db.close();
         }
         return result;
@@ -88,7 +89,10 @@ public class ISellerModelImpl implements ISellerModel {
                 sellerBean.setStatus(cursor.getInt(cursor.getColumnIndex("sellerstatus")));
                 sellerBeanArrayList.add(sellerBean);
             }
+            cursor.close();
+            db.close();
         }
+        Log.e(">>>>>", "销售商列表获取成功");
     }
 
     @Override

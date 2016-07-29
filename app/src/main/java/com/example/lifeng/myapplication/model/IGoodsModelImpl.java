@@ -49,6 +49,7 @@ public class IGoodsModelImpl implements IGoodsModel {
             cursor.close();
             db.close();
         }
+        Log.e(">>>>>", "商品详情获取成功");
         return mGoodsBean;
     }
 
@@ -117,6 +118,7 @@ public class IGoodsModelImpl implements IGoodsModel {
             }
             cursor.close();
             db.close();
+            Log.e(">>>>>", "商品列表获取成功");
         }
     }
 
@@ -144,6 +146,7 @@ public class IGoodsModelImpl implements IGoodsModel {
                 db.close();
             }
         }
+        Log.e(">>>>>", kind + "类别商品获取成功");
     }
 
     @Override
@@ -158,6 +161,7 @@ public class IGoodsModelImpl implements IGoodsModel {
             cursor.close();
             db.close();
         }
+        Log.e(">>>>>", "商品类别获取成功");
     }
 
     @Override

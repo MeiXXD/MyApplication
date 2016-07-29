@@ -144,6 +144,7 @@ public class IShoppingCartModelImpl implements IShoppingCartModel {
                 goodsBean.setAmounts(cursor3.getInt(cursor3.getColumnIndex("amounts")));
             }
             shoppingCartBean.setGoodsBean(goodsBean);
+            cursor3.close();
         }
         db.close();
         Log.e(">>>>>", "获取购物车订单商品信息成功");
