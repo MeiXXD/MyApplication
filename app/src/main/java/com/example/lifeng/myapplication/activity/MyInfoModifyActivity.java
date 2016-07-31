@@ -19,7 +19,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -119,15 +118,13 @@ public class MyInfoModifyActivity extends AppCompatActivity implements View.OnCl
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             Uri uri = data.getData();
-            Log.e(">>>>>", uri.toString());
             ContentResolver cr = this.getContentResolver();
             try {
                 Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-                ImageView imageView = (ImageView) findViewById(R.id.img_user_info_image);
-                //将Bitmap设定到ImageView
-                imageView.setImageBitmap(bitmap);
+                mUserBean.setImage(uri.toString());
+                mUserImg.setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {
-                Log.e("Exception", e.getMessage(), e);
+                e.printStackTrace();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -159,7 +156,21 @@ public class MyInfoModifyActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void setOutput(UserBean userBean) {
-        mUserImg.setImageResource(R.drawable.users);
+        String mImage = userBean.getImage();
+        if (null == mImage || mImage.isEmpty()) {
+            mUserImg.setImageResource(R.drawable.users);
+        } else {
+            Uri uri = Uri.parse(mImage);
+            ContentResolver cr = this.getContentResolver();
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                mUserImg.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                mUserImg.setImageResource(R.drawable.users);
+                e.printStackTrace();
+            }
+        }
+
         mUserNameTxt.setText(userBean.getName());
         mUserPasswordEdt.setText(userBean.getPassword());
         mUserIsVipEdt.setText(userBean.getIsVip() == 1 ? "是" : "否");

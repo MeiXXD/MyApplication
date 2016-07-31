@@ -13,7 +13,11 @@
 package com.example.lifeng.myapplication.activity.adapter;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +28,7 @@ import android.widget.TextView;
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.bean.OrderBean;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -77,7 +82,22 @@ public class MyOrdersManagementAdapter extends BaseAdapter {
 
         OrderBean orderBean = mOrderBeanList.get(position);
         orderIdTxt.setText(Integer.toString(orderBean.getId()));
-        goodsImg.setImageResource(R.drawable.goods);
+
+        String mGoodsImage = orderBean.getGoodsImage();
+        if (null == mGoodsImage || mGoodsImage.isEmpty()) {
+            goodsImg.setImageResource(R.drawable.goods);
+        } else {
+            Uri uri = Uri.parse(mGoodsImage);
+            ContentResolver cr = mActivity.getContentResolver();
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                goodsImg.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                goodsImg.setImageResource(R.drawable.goods);
+                e.printStackTrace();
+            }
+        }
+
         goodsNameTxt.setText(orderBean.getGoodsName());
         goodsPriceTxt.setText(Double.toString(orderBean.getGoodsPrice()));
         amountsTxt.setText(Integer.toString(orderBean.getAmounts()));

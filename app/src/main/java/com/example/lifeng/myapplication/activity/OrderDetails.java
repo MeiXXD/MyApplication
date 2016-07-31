@@ -12,7 +12,11 @@
 
 package com.example.lifeng.myapplication.activity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lifeng.myapplication.R;
+
+import java.io.FileNotFoundException;
 
 /**
  * @author lifeng
@@ -78,7 +84,22 @@ public class OrderDetails extends AppCompatActivity {
         mOrderUserNameTxt.setText(intent.getStringExtra("orderusername"));
         mOrderUserPhoneTxt.setText(intent.getStringExtra("orderuserphone"));
         mOrderUserAddressTxt.setText(intent.getStringExtra("orderuseraddress"));
-        mOrderGoodsImg.setImageResource(R.drawable.goods);
+
+        String mGoodsImage = intent.getStringExtra("ordergoodsimage");
+        if (null == mGoodsImage || mGoodsImage.isEmpty()) {
+            mOrderGoodsImg.setImageResource(R.drawable.goods);
+        } else {
+            Uri uri = Uri.parse(mGoodsImage);
+            ContentResolver cr = this.getContentResolver();
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                mOrderGoodsImg.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                mOrderGoodsImg.setImageResource(R.drawable.goods);
+                e.printStackTrace();
+            }
+        }
+
         mOrderGoodsNameTxt.setText(intent.getStringExtra("ordergoodsname"));
         mOrderGoodsPriceTxt.setText(Double.toString(intent.getDoubleExtra("ordergoodsprice", 0)));
         mOrderGoodsAmountsTxt.setText(Integer.toString(intent.getIntExtra("ordergoodsamounts", 0)));

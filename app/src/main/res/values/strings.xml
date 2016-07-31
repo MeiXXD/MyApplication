@@ -37,17 +37,17 @@
 
     <string name="activity_goods_management_add_goods">新增商品</string>
 
-    <string name="activity_goods_add_goods_name">商品名:</string>
+    <string name="activity_goods_add_goods_name">商品名</string>
     <string name="activity_goods_add_goods_amounts">库存(件):</string>
-    <string name="activity_goods_add_goods_price">单价(元):</string>
+    <string name="activity_goods_add_goods_price">单价(元)</string>
     <string name="activity_goods_add_goods_brief_description">简要描述:</string>
     <string name="activity_goods_add_goods_description">描述:</string>
     <string name="activity_goods_add_goods_images">图片:</string>
     <string name="activity_goods_add_add">添加商品</string>
 
-    <string name="activity_goods_info_modify_goods_name">商品名:</string>
+    <string name="activity_goods_info_modify_goods_name">商品名</string>
     <string name="activity_goods_info_modify_goods_amounts">库存(件):</string>
-    <string name="activity_goods_info_modify_goods_price">单价(元):</string>
+    <string name="activity_goods_info_modify_goods_price">单价(元)</string>
     <string name="activity_goods_info_modify_goods_brief_description">简要描述:</string>
     <string name="activity_goods_info_modify_goods_description">描述:</string>
     <string name="activity_goods_info_modify_goods_images">图片:</string>

@@ -119,6 +119,7 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
         intent.putExtra("orderuserphone", orderBean.getPhone());
         intent.putExtra("orderuseraddress", orderBean.getAddress());
         intent.putExtra("ordergoodsname", orderBean.getGoodsName());
+        intent.putExtra("ordergoodsimage", orderBean.getGoodsImage());
         intent.putExtra("ordergoodsprice", orderBean.getGoodsPrice());
         intent.putExtra("ordergoodsamounts", orderBean.getAmounts());
         intent.putExtra("orderaccount", orderBean.getAccount());

@@ -12,12 +12,17 @@
 
 package com.example.lifeng.myapplication.activity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.lifeng.myapplication.R;
@@ -25,12 +30,15 @@ import com.example.lifeng.myapplication.bean.GoodsBean;
 import com.example.lifeng.myapplication.presenter.GoodsInfoModifyViewPresenter;
 import com.example.lifeng.myapplication.utils.InputJudge;
 
+import java.io.FileNotFoundException;
+
 /**
  * @author lifeng
  * @version 1.0 16/7/22
  * @description 商品信息修改Activity
  */
 public class GoodsInfoModifyActivity extends AppCompatActivity implements IGoodsInfoModifyView, View.OnClickListener {
+    private ImageView mGoodsImg;
     private EditText mGoodsNameEdt;
     private EditText mGoodsAmountsEdt;
     private EditText mGoodsPirceEdt;
@@ -63,6 +71,8 @@ public class GoodsInfoModifyActivity extends AppCompatActivity implements IGoods
     }
 
     void init() {
+        mGoodsImg = (ImageView) findViewById(R.id.img_goods_info_modify_goods_image);
+        mGoodsImg.setOnClickListener(this);
         mGoodsNameEdt = (EditText) findViewById(R.id.edt_goods_info_modify_goods_name);
         mGoodsNameEdt.setEnabled(false);
         mGoodsAmountsEdt = (EditText) findViewById(R.id.edt_goods_info_modify_goods_amounts);
@@ -81,6 +91,20 @@ public class GoodsInfoModifyActivity extends AppCompatActivity implements IGoods
         mGoodsBriefDescription = intent.getStringExtra("goodsbriefdescription");
         mGoodsDescription = intent.getStringExtra("goodsdescription");
         mGoodsImage = intent.getStringExtra("goodsimage");
+
+        if (null == mGoodsImage || mGoodsImage.isEmpty()) {
+            mGoodsImg.setImageResource(R.drawable.goods);
+        } else {
+            Uri uri = Uri.parse(mGoodsImage);
+            ContentResolver cr = this.getContentResolver();
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                mGoodsImg.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                mGoodsImg.setImageResource(R.drawable.goods);
+                e.printStackTrace();
+            }
+        }
 
         mGoodsNameEdt.setText(mGoodsName);
         mGoodsAmountsEdt.setText(Integer.toString(mGoodsAmounts));
@@ -108,6 +132,7 @@ public class GoodsInfoModifyActivity extends AppCompatActivity implements IGoods
             boolean temp = InputJudge.isPositiveInteger(amounts) && (InputJudge.isPositiveInteger(price) || InputJudge.isPositiveDoubleNumber(price));
             if (temp) {
                 mGoodsBean.setId(mGoodsId);
+                mGoodsBean.setImage(mGoodsImage);
                 mGoodsBean.setName(name);
                 mGoodsBean.setAmounts(Integer.valueOf(amounts));
                 mGoodsBean.setPrice(Double.valueOf(price));
@@ -133,6 +158,31 @@ public class GoodsInfoModifyActivity extends AppCompatActivity implements IGoods
                     finish();
                 }
                 break;
+            case R.id.img_goods_info_modify_goods_image:
+                Intent intent = new Intent();
+                //开启Pictures画面Type设定为image
+                intent.setType("image/*");
+                //使用Intent.ACTION_GET_CONTENT这个Action
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                //取得相片后返回本画面
+                startActivityForResult(intent, 1);
+                break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            ContentResolver cr = this.getContentResolver();
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                mGoodsImage = uri.toString();
+                mGoodsImg.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

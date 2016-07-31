@@ -95,10 +95,11 @@ public class IUserModelImpl implements IUserModel {
         String phone = userBean.getPhone();
         String email = userBean.getEmail();
         String address = userBean.getAddress();
+        String image = userBean.getImage();
 
         SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
         if (db.isOpen()) {
-            db.execSQL("update tb_user set userpassword=\"" + password + "\",phone=\"" + phone + "\",mail=\"" + email + "\",address=\"" + address + "\" where userid=" + id);
+            db.execSQL("update tb_user set userpassword=\"" + password + "\",phone=\"" + phone + "\",mail=\"" + email + "\",address=\"" + address + "\",image=\"" + image + "\" where userid=" + id);
         }
         db.close();
         Log.e(">>>>>", "用户信息更新成功");
@@ -119,6 +120,7 @@ public class IUserModelImpl implements IUserModel {
                 mUserBean.setEmail(cursor.getString(cursor.getColumnIndex("mail")));
                 mUserBean.setAddress(cursor.getString(cursor.getColumnIndex("address")));
                 mUserBean.setIsVip(cursor.getInt(cursor.getColumnIndex("isvip")));
+                mUserBean.setImage(cursor.getString(cursor.getColumnIndex("image")));
             }
             cursor.close();
             db.close();

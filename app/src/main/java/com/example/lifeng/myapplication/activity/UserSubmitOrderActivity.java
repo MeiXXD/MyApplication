@@ -12,7 +12,11 @@
 
 package com.example.lifeng.myapplication.activity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +33,7 @@ import com.example.lifeng.myapplication.bean.ShoppingCartBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 import com.example.lifeng.myapplication.presenter.UserSubmitOrderViewPresenter;
 
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -119,7 +124,21 @@ public class UserSubmitOrderActivity extends AppCompatActivity implements View.O
         mUserPhoneTxt.setText(userBean.getPhone());
         mUserAddressTxt.setText(userBean.getAddress());
 
-        mGoodsImg.setImageResource(R.drawable.goods);
+        String mGoodsImage = goodsBean.getImage();
+        if (null == mGoodsImage || mGoodsImage.isEmpty()) {
+            mGoodsImg.setImageResource(R.drawable.goods);
+        } else {
+            Uri uri = Uri.parse(mGoodsImage);
+            ContentResolver cr = this.getContentResolver();
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                mGoodsImg.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                mGoodsImg.setImageResource(R.drawable.goods);
+                e.printStackTrace();
+            }
+        }
+
         mGoodsNameTxt.setText(goodsBean.getName());
         mGoodsPriceTxt.setText("单价(元):" + Double.toString(goodsBean.getPrice()));
         mGoodsAmounts.setText("x" + Integer.toString(shoppingCartBean.getAmounts()));
@@ -162,6 +181,8 @@ public class UserSubmitOrderActivity extends AppCompatActivity implements View.O
                         mOrderBean.setGoodsId(mShoppingCartBean.getGoodsBean().getId());
                         mOrderBean.setGoodsName(mShoppingCartBean.getGoodsBean().getName());
                         mOrderBean.setGoodsPrice(mShoppingCartBean.getGoodsBean().getPrice());
+                        mOrderBean.setGoodsImage(mShoppingCartBean.getGoodsBean().getImage());
+
                         mOrderBean.setAmounts(orderAmounts);
 
                         mOrderBean.setAccount(mAccount);

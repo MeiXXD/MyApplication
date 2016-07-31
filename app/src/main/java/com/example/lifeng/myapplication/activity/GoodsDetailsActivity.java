@@ -12,7 +12,11 @@
 
 package com.example.lifeng.myapplication.activity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -28,6 +32,8 @@ import com.example.lifeng.myapplication.bean.ShoppingCartBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 import com.example.lifeng.myapplication.presenter.GoodsDetaisViewPresenter;
 import com.example.lifeng.myapplication.utils.InputJudge;
+
+import java.io.FileNotFoundException;
 
 /**
  * @author lifeng
@@ -124,7 +130,21 @@ public class GoodsDetailsActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void setOutput(GoodsBean goodsBean) {
-        mGoodsDetailsGoodsImg.setImageResource(R.drawable.goods);
+        String mGoodsImage = goodsBean.getImage();
+        if (null == mGoodsImage || mGoodsImage.isEmpty()) {
+            mGoodsDetailsGoodsImg.setImageResource(R.drawable.goods);
+        } else {
+            Uri uri = Uri.parse(mGoodsImage);
+            ContentResolver cr = this.getContentResolver();
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                mGoodsDetailsGoodsImg.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                mGoodsDetailsGoodsImg.setImageResource(R.drawable.goods);
+                e.printStackTrace();
+            }
+        }
+
         mGoodsDetailsGoodsNameTxt.setText(goodsBean.getName());
         mGoodsDetailsGoodsPriceTxt.setText("价格(元): " + Double.toString(goodsBean.getPrice()));
         mGoodsDetailsGoodsAmountsTxt.setText("库存(件): " + Integer.toString(goodsBean.getAmounts()));

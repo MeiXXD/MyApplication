@@ -72,6 +72,7 @@ public class IShoppingCartModelImpl implements IShoppingCartModel {
                 goodsBean.setId(goodsId);
                 Cursor cursor2 = db.rawQuery("select * from tb_goods where goodsid=" + goodsId, null);
                 if (cursor2.moveToFirst()) {
+                    goodsBean.setImage(cursor2.getString(cursor2.getColumnIndex("goodsimage")));
                     goodsBean.setPrice(cursor2.getDouble(cursor2.getColumnIndex("price")));
                     goodsBean.setName(cursor2.getString(cursor2.getColumnIndex("goodsname")));
                 }

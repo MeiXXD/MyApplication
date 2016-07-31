@@ -45,6 +45,7 @@ public class IOrderModelImpl implements IOrderModel {
         String sellername = orderBean.getSellerName();
 
         int goodsid = orderBean.getGoodsId();
+        String goodsimage = orderBean.getGoodsImage();
         String goodsname = orderBean.getGoodsName();
         double goodsprice = orderBean.getGoodsPrice();
         int goodsamounts = orderBean.getAmounts();
@@ -55,7 +56,7 @@ public class IOrderModelImpl implements IOrderModel {
 
         SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
         if (db.isOpen()) {
-            db.execSQL("insert into tb_order(userid,phone,address,sellerid,sellername,goodsid,goodsname,goodsprice,goodsamounts,datetime,orderstatus,orderaccount) values(" + userid + ",\"" + phone + "\",\"" + address + "\"," + sellerid + ",\"" + sellername + "\"," + goodsid + ",\"" + goodsname + "\"," + goodsprice + "," + goodsamounts + ",\"" + datetime + "\"," + status + "," + account + ")");
+            db.execSQL("insert into tb_order(userid,phone,address,sellerid,sellername,goodsid,goodsname,goodsimage,goodsprice,goodsamounts,datetime,orderstatus,orderaccount) values(" + userid + ",\"" + phone + "\",\"" + address + "\"," + sellerid + ",\"" + sellername + "\"," + goodsid + ",\"" + goodsname + "\",\"" + goodsimage + "\"," + goodsprice + "," + goodsamounts + ",\"" + datetime + "\"," + status + "," + account + ")");
             db.close();
         }
         Log.e(">>>>>", "订单添加成功");
@@ -97,6 +98,7 @@ public class IOrderModelImpl implements IOrderModel {
                 orderBean.setSellerId(cursor.getInt(cursor.getColumnIndex("sellerid")));
                 orderBean.setSellerName(cursor.getString(cursor.getColumnIndex("sellername")));
                 orderBean.setGoodsId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+                orderBean.setGoodsImage(cursor.getString(cursor.getColumnIndex("goodsimage")));
                 orderBean.setGoodsName(cursor.getString(cursor.getColumnIndex("goodsname")));
                 orderBean.setGoodsPrice(cursor.getDouble(cursor.getColumnIndex("goodsprice")));
                 orderBean.setAmounts(cursor.getInt(cursor.getColumnIndex("goodsamounts")));
@@ -127,6 +129,7 @@ public class IOrderModelImpl implements IOrderModel {
                 orderBean.setSellerId(cursor.getInt(cursor.getColumnIndex("sellerid")));
                 orderBean.setSellerName(cursor.getString(cursor.getColumnIndex("sellername")));
                 orderBean.setGoodsId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+                orderBean.setGoodsImage(cursor.getString(cursor.getColumnIndex("goodsimage")));
                 orderBean.setGoodsName(cursor.getString(cursor.getColumnIndex("goodsname")));
                 orderBean.setGoodsPrice(cursor.getDouble(cursor.getColumnIndex("goodsprice")));
                 orderBean.setAmounts(cursor.getInt(cursor.getColumnIndex("goodsamounts")));
@@ -158,6 +161,7 @@ public class IOrderModelImpl implements IOrderModel {
                 orderBean.setSellerId(cursor.getInt(cursor.getColumnIndex("sellerid")));
                 orderBean.setSellerName(cursor.getString(cursor.getColumnIndex("sellername")));
                 orderBean.setGoodsId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+                orderBean.setGoodsImage(cursor.getString(cursor.getColumnIndex("goodsimage")));
                 orderBean.setGoodsName(cursor.getString(cursor.getColumnIndex("goodsname")));
                 orderBean.setGoodsPrice(cursor.getDouble(cursor.getColumnIndex("goodsprice")));
                 orderBean.setAmounts(cursor.getInt(cursor.getColumnIndex("goodsamounts")));
@@ -199,6 +203,7 @@ public class IOrderModelImpl implements IOrderModel {
                     orderBean.setSellerId(cursor.getInt(cursor.getColumnIndex("sellerid")));
                     orderBean.setSellerName(cursor.getString(cursor.getColumnIndex("sellername")));
                     orderBean.setGoodsId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+                    orderBean.setGoodsImage(cursor.getString(cursor.getColumnIndex("goodsimage")));
                     orderBean.setGoodsName(cursor.getString(cursor.getColumnIndex("goodsname")));
                     orderBean.setGoodsPrice(cursor.getDouble(cursor.getColumnIndex("goodsprice")));
                     orderBean.setAmounts(cursor.getInt(cursor.getColumnIndex("goodsamounts")));
@@ -242,6 +247,7 @@ public class IOrderModelImpl implements IOrderModel {
                     orderBean.setSellerId(cursor.getInt(cursor.getColumnIndex("sellerid")));
                     orderBean.setSellerName(cursor.getString(cursor.getColumnIndex("sellername")));
                     orderBean.setGoodsId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+                    orderBean.setGoodsImage(cursor.getString(cursor.getColumnIndex("goodsimage")));
                     orderBean.setGoodsName(cursor.getString(cursor.getColumnIndex("goodsname")));
                     orderBean.setGoodsPrice(cursor.getDouble(cursor.getColumnIndex("goodsprice")));
                     orderBean.setAmounts(cursor.getInt(cursor.getColumnIndex("goodsamounts")));

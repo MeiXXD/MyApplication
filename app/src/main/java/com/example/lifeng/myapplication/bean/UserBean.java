@@ -53,6 +53,8 @@ public class UserBean {
      */
     private String mAddress;
 
+    private String mImage;
+
     public int getId() {
         return mId;
     }
@@ -115,5 +117,13 @@ public class UserBean {
 
     public void setEmail(String email) {
         mEmail = email;
+    }
+
+    public String getImage() {
+        return mImage;
+    }
+
+    public void setImage(String image) {
+        mImage = image;
     }
 }

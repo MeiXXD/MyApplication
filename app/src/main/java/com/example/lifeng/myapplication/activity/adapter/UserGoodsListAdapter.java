@@ -13,7 +13,11 @@
 package com.example.lifeng.myapplication.activity.adapter;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +32,7 @@ import com.example.lifeng.myapplication.bean.GoodsBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 import com.example.lifeng.myapplication.presenter.UserGoodsViewPresenter;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -78,7 +83,22 @@ public class UserGoodsListAdapter extends BaseAdapter {
         Button goodsAddToShoppingCartBtn = (Button) convertView.findViewById(R.id.btn_user_goods_add_to_shopping_cart);
 
         final GoodsBean goodsBean = mGoodsBeanArrayList.get(position);
-        goodsImg.setImageResource(R.drawable.goods);
+
+        String mGoodsImage = goodsBean.getImage();
+        if (null == mGoodsImage || mGoodsImage.isEmpty()) {
+            goodsImg.setImageResource(R.drawable.goods);
+        } else {
+            Uri uri = Uri.parse(mGoodsImage);
+            ContentResolver cr = mActivity.getContentResolver();
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                goodsImg.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                goodsImg.setImageResource(R.drawable.goods);
+                e.printStackTrace();
+            }
+        }
+
         goodsNameTxt.setText(goodsBean.getName());
         goodsBriefDescription.setText("简单描述: " + goodsBean.getBriefDescription());
         goodsPirceTxt.setText("价格(元): " + Double.toString(goodsBean.getPrice()));

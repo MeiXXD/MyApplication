@@ -48,4 +48,5 @@ public class UserInfoModifyViewPresenter {
     public void modifyUserInfo(UserBean userBean) {
         mUserModel.modifyUserInfo(userBean);
     }
+
 }

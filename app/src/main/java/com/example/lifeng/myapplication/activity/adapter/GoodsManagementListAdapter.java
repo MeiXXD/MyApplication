@@ -13,7 +13,11 @@
 package com.example.lifeng.myapplication.activity.adapter;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +28,7 @@ import android.widget.TextView;
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.bean.GoodsBean;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -72,8 +77,22 @@ public class GoodsManagementListAdapter extends BaseAdapter {
         TextView goodsKindTxt = (TextView) convertView.findViewById(R.id.txt_goods_listview_kind);
 
         GoodsBean goodsBean = mGoodsBeanList.get(position);
-        //显示默认图片
-        goodsImageView.setImageResource(R.drawable.goods);
+
+        String mGoodsImage = goodsBean.getImage();
+        if (null == mGoodsImage || mGoodsImage.isEmpty()) {
+            goodsImageView.setImageResource(R.drawable.goods);
+        } else {
+            Uri uri = Uri.parse(mGoodsImage);
+            ContentResolver cr = mActivity.getContentResolver();
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                goodsImageView.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                goodsImageView.setImageResource(R.drawable.goods);
+                e.printStackTrace();
+            }
+        }
+
         goodsNameTxt.setText(goodsBean.getName());
         goodsPriceTxt.setText("价格(元) : " + Double.toString(goodsBean.getPrice()));
         goodsAmountTxt.setText("库存(件) : " + Integer.toString(goodsBean.getAmounts()));

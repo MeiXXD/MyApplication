@@ -63,6 +63,11 @@ public class OrderBean {
     private int mGoodsId;
 
     /**
+     * 商品图片
+     */
+    private String mGoodsImage;
+
+    /**
      * 商品名
      */
     private String mGoodsName;
@@ -185,5 +190,13 @@ public class OrderBean {
 
     public void setSellerId(int sellerId) {
         mSellerId = sellerId;
+    }
+
+    public String getGoodsImage() {
+        return mGoodsImage;
+    }
+
+    public void setGoodsImage(String goodsImage) {
+        mGoodsImage = goodsImage;
     }
 }
