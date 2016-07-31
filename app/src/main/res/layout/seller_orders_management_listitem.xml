@@ -9,7 +9,10 @@
         android:layout_width="25dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/rly_order"
-        android:layout_alignTop="@+id/rly_order" />
+        android:layout_alignTop="@+id/rly_order"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
     <RelativeLayout
         android:id="@+id/rly_order"

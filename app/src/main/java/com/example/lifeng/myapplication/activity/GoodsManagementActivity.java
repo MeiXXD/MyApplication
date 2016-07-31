@@ -26,6 +26,7 @@ import android.widget.ListView;
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.activity.adapter.GoodsManagementListAdapter;
 import com.example.lifeng.myapplication.bean.GoodsBean;
+import com.example.lifeng.myapplication.bean.SellerBean;
 import com.example.lifeng.myapplication.presenter.GoodsManagementViewPresenter;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class GoodsManagementActivity extends AppCompatActivity implements View.O
 
     private ListView mGoodsLv;
     private Button mGoodsAddBtn;
+    private SellerBean mSellerBean;
 
     private GoodsManagementViewPresenter mGoodsManagementViewPresenter;
 
@@ -53,6 +55,13 @@ public class GoodsManagementActivity extends AppCompatActivity implements View.O
     }
 
     void init() {
+        mSellerBean = new SellerBean();
+
+        Intent intent = getIntent();
+        mSellerBean.setId(intent.getIntExtra("sellerid", 0));
+        mSellerBean.setName(intent.getStringExtra("sellername"));
+        mSellerBean.setPassword(intent.getStringExtra("sellerpassword"));
+
         mGoodsManagementViewPresenter = new GoodsManagementViewPresenter();
         mGoodsBeanArrayList = new ArrayList<>();
         mGoodsManagementListAdapter = new GoodsManagementListAdapter(this, mGoodsBeanArrayList);
@@ -92,7 +101,7 @@ public class GoodsManagementActivity extends AppCompatActivity implements View.O
             public void onClick(DialogInterface dialog, int which) {
                 mGoodsManagementViewPresenter.delGoods(goodsBean);
                 mGoodsBeanArrayList.clear();
-                mGoodsManagementViewPresenter.getGoods(mGoodsBeanArrayList);
+                mGoodsManagementViewPresenter.getGoods(mGoodsBeanArrayList, mSellerBean);
                 mGoodsManagementListAdapter.notifyDataSetChanged();
             }
         }).setNegativeButton("取消", null).show();
@@ -104,6 +113,9 @@ public class GoodsManagementActivity extends AppCompatActivity implements View.O
         switch (v.getId()) {
             case R.id.btn_goods_management_add_goods:
                 Intent intent = new Intent();
+                intent.putExtra("sellerid", mSellerBean.getId());
+                intent.putExtra("sellername", mSellerBean.getName());
+                intent.putExtra("sellerpassword", mSellerBean.getPassword());
                 intent.setClass(GoodsManagementActivity.this, GoodsAddActivity.class);
                 startActivity(intent);
                 break;
@@ -114,7 +126,7 @@ public class GoodsManagementActivity extends AppCompatActivity implements View.O
     protected void onResume() {
         super.onResume();
         mGoodsBeanArrayList.clear();
-        mGoodsManagementViewPresenter.getGoods(mGoodsBeanArrayList);
+        mGoodsManagementViewPresenter.getGoods(mGoodsBeanArrayList, mSellerBean);
         mGoodsManagementListAdapter.notifyDataSetChanged();
     }
 

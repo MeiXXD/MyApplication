@@ -13,6 +13,7 @@
 package com.example.lifeng.myapplication.presenter;
 
 import com.example.lifeng.myapplication.bean.GoodsBean;
+import com.example.lifeng.myapplication.bean.SellerBean;
 import com.example.lifeng.myapplication.model.IGoodsModel;
 import com.example.lifeng.myapplication.model.IGoodsModelImpl;
 
@@ -31,12 +32,13 @@ public class GoodsManagementViewPresenter {
     }
 
     /**
-     * 得到所有商品
+     * 得到某销售商的所有商品
      *
      * @param goodsBeanArrayList
+     * @param sellerBean
      */
-    public void getGoods(ArrayList<GoodsBean> goodsBeanArrayList) {
-        mGoodsModel.getGoods(goodsBeanArrayList);
+    public void getGoods(ArrayList<GoodsBean> goodsBeanArrayList, SellerBean sellerBean) {
+        mGoodsModel.getGoods(goodsBeanArrayList, sellerBean);
     }
 
     /**

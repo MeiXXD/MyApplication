@@ -33,6 +33,7 @@ import com.example.lifeng.myapplication.presenter.SellerLoginViewPresenter;
  * @description 商品、订单管理TabActivity
  */
 public class GoodsOrdersManagementTabActivity extends TabActivity implements View.OnClickListener {
+    private int mSellerId;
     private String mSellerName;
     private String mSellerPassword;
     private Button mSellerLogout;
@@ -53,9 +54,11 @@ public class GoodsOrdersManagementTabActivity extends TabActivity implements Vie
         mSellerLoginViewPresenter = new SellerLoginViewPresenter();
 
         Intent intent = getIntent();
+        mSellerId = intent.getIntExtra("sellerid", 0);
         mSellerName = intent.getStringExtra("sellername");
         mSellerPassword = intent.getStringExtra("sellerpassword");
 
+        mSellerBean.setId(mSellerId);
         mSellerBean.setName(mSellerName);
         mSellerBean.setPassword(mSellerPassword);
         tabhostInit();
@@ -68,9 +71,19 @@ public class GoodsOrdersManagementTabActivity extends TabActivity implements Vie
         mTabHost = getTabHost();
         /* 去除标签下方的白线 */
         mTabHost.setPadding(mTabHost.getLeft(), mTabHost.getTop(), mTabHost.getRight(), mTabHost.getBottom() - 5);
+        Intent goodsIntent = new Intent();
+        goodsIntent.setClass(this, GoodsManagementActivity.class);
+        goodsIntent.putExtra("sellerid", mSellerId);
+        goodsIntent.putExtra("sellername", mSellerName);
+        goodsIntent.putExtra("sellerpassword", mSellerPassword);
+        mTabHost.addTab(mTabHost.newTabSpec("goodsmanagement").setIndicator("商品管理").setContent(goodsIntent));
 
-        mTabHost.addTab(mTabHost.newTabSpec("goodsmanagement").setIndicator("商品管理").setContent(new Intent(this, GoodsManagementActivity.class)));
-        mTabHost.addTab(mTabHost.newTabSpec("ordersmanagement").setIndicator("订单管理").setContent(new Intent(this, SellerOrdersManagementActivity.class)));
+        Intent ordersIntent = new Intent();
+        ordersIntent.setClass(this, SellerOrdersManagementActivity.class);
+        ordersIntent.putExtra("sellerid", mSellerId);
+        ordersIntent.putExtra("sellername", mSellerName);
+        ordersIntent.putExtra("sellerpassword", mSellerPassword);
+        mTabHost.addTab(mTabHost.newTabSpec("ordersmanagement").setIndicator("订单管理").setContent(ordersIntent));
 
         mTabHost.getTabWidget().setBackgroundResource(R.color.colorPrimary);
         updateTab(mTabHost);

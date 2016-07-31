@@ -17,6 +17,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.lifeng.myapplication.bean.GoodsBean;
+import com.example.lifeng.myapplication.bean.SellerBean;
 import com.example.lifeng.myapplication.bean.ShoppingCartBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 
@@ -70,7 +71,7 @@ public class IShoppingCartModelImpl implements IShoppingCartModel {
                 goodsBean = new GoodsBean();
                 goodsBean.setId(goodsId);
                 Cursor cursor2 = db.rawQuery("select * from tb_goods where goodsid=" + goodsId, null);
-                while (cursor2.moveToNext()) {
+                if (cursor2.moveToFirst()) {
                     goodsBean.setPrice(cursor2.getDouble(cursor2.getColumnIndex("price")));
                     goodsBean.setName(cursor2.getString(cursor2.getColumnIndex("goodsname")));
                 }
@@ -106,12 +107,13 @@ public class IShoppingCartModelImpl implements IShoppingCartModel {
     public void getShoppingCarOrder(ShoppingCartBean shoppingCartBean) {
         int userid = -1;
         int goodsid = -1;
+        int sellerid = -1;
         UserBean userBean = null;
         GoodsBean goodsBean = null;
         SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
         if (db.isOpen()) {
             Cursor cursor1 = db.rawQuery("select * from tb_shopping_cart where id=" + shoppingCartBean.getId(), null);
-            while (cursor1.moveToNext()) {
+            if (cursor1.moveToFirst()) {
                 shoppingCartBean.setAmounts(cursor1.getInt(cursor1.getColumnIndex("amounts")));
                 userid = cursor1.getInt(cursor1.getColumnIndex("userid"));
                 goodsid = cursor1.getInt(cursor1.getColumnIndex("goodsid"));
@@ -137,7 +139,13 @@ public class IShoppingCartModelImpl implements IShoppingCartModel {
             Cursor cursor3 = db.rawQuery("select * from tb_goods where goodsid=" + goodsid, null);
             goodsBean = shoppingCartBean.getGoodsBean();
             goodsBean.setId(goodsid);
-            while (cursor3.moveToNext()) {
+            if (cursor3.moveToFirst()) {
+                sellerid = cursor3.getInt(cursor3.getColumnIndex("sellerid"));
+                String sellername = cursor3.getString(cursor3.getColumnIndex("sellername"));
+                SellerBean sellerBean = new SellerBean();
+                sellerBean.setId(sellerid);
+                sellerBean.setName(sellername);
+                goodsBean.setSellerBean(sellerBean);
                 goodsBean.setImage(cursor3.getString(cursor3.getColumnIndex("goodsimage")));
                 goodsBean.setName(cursor3.getString(cursor3.getColumnIndex("goodsname")));
                 goodsBean.setPrice(cursor3.getDouble(cursor3.getColumnIndex("price")));

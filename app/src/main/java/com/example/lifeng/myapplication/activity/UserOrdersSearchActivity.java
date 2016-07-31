@@ -87,7 +87,7 @@ public class UserOrdersSearchActivity extends AppCompatActivity implements View.
                     mOrdersSearchViewPresenter.searchOrders(mOrderBeanArrayList, mUserBean, mKeywordStr);
                     mMyOrdersManagementAdapter.notifyDataSetChanged();
                     if (mOrderBeanArrayList.size() == 0) {
-                        Toast.makeText(this, "无相关商品", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "无相关订单", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;

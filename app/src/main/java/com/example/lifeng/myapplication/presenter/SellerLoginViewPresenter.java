@@ -46,4 +46,5 @@ public class SellerLoginViewPresenter {
     public void updateSellerStatus(SellerBean sellerBean) {
         mSellerModel.updateSellerStatus(sellerBean);
     }
+
 }

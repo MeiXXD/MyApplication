@@ -66,6 +66,7 @@ public class ISellerModelImpl implements ISellerModel {
         if (db.isOpen()) {
             Cursor cursor = db.rawQuery("select * from tb_seller where sellername=? and sellerpassword=?", new String[]{mSellerName, mSellerPassword});
             if (cursor.moveToFirst()) {
+                sellerBean.setId(cursor.getInt(cursor.getColumnIndex("sellerid")));
                 result = true;
             }
             cursor.close();

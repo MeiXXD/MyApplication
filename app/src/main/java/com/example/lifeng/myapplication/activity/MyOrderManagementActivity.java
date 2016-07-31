@@ -151,7 +151,7 @@ public class MyOrderManagementActivity extends AppCompatActivity implements Adap
                 mOrderBeanArrayList.clear();
                 mMyOrderManagementViewPresenter.getUserAllOrders(mOrderBeanArrayList, mUserBean);
                 mMyOrdersManagementAdapter.notifyDataSetChanged();
-                Toast.makeText(MyOrderManagementActivity.this, "删除成功!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyOrderManagementActivity.this, "订单删除成功!", Toast.LENGTH_SHORT).show();
             }
         }).setNegativeButton("取消", null).show();
         return false;

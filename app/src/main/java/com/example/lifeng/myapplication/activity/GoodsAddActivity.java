@@ -12,6 +12,7 @@
 
 package com.example.lifeng.myapplication.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.bean.GoodsBean;
+import com.example.lifeng.myapplication.bean.SellerBean;
 import com.example.lifeng.myapplication.presenter.GoodsAddViewPresenter;
 import com.example.lifeng.myapplication.utils.InputJudge;
 
@@ -39,6 +41,7 @@ public class GoodsAddActivity extends AppCompatActivity implements IGoodsAddView
     private Button mGoodsAddBtn;
 
     private GoodsBean mGoodsBean;
+    private SellerBean mSellerBean;
     private GoodsAddViewPresenter mGoodsAddViewPresenter;
 
     private boolean mIsInputValid;
@@ -54,6 +57,12 @@ public class GoodsAddActivity extends AppCompatActivity implements IGoodsAddView
     }
 
     void init() {
+        mSellerBean = new SellerBean();
+        Intent intent = getIntent();
+        mSellerBean.setId(intent.getIntExtra("sellerid", 0));
+        mSellerBean.setName(intent.getStringExtra("sellername"));
+        mSellerBean.setPassword(intent.getStringExtra("sellerpassword"));
+
         mGoodsNameEdt = (EditText) findViewById(R.id.edt_goods_add_goods_name);
         mGoodsAmountsEdt = (EditText) findViewById(R.id.edt_goods_add_goods_amounts);
         mGoodsPirceEdt = (EditText) findViewById(R.id.edt_goods_add_goods_price);
@@ -102,6 +111,7 @@ public class GoodsAddActivity extends AppCompatActivity implements IGoodsAddView
                 if (!mIsInputValid) {
                     Toast.makeText(GoodsAddActivity.this, "输入不合法!", Toast.LENGTH_SHORT).show();
                 } else {
+                    mGoodsBean.setSellerBean(mSellerBean);
                     mIsSuccess = mGoodsAddViewPresenter.addGoods(mGoodsBean);
                     if (mIsSuccess) {
                         Toast.makeText(GoodsAddActivity.this, "商品添加成功!", Toast.LENGTH_SHORT).show();

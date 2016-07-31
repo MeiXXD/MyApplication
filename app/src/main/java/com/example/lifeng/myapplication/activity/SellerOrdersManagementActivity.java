@@ -12,6 +12,7 @@
 
 package com.example.lifeng.myapplication.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -26,6 +28,7 @@ import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.activity.adapter.MySpinnerAdapter;
 import com.example.lifeng.myapplication.activity.adapter.SellerOrdersManagementAdapter;
 import com.example.lifeng.myapplication.bean.OrderBean;
+import com.example.lifeng.myapplication.bean.SellerBean;
 import com.example.lifeng.myapplication.presenter.SellerOrdersManagementViewPresenter;
 
 import java.util.ArrayList;
@@ -36,6 +39,8 @@ import java.util.ArrayList;
  * @description 销售商订单管理Activity
  */
 public class SellerOrdersManagementActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, ListView.OnItemClickListener {
+    private SellerBean mSellerBean;
+
     private final String[] mStatusStrings = {"全部", "等待卖家确认", "订单驳回", "确认发货"};
 
     private Spinner mOrderStatusSpinner;
@@ -58,6 +63,13 @@ public class SellerOrdersManagementActivity extends AppCompatActivity implements
     }
 
     void init() {
+        mSellerBean = new SellerBean();
+
+        Intent intent = getIntent();
+        mSellerBean.setId(intent.getIntExtra("sellerid", 0));
+        mSellerBean.setName(intent.getStringExtra("sellername"));
+        mSellerBean.setPassword(intent.getStringExtra("sellerpassword"));
+
         mSellerOrdersManagementViewPresenter = new SellerOrdersManagementViewPresenter();
 
         mOrderStatusSpinner = (Spinner) findViewById(R.id.spinner_seller_orders_management_order_status);
@@ -83,7 +95,7 @@ public class SellerOrdersManagementActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         mOrderBeanArrayList.clear();
-        mSellerOrdersManagementViewPresenter.getAllOrders(mOrderBeanArrayList);
+        mSellerOrdersManagementViewPresenter.getAllOrders(mOrderBeanArrayList, mSellerBean);
         mSellerOrdersManagementAdapter.notifyDataSetChanged();
     }
 
@@ -99,7 +111,7 @@ public class SellerOrdersManagementActivity extends AppCompatActivity implements
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String status = parent.getItemAtPosition(position).toString();
         mOrderBeanArrayList.clear();
-        mSellerOrdersManagementViewPresenter.getOrdersByStatus(mOrderBeanArrayList, status);
+        mSellerOrdersManagementViewPresenter.getOrdersByStatus(mOrderBeanArrayList, mSellerBean, status);
         mSellerOrdersManagementAdapter.notifyDataSetChanged();
     }
 
@@ -112,7 +124,7 @@ public class SellerOrdersManagementActivity extends AppCompatActivity implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_seller_orders_management_order_reject:
-                for (int i = SellerOrdersManagementAdapter.mSparseBooleanArray.size() - 1; i >= 0; i--) {
+                for (int i = mOrderBeanArrayList.size() - 1; i >= 0; i--) {
                     if (SellerOrdersManagementAdapter.mSparseBooleanArray.get(i)) {
                         OrderBean orderBean = mOrderBeanArrayList.get(i);
                         orderBean.setStatus(-1);
@@ -121,11 +133,11 @@ public class SellerOrdersManagementActivity extends AppCompatActivity implements
                 }
                 SellerOrdersManagementAdapter.resetCheckStatus();
                 mOrderBeanArrayList.clear();
-                mSellerOrdersManagementViewPresenter.getOrdersByStatus(mOrderBeanArrayList, mOrderStatusSpinner.getSelectedItem().toString());
+                mSellerOrdersManagementViewPresenter.getOrdersByStatus(mOrderBeanArrayList, mSellerBean, mOrderStatusSpinner.getSelectedItem().toString());
                 mSellerOrdersManagementAdapter.notifyDataSetChanged();
                 break;
             case R.id.btn_seller_orders_management_order_confirm:
-                for (int i = SellerOrdersManagementAdapter.mSparseBooleanArray.size() - 1; i >= 0; i--) {
+                for (int i = mOrderBeanArrayList.size() - 1; i >= 0; i--) {
                     if (SellerOrdersManagementAdapter.mSparseBooleanArray.get(i)) {
                         OrderBean orderBean = mOrderBeanArrayList.get(i);
                         orderBean.setStatus(1);
@@ -134,7 +146,7 @@ public class SellerOrdersManagementActivity extends AppCompatActivity implements
                 }
                 SellerOrdersManagementAdapter.resetCheckStatus();
                 mOrderBeanArrayList.clear();
-                mSellerOrdersManagementViewPresenter.getOrdersByStatus(mOrderBeanArrayList, mOrderStatusSpinner.getSelectedItem().toString());
+                mSellerOrdersManagementViewPresenter.getOrdersByStatus(mOrderBeanArrayList, mSellerBean, mOrderStatusSpinner.getSelectedItem().toString());
                 mSellerOrdersManagementAdapter.notifyDataSetChanged();
                 break;
         }
@@ -142,6 +154,8 @@ public class SellerOrdersManagementActivity extends AppCompatActivity implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        mSellerOrdersManagementAdapter.setItemChecked(position);
+        CheckBox cb = (CheckBox) view.findViewById(R.id.cbx_seller_orders_management_order);
+        cb.setChecked(SellerOrdersManagementAdapter.mSparseBooleanArray.get(position));
     }
 }

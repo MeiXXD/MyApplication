@@ -13,6 +13,7 @@
 package com.example.lifeng.myapplication.model;
 
 import com.example.lifeng.myapplication.bean.GoodsBean;
+import com.example.lifeng.myapplication.bean.SellerBean;
 
 import java.util.ArrayList;
 
@@ -54,8 +55,18 @@ public interface IGoodsModel {
 
     /**
      * 得到全部商品信息接口(浏览商品目录)
+     *
+     * @param goodsBeanArrayList
      */
     void getGoods(ArrayList<GoodsBean> goodsBeanArrayList);
+
+    /**
+     * 得到某销售商的全部商品信息接口(浏览商品目录)
+     *
+     * @param goodsBeanArrayList
+     * @param sellerBean
+     */
+    void getGoods(ArrayList<GoodsBean> goodsBeanArrayList, SellerBean sellerBean);
 
     /**
      * 得到指定类别的全部商品

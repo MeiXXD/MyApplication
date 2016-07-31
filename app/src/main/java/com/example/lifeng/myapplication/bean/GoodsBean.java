@@ -22,6 +22,11 @@ public class GoodsBean {
      * 产品编号
      */
     private int mId;
+
+    /**
+     * 销售商
+     */
+    private SellerBean mSellerBean;
     /**
      * 产品价格
      */
@@ -111,5 +116,13 @@ public class GoodsBean {
 
     public void setKind(String kind) {
         mKind = kind;
+    }
+
+    public SellerBean getSellerBean() {
+        return mSellerBean;
+    }
+
+    public void setSellerBean(SellerBean sellerBean) {
+        mSellerBean = sellerBean;
     }
 }

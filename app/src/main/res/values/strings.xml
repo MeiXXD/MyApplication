@@ -60,7 +60,7 @@
     <string name="tab_activity_user_logout">退出</string>
 
 
-    <string name="activity_user_goods_goods_search">输入商品名/商品类别搜索</string>
+    <string name="activity_user_goods_goods_search">输入商品名/商品类别/商家名称搜索</string>
     <string name="activity_user_goods_goods_kind">类别:</string>
     <string name="activity_user_goods_add_to_shopping_cart">添加到购物车</string>
 
@@ -107,7 +107,7 @@
     <string name="activity_order_details_mark">X</string>
     <string name="activity_order_details_back">返回</string>
 
-    <string name="activity_my_order_management_order_search">输入商品名/商品编号/订单号搜索</string>
+    <string name="activity_my_order_management_order_search">输入商品名/商品编号/订单号/商家名称搜索</string>
 
     <string name="activity_seller_orders_management_order_status">订单状态</string>
     <string name="activity_seller_orders_management_order_confirm">订单确认</string>

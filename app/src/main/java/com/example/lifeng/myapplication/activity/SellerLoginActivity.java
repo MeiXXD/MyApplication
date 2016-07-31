@@ -87,9 +87,12 @@ public class SellerLoginActivity extends AppCompatActivity implements ISellerLog
                     if (mIsSuccess) {
                         Toast.makeText(this, "销售商登录成功!", Toast.LENGTH_SHORT).show();
                         mSellerBean.setStatus(1);
+                        //更新登录状态
                         mSellerLoginViewPresenter.updateSellerStatus(mSellerBean);
+
                         Intent intent = new Intent();
                         intent.setClass(SellerLoginActivity.this, GoodsOrdersManagementTabActivity.class);
+                        intent.putExtra("sellerid", mSellerBean.getId());
                         intent.putExtra("sellername", mSellerBean.getName());
                         intent.putExtra("sellerpassword", mSellerBean.getPassword());
                         startActivity(intent);

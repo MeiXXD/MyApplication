@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,6 +55,14 @@ public class SellerOrdersManagementAdapter extends BaseAdapter {
         }
     }
 
+    public void setItemChecked(int position) {
+        if (!mSparseBooleanArray.get(position)) {
+            mSparseBooleanArray.put(position, true);
+        } else {
+            mSparseBooleanArray.put(position, false);
+        }
+    }
+
     @Override
     public int getCount() {
         return mOrderBeanArrayList.size();
@@ -81,17 +88,8 @@ public class SellerOrdersManagementAdapter extends BaseAdapter {
         }
 
         CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.cbx_seller_orders_management_order);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mSparseBooleanArray.put(position, true);
-                } else {
-                    mSparseBooleanArray.put(position, false);
-                }
-            }
-        });
         checkBox.setChecked(mSparseBooleanArray.get(position));
+
         TextView orderId = (TextView) convertView.findViewById(R.id.txt_seller_orders_management_order_id);
         ImageView orderGoodsImg = (ImageView) convertView.findViewById(R.id.img_seller_orders_management_goods_image);
         TextView orderGoodsName = (TextView) convertView.findViewById(R.id.txt_seller_orders_management_goods_name);

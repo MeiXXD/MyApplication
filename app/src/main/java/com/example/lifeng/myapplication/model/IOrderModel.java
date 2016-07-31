@@ -13,6 +13,7 @@
 package com.example.lifeng.myapplication.model;
 
 import com.example.lifeng.myapplication.bean.OrderBean;
+import com.example.lifeng.myapplication.bean.SellerBean;
 import com.example.lifeng.myapplication.bean.UserBean;
 
 import java.util.ArrayList;
@@ -53,11 +54,12 @@ public interface IOrderModel {
     void getUsersAllOrders(ArrayList<OrderBean> orderBeanArrayList, UserBean userBean);
 
     /**
-     * 得到全部订单的接口
+     * 得到某销售商全部订单的接口
      *
      * @param orderBeanArrayList
+     * @param sellerBean
      */
-    void getAllOrders(ArrayList<OrderBean> orderBeanArrayList);
+    void getAllOrders(ArrayList<OrderBean> orderBeanArrayList, SellerBean sellerBean);
 
     /**
      * 订单搜索接口
@@ -80,7 +82,8 @@ public interface IOrderModel {
      * 获取指定状态的订单
      *
      * @param orderBeanArrayList
+     * @param sellerBean
      * @param status
      */
-    void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, String status);
+    void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, SellerBean sellerBean, String status);
 }

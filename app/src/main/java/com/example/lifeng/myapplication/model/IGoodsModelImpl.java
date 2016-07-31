@@ -17,6 +17,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.lifeng.myapplication.bean.GoodsBean;
+import com.example.lifeng.myapplication.bean.SellerBean;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,12 @@ public class IGoodsModelImpl implements IGoodsModel {
             Cursor cursor = db.rawQuery("select * from tb_goods where goodsid=" + goodsId, null);
             if (cursor.moveToFirst()) {
                 mGoodsBean = new GoodsBean();
+                int sellid = cursor.getInt(cursor.getColumnIndex("sellerid"));
+                String sellername = cursor.getString(cursor.getColumnIndex("sellername"));
+                SellerBean sellerBean = new SellerBean();
+                sellerBean.setId(sellid);
+                sellerBean.setName(sellername);
+                mGoodsBean.setSellerBean(sellerBean);
                 mGoodsBean.setName(cursor.getString(cursor.getColumnIndex("goodsname")));
                 mGoodsBean.setPrice(cursor.getDouble(cursor.getColumnIndex("price")));
                 mGoodsBean.setAmounts(cursor.getInt(cursor.getColumnIndex("amounts")));
@@ -55,6 +62,8 @@ public class IGoodsModelImpl implements IGoodsModel {
 
     @Override
     public boolean addGoods(GoodsBean goodsBean) {
+        int sellerId = goodsBean.getSellerBean().getId();
+        String sellername = goodsBean.getSellerBean().getName();
         String name = goodsBean.getName();
         int amounts = goodsBean.getAmounts();
         double price = goodsBean.getPrice();
@@ -64,7 +73,7 @@ public class IGoodsModelImpl implements IGoodsModel {
         // TODO: 16/7/22 图片未添加
         SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
         if (db.isOpen()) {
-            db.execSQL("insert into tb_goods(goodsname,amounts,price,kind,briefdescription,description) values(\"" + name + "\"," + amounts + "," + price + ",\"" + kind + "\" ,\"" + briefDescription + "\",\"" + description + "\")");
+            db.execSQL("insert into tb_goods(sellerid,sellername,goodsname,amounts,price,kind,briefdescription,description) values(" + sellerId + ",\"" + sellername + "\",\"" + name + "\"," + amounts + "," + price + ",\"" + kind + "\" ,\"" + briefDescription + "\",\"" + description + "\")");
             db.close();
         }
         Log.e(">>>>>", "商品添加成功");
@@ -108,6 +117,14 @@ public class IGoodsModelImpl implements IGoodsModel {
             while (cursor.moveToNext()) {
                 goodsBean = new GoodsBean();
                 goodsBean.setId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+
+                int sellid = cursor.getInt(cursor.getColumnIndex("sellerid"));
+                String sellername = cursor.getString(cursor.getColumnIndex("sellername"));
+                SellerBean sellerBean = new SellerBean();
+                sellerBean.setId(sellid);
+                sellerBean.setName(sellername);
+
+                goodsBean.setSellerBean(sellerBean);
                 goodsBean.setName(cursor.getString(cursor.getColumnIndex("goodsname")));
                 goodsBean.setAmounts(cursor.getInt(cursor.getColumnIndex("amounts")));
                 goodsBean.setPrice(cursor.getDouble(cursor.getColumnIndex("price")));
@@ -123,6 +140,37 @@ public class IGoodsModelImpl implements IGoodsModel {
     }
 
     @Override
+    public void getGoods(ArrayList<GoodsBean> goodsBeanArrayList, SellerBean sellerBean) {
+        SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from tb_goods where sellerid=" + sellerBean.getId(), null);
+            GoodsBean goodsBean = null;
+            while (cursor.moveToNext()) {
+                goodsBean = new GoodsBean();
+                goodsBean.setId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+
+                int sellid = cursor.getInt(cursor.getColumnIndex("sellerid"));
+                String sellername = cursor.getString(cursor.getColumnIndex("sellername"));
+                SellerBean sellerbean = new SellerBean();
+                sellerbean.setId(sellid);
+                sellerbean.setName(sellername);
+
+                goodsBean.setSellerBean(sellerbean);
+                goodsBean.setName(cursor.getString(cursor.getColumnIndex("goodsname")));
+                goodsBean.setAmounts(cursor.getInt(cursor.getColumnIndex("amounts")));
+                goodsBean.setPrice(cursor.getDouble(cursor.getColumnIndex("price")));
+                goodsBean.setKind(cursor.getString(cursor.getColumnIndex("kind")));
+                goodsBean.setBriefDescription(cursor.getString(cursor.getColumnIndex("briefdescription")));
+                goodsBean.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                goodsBeanArrayList.add(goodsBean);
+            }
+            cursor.close();
+            db.close();
+            Log.e(">>>>>", sellerBean.getName() + "商品列表获取成功");
+        }
+    }
+
+    @Override
     public void getGoodsByKind(ArrayList<GoodsBean> goodsBeanArrayList, String kind) {
         if ("全部" == kind) {
             getGoods(goodsBeanArrayList);
@@ -134,6 +182,14 @@ public class IGoodsModelImpl implements IGoodsModel {
                 while (cursor.moveToNext()) {
                     goodsBean = new GoodsBean();
                     goodsBean.setId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+
+                    int sellid = cursor.getInt(cursor.getColumnIndex("sellerid"));
+                    String sellername = cursor.getString(cursor.getColumnIndex("sellername"));
+                    SellerBean sellerBean = new SellerBean();
+                    sellerBean.setId(sellid);
+                    sellerBean.setName(sellername);
+                    goodsBean.setSellerBean(sellerBean);
+
                     goodsBean.setName(cursor.getString(cursor.getColumnIndex("goodsname")));
                     goodsBean.setAmounts(cursor.getInt(cursor.getColumnIndex("amounts")));
                     goodsBean.setPrice(cursor.getDouble(cursor.getColumnIndex("price")));
@@ -168,11 +224,19 @@ public class IGoodsModelImpl implements IGoodsModel {
     public void searchGoods(ArrayList<GoodsBean> goodsBeanArrayList, String keyword) {
         SQLiteDatabase db = mMyDatabaseHelper.getReadableDatabase();
         if (db.isOpen()) {
-            Cursor cursor = db.rawQuery("select * from tb_goods where goodsname like '%" + keyword + "%' or kind like '%" + keyword + "%'", null);
+            Cursor cursor = db.rawQuery("select * from tb_goods where goodsname like '%" + keyword + "%' or kind like '%" + keyword + "%' or sellername like '%" + keyword + "%'", null);
             GoodsBean goodsBean = null;
             while (cursor.moveToNext()) {
                 goodsBean = new GoodsBean();
                 goodsBean.setId(cursor.getInt(cursor.getColumnIndex("goodsid")));
+
+                int sellid = cursor.getInt(cursor.getColumnIndex("sellerid"));
+                String sellername = cursor.getString(cursor.getColumnIndex("sellername"));
+                SellerBean sellerBean = new SellerBean();
+                sellerBean.setId(sellid);
+                sellerBean.setName(sellername);
+
+                goodsBean.setSellerBean(sellerBean);
                 goodsBean.setName(cursor.getString(cursor.getColumnIndex("goodsname")));
                 goodsBean.setAmounts(cursor.getInt(cursor.getColumnIndex("amounts")));
                 goodsBean.setPrice(cursor.getDouble(cursor.getColumnIndex("price")));

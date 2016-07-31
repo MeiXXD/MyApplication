@@ -13,6 +13,7 @@
 package com.example.lifeng.myapplication.presenter;
 
 import com.example.lifeng.myapplication.bean.OrderBean;
+import com.example.lifeng.myapplication.bean.SellerBean;
 import com.example.lifeng.myapplication.model.IOrderModel;
 import com.example.lifeng.myapplication.model.IOrderModelImpl;
 
@@ -36,8 +37,8 @@ public class SellerOrdersManagementViewPresenter {
      * @param orderBeanArrayList
      * @param status
      */
-    public void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, String status) {
-        mOrderModel.getOrdersByStatus(orderBeanArrayList, status);
+    public void getOrdersByStatus(ArrayList<OrderBean> orderBeanArrayList, SellerBean sellerBean, String status) {
+        mOrderModel.getOrdersByStatus(orderBeanArrayList, sellerBean, status);
     }
 
     /**
@@ -45,8 +46,8 @@ public class SellerOrdersManagementViewPresenter {
      *
      * @param orderBeanArrayList
      */
-    public void getAllOrders(ArrayList<OrderBean> orderBeanArrayList) {
-        mOrderModel.getAllOrders(orderBeanArrayList);
+    public void getAllOrders(ArrayList<OrderBean> orderBeanArrayList, SellerBean sellerBean) {
+        mOrderModel.getAllOrders(orderBeanArrayList, sellerBean);
     }
 
     /**

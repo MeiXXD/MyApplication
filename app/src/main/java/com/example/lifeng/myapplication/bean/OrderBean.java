@@ -48,6 +48,16 @@ public class OrderBean {
     private String mAddress;
 
     /**
+     * 销售商ID
+     */
+    private int mSellerId;
+
+    /**
+     * 销售商名称
+     */
+    private String mSellerName;
+
+    /**
      * 商品ID
      */
     private int mGoodsId;
@@ -159,5 +169,21 @@ public class OrderBean {
 
     public void setGoodsName(String goodsName) {
         mGoodsName = goodsName;
+    }
+
+    public String getSellerName() {
+        return mSellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        mSellerName = sellerName;
+    }
+
+    public int getSellerId() {
+        return mSellerId;
+    }
+
+    public void setSellerId(int sellerId) {
+        mSellerId = sellerId;
     }
 }

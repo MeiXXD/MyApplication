@@ -12,9 +12,14 @@
 
 package com.example.lifeng.myapplication.activity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +31,8 @@ import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.bean.UserBean;
 import com.example.lifeng.myapplication.presenter.UserInfoModifyViewPresenter;
 import com.example.lifeng.myapplication.utils.InputJudge;
+
+import java.io.FileNotFoundException;
 
 /**
  * @author lifeng
@@ -70,6 +77,7 @@ public class MyInfoModifyActivity extends AppCompatActivity implements View.OnCl
 
         mCancelModifyBtn.setOnClickListener(this);
         mSubmitModiyfBtn.setOnClickListener(this);
+        mUserImg.setOnClickListener(this);
 
         Intent intent = getIntent();
         mUserBean = new UserBean();
@@ -95,7 +103,34 @@ public class MyInfoModifyActivity extends AppCompatActivity implements View.OnCl
                     finish();
                 }
                 break;
+            case R.id.img_user_info_image:
+                Intent intent = new Intent();
+                //开启Pictures画面Type设定为image
+                intent.setType("image/*");
+                //使用Intent.ACTION_GET_CONTENT这个Action
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                //取得相片后返回本画面
+                startActivityForResult(intent, 1);
+                break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            Log.e(">>>>>", uri.toString());
+            ContentResolver cr = this.getContentResolver();
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                ImageView imageView = (ImageView) findViewById(R.id.img_user_info_image);
+                //将Bitmap设定到ImageView
+                imageView.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                Log.e("Exception", e.getMessage(), e);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
