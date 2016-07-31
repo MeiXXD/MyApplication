@@ -55,14 +55,6 @@ public class SellerOrdersManagementAdapter extends BaseAdapter {
         }
     }
 
-    public void setItemChecked(int position) {
-        if (!mSparseBooleanArray.get(position)) {
-            mSparseBooleanArray.put(position, true);
-        } else {
-            mSparseBooleanArray.put(position, false);
-        }
-    }
-
     @Override
     public int getCount() {
         return mOrderBeanArrayList.size();
@@ -118,7 +110,6 @@ public class SellerOrdersManagementAdapter extends BaseAdapter {
         } else {
             orderStatus.setText("订单驳回");
         }
-
 
         return convertView;
     }

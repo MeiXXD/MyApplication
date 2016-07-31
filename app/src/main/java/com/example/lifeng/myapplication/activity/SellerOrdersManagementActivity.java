@@ -154,8 +154,8 @@ public class SellerOrdersManagementActivity extends AppCompatActivity implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        mSellerOrdersManagementAdapter.setItemChecked(position);
         CheckBox cb = (CheckBox) view.findViewById(R.id.cbx_seller_orders_management_order);
-        cb.setChecked(SellerOrdersManagementAdapter.mSparseBooleanArray.get(position));
+        cb.toggle();
+        SellerOrdersManagementAdapter.mSparseBooleanArray.put(position, cb.isChecked());
     }
 }
