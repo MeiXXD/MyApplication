@@ -12,8 +12,11 @@
 
 package com.example.lifeng.myapplication.presenter;
 
+import com.example.lifeng.myapplication.bean.GoodsBean;
 import com.example.lifeng.myapplication.bean.OrderBean;
 import com.example.lifeng.myapplication.bean.SellerBean;
+import com.example.lifeng.myapplication.model.IGoodsModel;
+import com.example.lifeng.myapplication.model.IGoodsModelImpl;
 import com.example.lifeng.myapplication.model.IOrderModel;
 import com.example.lifeng.myapplication.model.IOrderModelImpl;
 
@@ -26,9 +29,11 @@ import java.util.ArrayList;
  */
 public class SellerOrdersManagementViewPresenter {
     private IOrderModel mOrderModel;
+    private IGoodsModel mGoodsModel;
 
     public SellerOrdersManagementViewPresenter() {
         mOrderModel = new IOrderModelImpl();
+        mGoodsModel = new IGoodsModelImpl();
     }
 
     /**
@@ -57,5 +62,14 @@ public class SellerOrdersManagementViewPresenter {
      */
     public void updateOrderStatus(OrderBean orderBean) {
         mOrderModel.updateOrderStatus(orderBean);
+    }
+
+    /**
+     * 订单驳回则更新库存
+     *
+     * @param goodsBean
+     */
+    public void updateGoodsAmounts(GoodsBean goodsBean) {
+        mGoodsModel.updateGoodsAmounts(goodsBean);
     }
 }

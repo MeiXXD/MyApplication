@@ -192,7 +192,7 @@ public class UserSubmitOrderActivity extends AppCompatActivity implements View.O
                         mOrderBean.setDateTime(dateFormat.format(new Date()));
                         mUserSubmitOrderViewPresenter.submitOrder(mOrderBean);
                         mUserSubmitOrderViewPresenter.updateShoppingCart(mShoppingCartBean);
-                        mGoodsBean.setAmounts(goodsAmounts - orderAmounts);
+                        mGoodsBean.setAmounts(-orderAmounts);
                         mUserSubmitOrderViewPresenter.updateGoodsAmounts(mGoodsBean);
                         finish();
                         Toast.makeText(this, "添加订单成功", Toast.LENGTH_SHORT).show();

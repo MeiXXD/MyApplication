@@ -27,6 +27,7 @@ import android.widget.Spinner;
 import com.example.lifeng.myapplication.R;
 import com.example.lifeng.myapplication.activity.adapter.MySpinnerAdapter;
 import com.example.lifeng.myapplication.activity.adapter.SellerOrdersManagementAdapter;
+import com.example.lifeng.myapplication.bean.GoodsBean;
 import com.example.lifeng.myapplication.bean.OrderBean;
 import com.example.lifeng.myapplication.bean.SellerBean;
 import com.example.lifeng.myapplication.presenter.SellerOrdersManagementViewPresenter;
@@ -129,6 +130,10 @@ public class SellerOrdersManagementActivity extends AppCompatActivity implements
                         OrderBean orderBean = mOrderBeanArrayList.get(i);
                         orderBean.setStatus(-1);
                         mSellerOrdersManagementViewPresenter.updateOrderStatus(orderBean);
+                        GoodsBean goodsBean = new GoodsBean();
+                        goodsBean.setId(orderBean.getGoodsId());
+                        goodsBean.setAmounts(orderBean.getAmounts());
+                        mSellerOrdersManagementViewPresenter.updateGoodsAmounts(goodsBean);
                     }
                 }
                 SellerOrdersManagementAdapter.resetCheckStatus();

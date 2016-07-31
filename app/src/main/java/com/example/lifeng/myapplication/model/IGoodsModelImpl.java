@@ -258,9 +258,17 @@ public class IGoodsModelImpl implements IGoodsModel {
 
     @Override
     public void updateGoodsAmounts(GoodsBean goodsBean) {
+        int temp = goodsBean.getAmounts();
+        int amounts = 0;
         SQLiteDatabase db = mMyDatabaseHelper.getWritableDatabase();
         if (db.isOpen()) {
-            db.execSQL("update tb_goods set amounts=" + goodsBean.getAmounts() + " where goodsid=" + goodsBean.getId());
+            Cursor cursor = db.rawQuery("select * from tb_goods where goodsid=" + goodsBean.getId(), null);
+            if (cursor.moveToFirst()) {
+                amounts = cursor.getInt(cursor.getColumnIndex("amounts"));
+            }
+            cursor.close();
+            amounts = amounts + temp;
+            db.execSQL("update tb_goods set amounts=" + amounts + " where goodsid=" + goodsBean.getId());
             db.close();
         }
         Log.e(">>>>>", "商品库存已更新");
