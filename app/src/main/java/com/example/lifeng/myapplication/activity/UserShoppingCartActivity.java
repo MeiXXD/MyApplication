@@ -35,6 +35,7 @@ import com.example.lifeng.myapplication.presenter.UserShoppingCartViewPresenter;
 import com.example.lifeng.myapplication.utils.InputJudge;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -110,8 +111,9 @@ public class UserShoppingCartActivity extends AppCompatActivity implements ListV
         mShoppingCartBean = mShoppingCartBeanArrayList.get(position);
         double goodsPrice = mShoppingCartBean.getGoodsBean().getPrice();
         int amounts = mShoppingCartBean.getAmounts();
-        double total = goodsPrice * amounts;
+        double total = new BigDecimal(goodsPrice * amounts).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         mTotalTxt.setText("总计(元): " + Double.toString(total));
+
         mTotalTxt.setTextSize(20);
     }
 
