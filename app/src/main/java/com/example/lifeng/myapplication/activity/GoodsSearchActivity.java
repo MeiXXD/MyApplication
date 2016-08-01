@@ -41,11 +41,12 @@ public class GoodsSearchActivity extends AppCompatActivity implements View.OnCli
     private GoodsSearchViewPresenter mGoodsSearchViewPresenter;
 
     private String mKeywordStr;
-
     private ArrayList<GoodsBean> mGoodsBeanArrayList;
+
     private EditText mKeywordEdt;
     private Button mSearchBtn;
     private ListView mGoodsLv;
+
     private UserGoodsListAdapter mUserGoodsListAdapter;
 
     @Override

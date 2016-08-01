@@ -36,6 +36,7 @@ public class GoodsOrdersManagementTabActivity extends TabActivity implements Vie
     private int mSellerId;
     private String mSellerName;
     private String mSellerPassword;
+
     private Button mSellerLogout;
     private TabHost mTabHost;
 

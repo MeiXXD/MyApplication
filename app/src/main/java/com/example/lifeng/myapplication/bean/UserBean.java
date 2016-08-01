@@ -53,6 +53,9 @@ public class UserBean {
      */
     private String mAddress;
 
+    /**
+     * 用户头像
+     */
     private String mImage;
 
     public int getId() {

@@ -52,6 +52,9 @@ public class GoodsBean {
      */
     private int mAmounts;
 
+    /**
+     * 商品种类
+     */
     private String mKind;
 
     public int getId() {

@@ -92,6 +92,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        System.out.println("数据库版本更新," + oldVersion + "----------->" + newVersion);
+        Log.e(">>>>>", "数据库版本更新," + oldVersion + "----------->" + newVersion);
     }
 }

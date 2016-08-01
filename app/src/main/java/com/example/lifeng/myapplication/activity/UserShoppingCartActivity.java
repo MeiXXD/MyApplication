@@ -44,17 +44,16 @@ import java.util.ArrayList;
  * @description 用户购物车页面
  */
 public class UserShoppingCartActivity extends AppCompatActivity implements ListView.OnItemClickListener, View.OnClickListener, ListView.OnItemLongClickListener {
+    private ListView mShoppingCartLv;
+    private TextView mTotalTxt;
+    private Button mSettleAccountsBtn;
+    private Dialog mDialog;
+
     private UserBean mUserBean;
     private ShoppingCartBean mShoppingCartBean = null;
     private UserShoppingCartViewPresenter mUserShoppingCartViewPresenter;
     private ArrayList<ShoppingCartBean> mShoppingCartBeanArrayList;
     private ShoppingCartListAdapter mShoppingCartListAdapter;
-
-    private ListView mShoppingCartLv;
-    private TextView mTotalTxt;
-    private Button mSettleAccountsBtn;
-
-    private Dialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

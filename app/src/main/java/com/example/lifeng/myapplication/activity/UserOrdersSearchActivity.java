@@ -37,15 +37,16 @@ import java.util.ArrayList;
  * @description 订单搜索Activity
  */
 public class UserOrdersSearchActivity extends AppCompatActivity implements View.OnClickListener, IUserOrdersSearchView, ListView.OnItemClickListener {
-    private UserBean mUserBean;
-    private OrdersSearchViewPresenter mOrdersSearchViewPresenter;
-
     private String mKeywordStr;
 
-    private ArrayList<OrderBean> mOrderBeanArrayList;
     private EditText mKeywordEdt;
     private Button mSearchBtn;
     private ListView mOrdersLv;
+
+    private UserBean mUserBean;
+    private OrdersSearchViewPresenter mOrdersSearchViewPresenter;
+    private ArrayList<OrderBean> mOrderBeanArrayList;
+
     private MyOrdersManagementAdapter mMyOrdersManagementAdapter;
 
     @Override

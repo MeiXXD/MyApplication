@@ -40,8 +40,6 @@ import java.util.ArrayList;
  * @description 销售商订单管理Activity
  */
 public class SellerOrdersManagementActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, ListView.OnItemClickListener {
-    private SellerBean mSellerBean;
-
     private final String[] mStatusStrings = {"全部", "等待卖家确认", "订单驳回", "确认发货"};
 
     private Spinner mOrderStatusSpinner;
@@ -49,6 +47,7 @@ public class SellerOrdersManagementActivity extends AppCompatActivity implements
     private Button mOrderRejectBtn;
     private Button mOrderConfirmBtn;
 
+    private SellerBean mSellerBean;
     private ArrayList<OrderBean> mOrderBeanArrayList;
     private SellerOrdersManagementAdapter mSellerOrdersManagementAdapter;
     private SellerOrdersManagementViewPresenter mSellerOrdersManagementViewPresenter;

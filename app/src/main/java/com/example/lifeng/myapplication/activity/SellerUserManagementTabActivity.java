@@ -35,6 +35,7 @@ import com.example.lifeng.myapplication.presenter.AdministratorLoginViewPresente
 public class SellerUserManagementTabActivity extends TabActivity implements View.OnClickListener {
     private String mAdminName;
     private String mAdminPassword;
+
     private AdministratorBean mAdministratorBean;
     private AdministratorLoginViewPresenter mAdministratorLoginViewPresenter;
 
